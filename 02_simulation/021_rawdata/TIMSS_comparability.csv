@@ -1,0 +1,93 @@
+countrycode,n_res,country,grade4_2015,grade4_2011,grade4_2007,grade4_2003,grade4_1995,grade8_2015,grade8_2011,grade8_2007,grade8_2003,grade8_1999,grade8_1995
+ARM,1,Armenia,Y*,Y,Y*,Y,0,Y*,Y,Y*,Y,0,0
+AUS,1,Australia,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y*,Y
+AUT,1,Austria,,Y,Y,,Y,,,,,,Y
+AZE,1,Azerbaijan,,Y,,,,,,,,,
+BHR,1,Bahrain,Y,Y,0,0,0,Y,Y,Y,Y,0,0
+BEL,0,Belgium (Flemish),Y,Y,0,Y,0,0,0,0,Y,Y,Y
+BWA,1,Botswana,,,,,,,,Y,Y,,
+BWA,1,"Botswana (6, 9)",0,Y,0,0,0,Y,Y,Y*,Y*,0,0
+BGR,1,Bulgaria,Y,0,0,0,0,0,0,Y,Y,Y,Y
+CAN,1,Canada,Y,0,0,0,Y*,Y,0,0,0,Y*,Y*
+CHL,1,Chile,Y,Y,0,0,0,Y,Y,0,Y,Y,0
+TWN,1,Chinese Taipei,Y,Y,Y,Y,0,Y,Y,Y,Y,Y,0
+HRV,1,Croatia,Y,Y,0,0,0,0,0,0,0,0,0
+CYP,1,Cyprus,Y,0,0,Y,Y,0,0,Y,Y,Y,Y
+CZE,1,Czech Republic,Y,Y,Y,0,Y,0,0,Y,0,Y,Y
+DNK,1,Denmark,Y,Y,Y,0,0,0,0,0,0,0,Y
+EGY,1,Egypt,0,0,0,0,0,Y,0,Y,Y,0,0
+GBR,0,"England, Britain",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+FIN,1,Finland,Y,Y,0,0,0,0,Y,0,0,Y*,0
+FRA,1,France,Y,0,0,0,0,0,0,0,0,0,Y
+GEO,1,Georgia,Y,Y,Y,0,0,Y,Y,Y,0,0,0
+DEU,1,Germany,Y,Y,Y,0,0,0,0,0,0,0,Y
+GHA,1,Ghana,,,,,,,Y,Y,,,
+HKG,1,Hong Kong SAR,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+HUN,1,Hungary,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+IDN,1,Indonesia,Y,0,0,0,Y*,0,Y,Y,Y*,Y*,Y*
+IRN,1,"Iran, Islamic Rep. of",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+IRL,1,Ireland,Y,Y,0,0,Y,Y,0,0,0,0,Y
+ISR,1,Israel,0,0,0,0,Y*,Y,Y,Y*,Y*,Y*,Y*
+ITA,1,Italy,Y,Y,Y,Y,Y*,Y,Y,Y,Y,Y,Y*
+JPN,1,Japan,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+JOR,1,Jordan,Y,0,0,0,0,Y,Y,Y,Y,Y,0
+KAZ,1,Kazakhstan,Y,Y,Y*,0,0,Y,Y,0,0,0,0
+KOR,1,"Korea, Rep. of",Y,Y,0,0,Y,Y,Y,Y,Y,Y,Y
+KWT,1,Kuwait,Y,Y,Y*,0,Y*,Y,0,Y*,0,0,Y*
+LBN,1,Lebanon,0,0,0,0,0,Y,Y,Y,Y,0,0
+LTU,1,Lithuania,Y,Y,Y,Y,0,Y,Y,Y,Y,Y,Y
+MKD,1,"Macedonia, Rep. of",,,,,,,Y,,Y,Y,
+MYS,1,Malaysia,0,0,0,0,0,Y,Y,Y,Y,Y,0
+MLT,1,Malta,0,Y,0,0,0,Y,0,Y,0,0,0
+MAR,1,Morocco,Y,Y,Y*,Y*,0,Y,Y,Y*,Y*,Y*,0
+NLD,1,Netherlands,Y,Y,Y,Y,Y,0,0,0,Y,Y,Y
+NZL,1,New Zealand,Y,Y,Y,Y,Y,Y,Y,0,Y,Y,Y
+GBR,0,"Northern Ireland, Britain",Y,Y,0,0,0,0,0,0,0,0,0
+NOR,1,"Norway (5,9)",Y,0,0,0,0,Y,0,0,0,0,0
+OMN,1,Oman,Y,Y,0,0,0,Y,Y,Y,0,0,0
+PSE,1,Palestinian Nat'l Auth.,,,,,,,Y,Y,Y,,
+POL,1,Poland,Y,Y*,0,0,0,0,0,0,0,0,0
+PRT,1,Portugal,Y,Y,0,0,Y,0,0,0,0,0,Y
+QAT,1,Qatar,Y,Y,Y*,0,0,Y,Y,Y*,0,0,0
+ROU,1,Romania,,Y,,,,,Y,Y,Y,Y,Y
+RUS,1,Russian Federation,Y,Y,Y,Y,0,Y,Y,Y,Y,Y,Y
+SAU,1,Saudi Arabia,Y,Y,0,0,0,Y,Y,Y*,Y*,0,0
+SRB,1,Serbia,Y,Y,0,0,0,0,0,Y,Y,0,0
+SGP,1,Singapore,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+SVK,1,Slovak Republic,Y,Y,Y,0,0,0,0,0,Y,Y,Y
+SVN,1,Slovenia,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y*,Y
+ZAF,1,"South Africa (5, 9)",Y,0,0,0,0,Y,Y,0,Y*,Y*,Y*
+ESP,1,Spain,Y,Y,0,0,0,0,0,0,0,0,Y
+SWE,1,Sweden,Y,Y,Y,0,0,Y,Y,Y,Y,0,Y
+SYR,1,Syrian Arab Republic,,,,,,,Y,Y,Y*,,
+THA,1,Thailand,0,Y,0,0,Y*,Y,Y,Y,0,Y,Y*
+TUN,1,Tunisia,,Y,Y,Y,,,Y,Y,Y,Y,
+TUR,1,Turkey,Y,Y,0,0,0,Y,Y,Y*,0,Y*,0
+UKR,1,Ukraine,,,Y,,,,Y,Y,,,
+ARE,1,United Arab Emirates,Y,Y,0,0,0,Y,Y,0,0,0,0
+USA,1,United States,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+YEM,1,Yemen,,Y,Y,Y*,,,,,,,
+HND,1,"Honduras (6,9)",,Y,,,,,Y,,,,
+ZAF,1,South Africa (9),,,,,,,Y,,,,
+YEM,1,Yemen (6),,Y,,,,,,,,,
+ARG,0,"Buenos Aires, Argentina",Y,0,0,0,0,Y,0,0,0,0,0
+CAN,0,"Alberta, Canada",,Y,Y,,Y,,Y,,,Y,Y
+CAN,0,"Ontario, Canada",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+CAN,0,"Quebec, Canada",Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+NOR,1,"Norway (4,8)",Y,Y,Y,Y,Y,Y,Y,Y,Y,0,Y
+UAE,0,"Abu Dhabi, UAE",Y,Y,0,0,0,Y,Y,0,0,0,0
+UAE,0,"Dubai, UAE",Y,Y,Y,0,0,Y,Y,Y,0,0,0
+USA,0,"Alabama, US",,,,,,,Y,,,,
+USA,0,"California, US",,,,,,,Y,,,,
+USA,0,"Colorado, US",,,,,Y,,Y,,,,
+USA,0,"Connecticut, US",,,,,,,Y,,,,
+USA,0,"Florida, US",Y,Y,0,0,0,Y,Y,0,0,0,0
+USA,0,"Indiana, US",,,,Y,,,Y,,Y,Y,
+USA,0,"Massachusetts, US",,,Y,,,,Y,Y,,Y,
+USA,0,"Minnesota, US",,,Y,,Y,,Y,Y,,,Y
+USA,0,"North Carolina, US",,Y,,,,,Y,,,Y,
+,,,,,,,,,,,,,
+,,,Y,Indicates participation in that testing cycle.,,,,,,,,,
+,,,Y*,"Indicates participation but data not comparable for measuring trends to later years, primarily due to countries improving translations or increasing population coverage.",,,,,,,,,
+,,,,Out of grade participants,,,,,,,,,
+,,,,Benchmarking Participants,,,,,,,,,

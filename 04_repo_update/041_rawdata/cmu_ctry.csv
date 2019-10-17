@@ -1,0 +1,218 @@
+﻿region,adminregion,cmu,countrycode,countryname
+EAS,EAP,EACCF,CHN,China
+EAS,EAP,EACCF,PRK,Korea Dem Peoples Rep
+EAS,EAP,EACCF,MNG,Mongolia
+EAS,EAP,EACDF,TLS,Timor-Leste
+EAS,EAP,EACIF,IDN,Indonesia
+EAS,EAP,EACLF,LAO,Lao PDR
+EAS,EAP,EACMM,KHM,Cambodia
+EAS,EAP,EACMM,MMR,Myanmar
+EAS,EAP,EACNF,ASM,American Samoa
+EAS,EAP,EACNF,MHL,Marshall Islands
+EAS,EAP,EACNF,FSM,Micronesia Fed Sts
+EAS,EAP,EACNF,WSM,Samoa
+EAS,EAP,EACNF,SLB,Solomon Islands
+EAS,EAP,EACNF,TON,Tonga
+EAS,EAP,EACNF,TUV,Tuvalu
+EAS,EAP,EACNF,VUT,Vanuatu
+EAS,EAP,EACNF ,FJI,Fiji
+EAS,EAP,EACNF ,KIR,Kiribati
+EAS,EAP,EACNQ,NRU,Nauru
+EAS,EAP,EACNQ,PNG,Papua New Guinea
+EAS,EAP,EACPF,MYS,Malaysia
+EAS,EAP,EACPF,PHL,Philippines
+EAS,EAP,EACPF,THA,Thailand
+EAS,EAP,EACVF,VNM,Vietnam
+EAS,,EACCF,KOR,Korea Rep
+EAS,,EACNF,AUS,Australia
+EAS,,EACNF,GUM,Guam
+EAS,,EACNF,PLW,Palau
+EAS,,EACNQ,NZL,New Zealand
+EAS,,EACPF,BRN,Brunei Darussalam
+EAS,,EAPSG,PYF,French Polynesia
+EAS,,EAPSG,SGP,Singapore
+EAS,,,HKG,Hong Kong SAR China
+EAS,,,JPN,Japan
+EAS,,,MAC,Macao SAR China
+EAS,,,NCL,New Caledonia
+EAS,,,MNP,Northern Mariana Islands
+ECS,ECA,ECCCA,KAZ,Kazakhstan
+ECS,ECA,ECCCA,KGZ,Kyrgyz Republic
+ECS,ECA,ECCCA,TJK,Tajikistan
+ECS,ECA,ECCCA,UZB,Uzbekistan
+ECS,ECA,ECCEE,BLR,Belarus
+ECS,ECA,ECCEE,MDA,Moldova
+ECS,ECA,ECCEE,UKR,Ukraine
+ECS,ECA,ECCEU,BGR,Bulgaria
+ECS,ECA,ECCEU,ROU,Romania
+ECS,ECA,ECCRU,RUS,Russian Federation
+ECS,ECA,ECCSC,ARM,Armenia
+ECS,ECA,ECCSC,AZE,Azerbaijan
+ECS,ECA,ECCSC,GEO,Georgia
+ECS,ECA,ECCTR,TUR,Turkey
+ECS,ECA,ECCWB,ALB,Albania
+ECS,ECA,ECCWB,BIH,Bosnia and Herzegovina
+ECS,ECA,ECCWB,XKX,Kosovo
+ECS,ECA,ECCWB,MKD,Macedonia FYR
+ECS,ECA,ECCWB,MNE,Montenegro
+ECS,ECA,ECCWB,SRB,Serbia
+ECS,ECA,,TKM,Turkmenistan
+ECS,,ECCEU,HRV,Croatia
+ECS,,ECCEU,CZE,Czech Republic
+ECS,,ECCEU,HUN,Hungary
+ECS,,ECCEU,LVA,Latvia
+ECS,,ECCEU,LTU,Lithuania
+ECS,,ECCEU,POL,Poland
+ECS,,ECCEU,SVK,Slovak Republic
+ECS,,ECCEU,SVN,Slovenia
+ECS,,,AND,Andorra
+ECS,,,AUT,Austria
+ECS,,,BEL,Belgium
+ECS,,,CHI,Channel Islands
+ECS,,,CYP,Cyprus
+ECS,,,DNK,Denmark
+ECS,,,EST,Estonia
+ECS,,,FRO,Faroe Islands
+ECS,,,FIN,Finland
+ECS,,,FRA,France
+ECS,,,DEU,Germany
+ECS,,,GIB,Gibraltar
+ECS,,,GRC,Greece
+ECS,,,GRL,Greenland
+ECS,,,ISL,Iceland
+ECS,,,IRL,Ireland
+ECS,,,IMN,Isle of Man
+ECS,,,ITA,Italy
+ECS,,,LIE,Liechtenstein
+ECS,,,LUX,Luxembourg
+ECS,,,MCO,Monaco
+ECS,,,NLD,Netherlands
+ECS,,,NOR,Norway
+ECS,,,PRT,Portugal
+ECS,,,SMR,San Marino
+ECS,,,ESP,Spain
+ECS,,,SWE,Sweden
+ECS,,,CHE,Switzerland
+ECS,,,GBR,United Kingdom
+LCN,LAC,LCC1C,MEX,Mexico
+LCN,LAC,LCC2C,CRI,Costa Rica
+LCN,LAC,LCC2C,SLV,El Salvador
+LCN,LAC,LCC2C,GTM,Guatemala
+LCN,LAC,LCC2C,HND,Honduras
+LCN,LAC,LCC2C,NIC,Nicaragua
+LCN,LAC,LCC2C,PAN,Panama
+LCN,LAC,LCC3C,ATG,Antigua and Barbuda
+LCN,LAC,LCC3C,BHS,Bahamas
+LCN,LAC,LCC3C,BRB,Barbados
+LCN,LAC,LCC3C,BLZ,Belize
+LCN,LAC,LCC3C,DMA,Dominica
+LCN,LAC,LCC3C,DOM,Dominican Republic
+LCN,LAC,LCC3C,GRD,Grenada
+LCN,LAC,LCC3C,GUY,Guyana
+LCN,LAC,LCC3C,JAM,Jamaica
+LCN,LAC,LCC3C,SXM,Sint Maarten
+LCN,LAC,LCC3C,KNA,St Kitts and Nevis
+LCN,LAC,LCC3C,LCA,St Lucia
+LCN,LAC,LCC3C,VCT,St Vincent and the Grenadines
+LCN,LAC,LCC3C,SUR,Suriname
+LCN,LAC,LCC3C,TTO,Trinidad and Tobago
+LCN,LAC,LCC4C,COL,Colombia
+LCN,LAC,LCC4C,VEN,Venezuela
+LCN,LAC,LCC5C,BRA,Brazil
+LCN,LAC,LCC6C,BOL,Bolivia
+LCN,LAC,LCC6C,CHL,Chile
+LCN,LAC,LCC6C,ECU,Ecuador
+LCN,LAC,LCC6C,PER,Peru
+LCN,LAC,LCC7C,ARG,Argentina
+LCN,LAC,LCC7C,PRY,Paraguay
+LCN,LAC,LCC7C,URY,Uruguay
+LCN,LAC,LCC8C,HTI,Haiti
+LCN,LAC,,CYM,Cayman Islands
+LCN,LAC,,CUB,Cuba
+LCN,LAC,,CUW,Curaçao
+LCN,LAC,,PRI,Puerto Rico
+LCN,LAC,,MAF,St Martin
+LCN,LAC,,TCA,Turks and Caicos Islands
+LCN,,,ABW,Aruba
+LCN,,,VGB,British Virgin Islands
+LCN,,,VIR,US Virgin Islands
+MEA,MNA,MNC01,DZA,Algeria
+MEA,MNA,MNC01,LBY,Libya
+MEA,MNA,MNC01,MAR,Morocco
+MEA,MNA,MNC01,TUN,Tunisia
+MEA,MNA,MNC02,IRN,Iran Islamic Rep
+MEA,MNA,MNC02,IRQ,Iraq
+MEA,MNA,MNC02,JOR,Jordan
+MEA,MNA,MNC02,LBN,Lebanon
+MEA,MNA,MNC02,SYR,Syrian Arab Republic
+MEA,MNA,MNC03,DJI,Djibouti
+MEA,MNA,MNC03,EGY,Egypt Arab Rep
+MEA,MNA,MNC03,YEM,Yemen Rep
+MEA,MNA,MNC04,PSE,West Bank and Gaza
+MEA,,MNC01,MLT,Malta
+MEA,,MNC05,BHR,Bahrain
+MEA,,MNC05,KWT,Kuwait
+MEA,,MNC05,OMN,Oman
+MEA,,MNC05,QAT,Qatar
+MEA,,MNC05,SAU,Saudi Arabia
+MEA,,MNC05,ARE,United Arab Emirates
+MEA,,,ISR,Israel
+NAC,,,BMU,Bermuda
+NAC,,,CAN,Canada
+NAC,,,USA,United States
+SAS,SAS,SACAF,AFG,Afghanistan
+SAS,SAS,SACBB,BGD,Bangladesh
+SAS,SAS,SACBB,BTN,Bhutan
+SAS,SAS,SACIN,IND,India
+SAS,SAS,SACPK,PAK,Pakistan
+SAS,SAS,SACSN,MDV,Maldives
+SAS,SAS,SACSN,NPL,Nepal
+SAS,SAS,SACSN,LKA,Sri Lanka
+SSF,SSA,AFCC1,AGO,Angola
+SSF,SSA,AFCC1,CMR,Cameroon
+SSF,SSA,AFCC1,GNQ,Equatorial Guinea
+SSF,SSA,AFCC1,GAB,Gabon
+SSF,SSA,AFCC1,STP,Sao Tome and Principe
+SSF,SSA,AFCC2,BDI,Burundi
+SSF,SSA,AFCC2,CAF,Central African Republic
+SSF,SSA,AFCC2,COD,Congo Dem Rep
+SSF,SSA,AFCC2,COG,Congo Rep
+SSF,SSA,AFCE1,MWI,Malawi
+SSF,SSA,AFCE1,TZA,Tanzania
+SSF,SSA,AFCE1,ZMB,Zambia
+SSF,SSA,AFCE1,ZWE,Zimbabwe
+SSF,SSA,AFCE2,KEN,Kenya
+SSF,SSA,AFCE2,RWA,Rwanda
+SSF,SSA,AFCE2,SOM,Somalia
+SSF,SSA,AFCE2,UGA,Uganda
+SSF,SSA,AFCE3,ERI,Eritrea
+SSF,SSA,AFCE3,ETH,Ethiopia
+SSF,SSA,AFCE3,SSD,South Sudan
+SSF,SSA,AFCE3,SDN,Sudan
+SSF,SSA,AFCF1,CPV,Cabo Verde
+SSF,SSA,AFCF1,GMB,Gambia The
+SSF,SSA,AFCF1,GNB,Guinea Bissau
+SSF,SSA,AFCF1,MRT,Mauritania
+SSF,SSA,AFCF1,SEN,Senegal
+SSF,SSA,AFCF2,BEN,Benin
+SSF,SSA,AFCF2,CIV,Cote d Ivoire
+SSF,SSA,AFCF2,GIN,Guinea
+SSF,SSA,AFCF2,TGO,Togo
+SSF,SSA,AFCS1,BWA,Botswana
+SSF,SSA,AFCS1,SWZ,eSwatini
+SSF,SSA,AFCS1,LSO,Lesotho
+SSF,SSA,AFCS1,NAM,Namibia
+SSF,SSA,AFCS1,ZAF,South Africa
+SSF,SSA,AFCS2,COM,Comoros
+SSF,SSA,AFCS2,MDG,Madagascar
+SSF,SSA,AFCS2,MUS,Mauritius
+SSF,SSA,AFCS2,MOZ,Mozambique
+SSF,SSA,AFCS2,SYC,Seychelles
+SSF,SSA,AFCW1,GHA,Ghana
+SSF,SSA,AFCW1,LBR,Liberia
+SSF,SSA,AFCW1,SLE,Sierra Leone
+SSF,SSA,AFCW2,NGA,Nigeria
+SSF,SSA,AFCW3,BFA,Burkina Faso
+SSF,SSA,AFCW3,TCD,Chad
+SSF,SSA,AFCW3,MLI,Mali
+SSF,SSA,AFCW3,NER,Niger

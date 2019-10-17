@@ -1,0 +1,92 @@
+Countrycode,n_res,Country,D,E,F,G
+ARG,1,Argentina,,,,Y
+AUS,1,Australia,Y,Y,,
+AUT,1,Austria,Y,Y,Y,
+AZE,1,Azerbaijan,Y,Y,,
+BHR,1,Bahrain,Y,,,
+BEL,0,Belgium (Flemish),Y,,Y,
+BEL,0,Belgium (French),Y,Y,Y,
+BLZ,1,Belize,,,,Y
+BGR,1,Bulgaria,Y,Y,Y,Y
+CAN,1,Canada,Y,Y,,
+CHL,1,Chile,Y,,,
+TWN,1,Chinese Taipei,Y,Y,Y,
+COL,1,Colombia,,Y,,Y
+HRV,1,Croatia,,Y,,
+CYP,1,Cyprus,,,,Y
+CZE,1,Czech Republic,Y,Y,,Y
+DNK,1,Denmark,Y,Y,Y,
+EGY,1,Egypt,Y,,,
+GBR,0,"England, Britain",Y,Y,Y,Y
+FIN,1,Finland,Y,Y,,
+FRA,1,France,Y,Y,Y,Y
+GEO,1,Georgia,Y,Y,Y,
+DEU,1,Germany,Y,Y,Y,Y
+GRC,1,Greece,,,,Y
+HKG,1,Hong Kong SAR,Y,Y,Y,Y
+HUN,1,Hungary,Y,Y,Y,Y
+ISL,1,Iceland,,,Y,Y
+IDN,1,Indonesia,,Y,Y,
+IRN,1,"Iran, Islamic Rep. of",Y,Y,Y,Y
+IRL,1,Ireland,Y,Y,,
+ISR,1,Israel,Y,Y,Y*,Y*
+ITA,1,Italy,Y,Y,Y,Y
+KAZ,1,Kazakhstan,Y,,,
+KWT,1,Kuwait,Y,,Y*,Y*
+LVA,1,Latvia,Y,,Y,Y
+LTU,1,Lithuania,Y,Y,Y,Y
+LUX,1,Luxembourg,,,Y,
+MKD,1,"Macedonia, Rep. of",,,Y,Y
+MAC,1,Macao SAR,Y,,,
+MLT,1,Malta,Y,Y,,
+MDA,1,"Moldova, Rep. of",,,Y,Y
+MAR,1,Morocco,Y,Y,Y*,Y*
+NLD,1,Netherlands,Y,Y,Y,Y
+NZL,1,New Zealand,Y,Y,Y,Y
+GBR,0,"Northern Ireland, Britain",Y,Y,,
+NOR,1,Norway (5),Y,,,
+OMN,1,Oman,Y,Y,,
+POL,1,Poland,Y,Y*,Y*,
+PRT,1,Portugal,Y,Y,,
+QAT,1,Qatar,Y,Y,Y*,
+ROU,1,Romania,,Y,Y,Y
+RUS,1,Russian Federation,Y,Y,Y,Y
+SAU,1,Saudi Arabia,Y,Y,,
+GBR,0,"Scotland, Britain",,,Y,Y
+SGP,1,Singapore,Y,Y,Y,Y
+SVK,1,Slovak Republic,Y,Y,Y,Y
+SVN,1,Slovenia,Y,Y,Y,Y
+ZAF,1,South Africa,Y,Y,Y*,
+ESP,1,Spain,Y,Y,Y,
+SWE,1,Sweden,Y,Y,Y,Y
+TTO,1,Trinidad and Tobago,Y,Y,Y,
+TUR,1,Turkey,,,,Y
+ARE,1,United Arab Emirates,Y,Y,,
+USA,1,United States,Y,Y,Y,Y
+BWA,1,Botswana (6),,Y,,
+HND,1,Honduras (6),,Y,,
+KWT,1,Kuwait (6),,Y,,
+MAR,1,Morocco (6),,Y,,
+ARG,0,"Buenos Aires, Argentina",Y,,,
+CAN,0,"Alberta, Canada",,Y,,
+CAN,0,"British Columbia, Canada",,,Y,
+CAN,0,"Nova Scotia, Canada",,,Y,
+CAN,0,"Ontario, Canada",Y,Y,Y,Y
+CAN,0,"Quebec, Canada",Y,Y,Y,Y
+MLT,0,Maltese - Malta,,Y,,
+DEN,1,Denmark (3),Y,,,
+NOR,1,Norway (4),Y,Y,Y,Y
+RUS,0,"Moscow City, Russian Fed.",Y,,,
+ZAF,1,Eng/Afr/Zulu - Republic of South Africa (5),Y,,Y,
+ZAF,0,Eng/Afr/Zulu - Republic of South Africa (5),,Y,,
+ESP,0,"Andalusia, Spain",Y,Y,,
+ESP,0,"Madrid, Spain",Y,,,
+UAE,0,"Abu Dhabi, UAE",Y,Y,,
+UAE,0,"Dubai, UAE",Y,Y,,
+USA,0,"Florida, US",,Y,,
+,,,,,,
+,,,Y,Indicates participation in that testing cycle.,,
+,,,Y*,"Indicates participation but data not comparable for measuring trends to later years, primarily due to countries improving translations or increasing population coverage.",,
+,,,,,,
+,,,,Sixth Grade Participants,,
+,,,,Benchmarking Participants,,
