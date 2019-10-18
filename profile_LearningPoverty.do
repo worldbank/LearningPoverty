@@ -33,11 +33,11 @@ qui {
   }
   * Joao Pedro I
   else if inlist("`c(username)'","wb255520","WB255520") {
-    global clone   "C:/Users/`c(username)'/Documents/mytasks/LearningPoverty-tmp"
+    global clone   "C:/Users/`c(username)'/Documents/mytasks/LearningPoverty"
   }
   * Joao Pedro II
   else if inlist("`c(username)'","azeve") {
-    global clone   "C:/GitHub_mytasks/LearningPoverty-tmp"
+    global clone   "C:/GitHub_mytasks/LearningPoverty"
   }
   * Kristoffer
   else if inlist("`c(username)'","wb462869","WB462869") {
