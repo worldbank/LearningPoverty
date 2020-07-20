@@ -69,7 +69,6 @@ Documentation of <<dd_display:"`char_value_i5'">>
 
 ~~~~
 <<dd_display:"`char_i4'">>:     <<dd_display:"`char_value_i4'">>
-<<dd_display:"`char_i1'">>:    <<dd_display:"`char_value_i1'">>
 ~~~~
 
 

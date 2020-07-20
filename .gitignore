@@ -80,7 +80,13 @@
 # csv files in selected input folders
 !08_2pager/081_data/cleaned_*.csv
 !08_2pager/081_data/hosted_in_repo/*.csv
+!05_working_paper/053_outputs/*correlations.csv
+!02_simulation/023_outputs/*.csv
+!02_simulation/023_outputs/*/*.csv
 
+# excel for working paper
+!05_working_paper/051_rawdata/LPV_*Template.xlsx
+!05_working_paper/053_outputs/LPV_*PAPER.xlsx
 
 ##################
 #Include images used in the 2pager template

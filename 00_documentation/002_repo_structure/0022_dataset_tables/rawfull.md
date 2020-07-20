@@ -10,36 +10,41 @@ Dataset of proficiency merged with enrollment and population. Not a timeseries, 
 
 ~~~~
 sources:     All population, enrollment and proficiency sources combined.
-lastsave:    16 Oct 2019 21:57:15 by wb255520
 ~~~~
 
 
-About the **54 variables** in this dataset:
+About the **60 variables** in this dataset:
 
 ~~~~
 The variables belong to the following variable classifications:
 idvars valuevars traitvars
 
 idvars:    countrycode year_assessment idgrade test nla_code subject
-valuevars: nonprof_all se_nonprof_all nonprof_ma se_nonprof_ma nonprof_fe se_nonprof_fe enrollment_validated_all enrollment_validated_fe enrollment_validated_ma enrollment_validated_flag enrollment_interpolated_all enrollment_interpolated_fe enrollment_interpolated_ma enrollment_interpolated_flag population_fe_10 population_fe_primary population_fe_9plus population_ma_10 population_ma_primary population_ma_9plus population_all_10 population_all_primary population_all_9plus population_fe_1014 population_ma_1014 population_all_1014 population_source
+valuevars: nonprof_all se_nonprof_all nonprof_ma se_nonprof_ma nonprof_fe se_nonprof_fe fgt1_all fgt1_fe fgt1_ma fgt2_all fgt2_fe fgt2_ma enrollment_validated_all enrollment_validated_fe enrollment_validated_ma enrollment_validated_flag enrollment_interpolated_all enrollment_interpolated_fe enrollment_interpolated_ma enrollment_interpolated_flag population_fe_10 population_fe_primary population_fe_9plus population_ma_10 population_ma_primary population_ma_9plus population_all_10 population_all_primary population_all_9plus population_fe_1014 population_ma_1014 population_all_1014 population_source
 traitvars: year_enrollment year_population source_assessment enrollment_source population_source enrollment_definition min_proficiency_threshold surveyid countryname region region_iso2 regionname adminregion adminregion_iso2 adminregionname incomelevel incomelevel_iso2 incomelevelname lendingtype lendingtype_iso2 lendingtypename cmu
 
 . codebook, compact
 
 Variable      Obs Unique      Mean       Min       Max  Label
-----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
 countrycode   914    217         .         .         .  WB country code (3 letters)
 year_asses~t  914     20  2011.109      1996      2017  Year of assessment
 idgrade       914      5  -233.895      -999         6  Grade ID
 test          914      8         .         .         .  Assessment
 nla_code      914     22         .         .         .  Reference code for NLA in markdown documentation
 subject       914      4         .         .         .  Subject
-nonprof_all   697    697  30.44718  .2252221  99.89659  % pupils below minimum proficiency (all)
-se_nonprof~l  559    559  .9498702  .1218972  3.419903  SE of pupils below minimum proficiency (all)
-nonprof_ma    559    559  24.92177  .1586974  97.96137  % pupils below minimum proficiency (ma)
-se_nonprof~a  559    559  1.199997  .1287481  3.848194  SE of pupils below minimum proficiency (ma)
-nonprof_fe    559    559  22.02045  .1284599  97.83222  % pupils below minimum proficiency (fe)
-se_nonprof~e  559    559  1.142743  .1141958  3.566816  SE of pupils below minimum proficiency (fe)
+nonprof_all   697    697  30.44595  .2252221  99.89659  % pupils below minimum proficiency (all)
+se_nonprof~l  559    559   1.05663  .1218972  3.419903  SE of pupils below minimum proficiency (all)
+nonprof_ma    561    561  25.08579  .1586974  97.96137  % pupils below minimum proficiency (ma)
+se_nonprof~a  559    559  1.297817  .1287481  3.848194  SE of pupils below minimum proficiency (ma)
+nonprof_fe    561    561  22.18714  .1284599  97.83222  % pupils below minimum proficiency (fe)
+se_nonprof~e  559    559  1.245255  .1141958  4.098772  SE of pupils below minimum proficiency (fe)
+fgt1_all      559    559  .1708391  .0308948  .7537994  Avg gap to minimum proficiency (all, FGT1)
+fgt1_fe       559    559  .1641004  .0257019  .7643428  Avg gap to minimum proficiency (fe, FGT1)
+fgt1_ma       559    559  .1757896  .0298228  .7457443  Avg gap to minimum proficiency (ma, FGT1)
+fgt2_all      559    559  .0610742   .001687  .6159182  Avg gap squared to minimum proficiency (all, FGT2)
+fgt2_fe       559    559  .0572421  .0011683  .6308874  Avg gap squared to minimum proficiency (fe, FGT2)
+fgt2_ma       559    559  .0639653  .0017091  .6044815  Avg gap squared to minimum proficiency (ma, FGT2)
 en~dated_all  896    503  92.41767  23.54786       100  Validated % of children enrolled in school (using closest year, both genders)
 enr~dated_fe  855    481  92.32435  16.75778       100  Validated % of children enrolled in school (using closest year, female only)
 enr~dated_ma  855    481  92.87754  30.29106  100.2015  Validated % of children enrolled in school (using closest year, male only)
@@ -64,8 +69,8 @@ population~e  914      1         .         .         .  The source used for popu
 year_enrol~t  896     24  2010.494      1991      2017  The year that the enrollment value is from
 year_popul~n  914      1      2015      2015      2015  Year of population
 source_ass~t  697      3         .         .         .  Source of assessment data
-enrollmen~ce  914      5         .         .         .  The source used for this enrollment value
-enrollment~n  914      5         .         .         .  The definition used for this enrollment value
+enrollmen~ce  914      4         .         .         .  The source used for this enrollment value
+enrollment~n  914      6         .         .         .  The definition used for this enrollment value
 min_profic~d  694     18         .         .         .  Minimum Proficiency Threshold (assessment-specific)
 surveyid      697    503         .         .         .  SurveyID (countrycode_year_assessment)
 countryname   914    217         .         .         .  Country Name
@@ -80,8 +85,8 @@ incomeleve~2  914      4         .         .         .  Income Level Code (ISO 2
 incomeleve~e  914      4         .         .         .  Income Level Name
 lendingtype   914      4         .         .         .  Lending Type Code
 lendingtyp~2  914      4         .         .         .  Lending Type Code (ISO 2 digits)
-lendingty~me  911      4         .         .         .  Lending Type Name
+lendingty~me  914      4         .         .         .  Lending Type Name
 cmu           680     48         .         .         .  WB Country Management Unit
-----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
 
 ~~~~

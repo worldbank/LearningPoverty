@@ -31,9 +31,7 @@ do "${clone}/04_repo_update/042_programs/0422_population_data_from_api.do"
 do "${clone}/04_repo_update/042_programs/0423_enrollment_data_from_api.do"
 
 * Update PROFICIENCY DATA from multiple sources to store as csv in 011_rawdata
-if $datalibweb_is_available {
-  do "${clone}/04_repo_update/042_programs/0424_proficiency_data.do"
-}
+do "${clone}/04_repo_update/042_programs/0424_proficiency_data.do"
 
 * Update Other WB API data to store as csv in 011_rawdata
 do "${clone}/04_repo_update/042_programs/0425_otherdata_from_api.do"

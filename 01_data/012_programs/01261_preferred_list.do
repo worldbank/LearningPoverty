@@ -259,7 +259,7 @@ qui {
     local sources "All population, enrollment and proficiency sources combined."
     edukit_save, filename("preference`runname'") path("${clone}/01_data/013_outputs/")   ///
                  idvars(countrycode preference) ///
-                 varc("value *nonprof* enrollment_all enrollment_ma enrollment_fe population_* anchor_*; trait idgrade test nla_code subject *year* enrollment_flag enrollment_*source* *definition* *threshold* surveyid countryname region* adminregion* incomelevel* lendingtype* cmu preference_description lp_by_gender_is_available") ///
+                 varc("value *nonprof* fgt* enrollment_all enrollment_ma enrollment_fe population_* anchor_*; trait idgrade test nla_code subject *year* enrollment_flag enrollment_*source* *definition* *threshold* surveyid countryname region* adminregion* incomelevel* lendingtype* cmu preference_description lp_by_gender_is_available") ///
                  metadata("description `description'; sources `sources'; filename Rawlatest")
   }
   else save "${clone}/01_data/013_outputs/preference`runname'.dta", replace

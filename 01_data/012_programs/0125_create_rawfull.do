@@ -86,7 +86,7 @@ qui {
     local sources "All population, enrollment and proficiency sources combined."
     edukit_save, filename(rawfull) path("${clone}/01_data/013_outputs/")   ///
                  idvars(countrycode year_assessment idgrade test nla_code subject) ///
-                 varc("value *nonprof* enrollment_val* enrollment_inte* population_*; trait year_enrollment year_population *source* *definition* *threshold* surveyid countryname region* adminregion* incomelevel* lendingtype* cmu") ///
+                 varc("value *nonprof* fgt* enrollment_val* enrollment_inte* population_*; trait year_enrollment year_population *source* *definition* *threshold* surveyid countryname region* adminregion* incomelevel* lendingtype* cmu") ///
                  metadata("description `description'; sources `sources'; filename Rawfull")
   }
   else save "${clone}/01_data/013_outputs/rawfull.dta", replace

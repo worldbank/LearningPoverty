@@ -64,7 +64,7 @@ qui {
     local sources "Compilation of proficiency measures from 3 sources: CLO (Country Level Outcomes from GLAD), National Learning Assessment (from UIS), HAD (Harmonized Assessment Database)"
     edukit_save, filename(proficiency) path("${clone}/01_data/013_outputs/") ///
                  idvars(countrycode year idgrade test nla_code subject)      ///
-                 varc("value *nonprof*; trait *threshold source_assessment surveyid") ///
+                 varc("value *nonprof* fgt*; trait *threshold source_assessment surveyid") ///
                  metadata("description `description'; sources `sources'; filename Proficiency")
   }
   else save "${clone}/01_data/013_outputs/proficiency.dta", replace

@@ -84,9 +84,9 @@ qui {
       timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX")
 
 
-  noi disp as err _newline "Sensitivity analysis: change reporting window (8, 6 and 4 years)"
+  noi disp as err _newline "Sensitivity analysis: change reporting window (Latest available, 8, 6 and 4 years)"
 
-  foreach year in 2011 2013 2015 {
+  foreach year in 2001 2011 2013 2015 {
 
     * Displays output for chosen preferences for PART2 countries (`year')
     noi population_weights, preference(1005) timewindow(year_assessment>=`year') countryfilter(lendingtype!="LNX")

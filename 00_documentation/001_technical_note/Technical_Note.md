@@ -69,21 +69,21 @@ PIRLS is the anchor assessment used in our dataset. Of the major multi-country a
 
 ##### **International**: Trends in International Mathematics and Science Study ([TIMSS](https://nces.ed.gov/timss/))
 
-For some countries we use proficiency data from TIMSS international math and science assessment in grades 3-6 (most countries participated in grade 4). For these countries, we use the science scores as a proxy for reading scores, counting children as proficient if they exceeded the Low International Benchmark of 400 (Minimum Proficiency Level 2). We have two rationales for using this proxy. The first is conceptual: the ability to decipher science questions requires reading proficiency, since most science questions are word problems. The second is empirical: across the countries for which we have data for both subject areas, proficiency on science is highly correlated with reading proficiency. Within the PISA assessment, the science-reading correlation is 0.97, and for countries that have participated in both TIMSS and PIRLS, the correlation between the two is 0.99. Only in the case of Jordan, for which had no science scores, we are using mathematics proficiency as a proxy for reading proficiency (same MPL of 2, Low International Benchmark, 400 points).
+For some countries we use proficiency data from TIMSS international math and science assessment in grades 3-6 (most countries participated in grade 4). For these countries, we use the science scores as a proxy for reading scores, counting children as proficient if they exceeded the Low International Benchmark of 400 points (Minimum Proficiency Level 2). We have two rationales for using this proxy. The first is conceptual: the ability to decipher science questions requires reading proficiency, since most science questions are word problems. The second is empirical: across the countries for which we have data for both subject areas, proficiency on science is highly correlated with reading proficiency. Within the PISA assessment, the science-reading correlation is 0.97, and for countries that have participated in both TIMSS and PIRLS, the correlation between the two is 0.99. Only in the case of Jordan, for which had no science scores, we are using mathematics proficiency as a proxy for reading proficiency (same MPL of 2, Low International Benchmark, a score of 400 points).
 
 ##### **Regional**: Latin American Laboratory for Assessment of the Quality of Education ([LLECE](http://www.unesco.org/new/en/santiago/education/education-assessment-llece/))
 
-LLECE has implemented three rounds of regional assessments in Latin America (PERCE, SERCE and TERCE). The most recent for which we have data, the TERCE, was carried out in 2013 and covered 15 countries. The TERCE scores were reported in two scales: we choose to use the SERCE-compatible reporting scale, for historical comparability. In the SERCE scale, we defined minimum proficiency as reaching Level 3 in language.
+LLECE has implemented three rounds of regional assessments in Latin America (PERCE, SERCE and TERCE). The most recent for which we have data, the TERCE, was carried out in 2013 and covered 15 countries. The TERCE scores were reported in two scales: we choose to use the SERCE-compatible reporting scale, for historical comparability. In the SERCE scale, we defined minimum proficiency as reaching Level 3 in language (a score of 513.66 points).
 
 ##### **Regional**: CONFEMEN Education Systems Analysis Program ([PASEC](http://www.pasec.confemen.org))
 
-PASEC has carried out several rounds of data collection in Francophone African countries. The most recent round was carried out in 2014, and we used data from that round of PASEC to provide estimates for 10 countries, considering minimum reading proficiency as reaching Level 4 in language for 6th graders.
+PASEC has carried out several rounds of data collection in Francophone African countries. The most recent round was carried out in 2014, and we used data from that round of PASEC to provide estimates for 10 countries, considering minimum reading proficiency as reaching Level 4 in language for 6th graders (a score of 595.1 points).
 
 Other rounds of PASEC were also included in our dataset, with proficiency data extracted from official reports instead of generated from the harmonized microdata in the Global Learning Assessment Database ([GLAD](https://github.com/worldbank/GLAD)). From all the countries included in the global number, this is the case for 3: Dem. Rep. of Congo, Madagascar and Mali (COD MLI MDG).
 
 ##### **Regional**: Southern and Eastern Africa Consortium for Monitoring Educational Quality ([SACMEQ](http://www.sacmeq.org/))
 
-SACMEQ has carried out several rounds of data collection for Eastern and Southern African countries. The latest round of the SACMEQ assessment was carried out in 2013 (SACMEQ IV). Due to concerns on the quality of the data for this round, however, we do not use this to establish levels. We do however, use the earlier rounds of data for estimating changes in proficiency over time. We considered as minimum proficiency reaching Level 5 in reading.
+SACMEQ has carried out several rounds of data collection for Eastern and Southern African countries. The latest round of the SACMEQ assessment was carried out in 2013 (SACMEQ IV). Due to concerns on the quality of the data for this round, however, we do not use this to establish levels. We do, however, use this data for estimating changes in proficiency over time. We considered as minimum proficiency reaching Level 5 in reading (a score of 509 points).
 
 ##### **Country-specific**: National Learning Assessments (NLA)
 
@@ -101,14 +101,14 @@ For each new assessment incorporated into the database, the harmonization proces
 
 The GAML created an initial mappings between three regional assessments (PASEC, LLECE, and SACMEQ) as part of the SDG monitoring process ([2018a](http://gaml.uis.unesco.org/wp-content/uploads/sites/2/2018/12/4.1.1_29_Consensus-building-meeting-package.pdf), [2018b](http://gaml.uis.unesco.org/wp-content/uploads/sites/2/2018/10/Final-Report-of-September-2018-Paris-Consensus-Meeting.pdf)). These mappings, however, are provisional.  These have been updated during GAML workshops in 2019, and there is a process underway to validate them using analysis of individual items, but it will be some time before that process reaches any conclusions. While we typically use these thresholds, summarized in the table below, we triangulate these with other data where possible.
 
-|Assessment| Minimum Proficiency Level (MPL) | Grade(s) assessed | Most recent year | Number of countries |
+|Assessment| Minimum Proficiency Level (MPL) | Grade(s) assessed | Most recent year | Number of low- and middle-income countries w/ data after 2011 |
 |---|---|---|---|---|
-|PIRLS|Level 2 (Low international benchmark)|4|2016|59|
-|TIMSS|Level 2 (Low international benchmark)|4|2015|14|
-|LLECE|Level 3|6|2013|13|
-|PASEC|Level 4|5 and 6|2014|15|
-|SACMEQ|Level 5|6|2007|11|
-|NLAs|Varies by country|4, 5 and 6|2017|9||
+|PIRLS|Level 2 (Low international benchmark, 400 points)|4|2016|15|
+|TIMSS|Level 2 (Low international benchmark, 400 points)|4|2015|7|
+|LLECE|Level 3 (513.66 points)|6|2013|15|
+|PASEC|Level 4 (595.1 points)|5 and 6|2014|13|
+|SACMEQ|Level 5 (509 points) |6|2007|-|
+|NLAs|Varies by country|4, 5 and 6|2017|12||
 
 ##### Preferred Learning Assessments Order
 
@@ -152,24 +152,9 @@ The regional focal points and country TTLs have validated the enrollment data an
 #### Population Source
 
 Our source of population is the official United Nations populations estimates and projections (2017 Revision), prepared by the Population Division of the Department of Economic and Social Affairs of the United Nations Secretariat. The 2017 Revision is the twenty-fifth round of global population estimates and projections produced by the Population Division since 1951. The detailed description of the methodology on the way that country estimates have been prepared, including the assumptions that were used to project fertility, mortality and international migration up to
-the year 2100 can be found on the [website of the Population Division](www.unpopulation.org). 
+the year 2100 can be found on the [website of the Population Division](www.unpopulation.org).
 
-This work uses the **10-14 age group** UN Population Division’s “medium fertility” scenario. The data can be also found at [HealthStats' Population Estimates and Projection database](https://databank.worldbank.org/data/source/health-nutrition-and-population-statistics:-population-estimates-and-projections). See also: [graphs](https://esa.un.org/unpd/wpp/Graphs/Probabilistic/) and [methodology](https://population.un.org/wpp/Publications/Files/WPP2017_Methodology.pdf). 
-
-#### Population by Region and Income level
-
-The table below shows the target population, 10-14 years old, by region and country income level classification in 2015, our anchor year.
-
-|region	| HIC	| UMC |	LMC	| LIC |	**Total**|
-|---|---|---|---|---|---|
-|EAS|10,448,241 |	 87,689,307 |	 49,371,244 |	 1,885,239 |	 149,394,032 |
-|ECS|25,422,323 |	 19,022,549 |	 5,238,264 	| 823,390 	| 50,506,528 |
-|LCN|2,240,453 	| 47,456,826 	| 3,444,678 	| 1,178,250 |	 54,320,208 |
-|MEA|4,184,567 	| 14,847,722 	| 13,116,378 	| 5,070,562 |	 37,219,228 |
-|NAC|22,578,317 |	          - |   	 -|   	 -|   	 22,578,316|
-|SAS|-   	      |  1,733,106 	| 164,939,900 |	 7,974,831 |	 174,647,840 |
-|SSF|  6,448    |  5,769,214  | 	 53,027,261 |	 64,356,101 |	 123,159,024 |
-|**Total**|64,880,349|176,518,724 |	 289,137,725 |	 81,288,373 |	 611,825,176 ||
+This work uses the **10-14 age group** UN Population Division’s “medium fertility” scenario. The data can be also found at [HealthStats' Population Estimates and Projection database](https://databank.worldbank.org/data/source/health-nutrition-and-population-statistics:-population-estimates-and-projections). See also: [graphs](https://esa.un.org/unpd/wpp/Graphs/Probabilistic/) and [methodology](https://population.un.org/wpp/Publications/Files/WPP2017_Methodology.pdf).
 
 ***
 
@@ -199,11 +184,13 @@ A second empirical goal is to measure how _learning poverty_  has improved over 
 
 ### Calculation of Standard Errors
 
-We calculate standard errors that are reported in the tables of the technical paper in the following way.  In short, we use a bootstrapping technique, which captures sampling error in the proportion of students minimally proficient at the country-year-assessment level.  
+Our Learning Poverty measure is a weighted average of two indicators, namely the share of learners below a minimum proficiency threshold and the share of out-of-school children. The first indicator is estimated using sample-based learning assessments, the latter is estimated in virtually all cases using administrative records from national Education Management Information System and the population census. Both measures have an associated error term, however they are of very different nature.
 
-Using our student level assessment microdata, we form an indicator for whether each student is above the minimum proficiency level defined above and estimate the mean to produce the proportion proficient in each country, along with the standard error of that mean estimate for each country-year-assessment combination.  Applying the Central Limit Theorem, which can be justified because the assessment databases typically contain several hundred student observations, our estimator of the proportion above minimum proficiency in each country follows an asymptotically Normal distribution. To produce standard errors for our final numbers, which are based on these country-year-assessment level proficiency numbers, we take 100 bootstrap random draws of our country-year-assessment level proficiency database, where each individual observation in our database is drawn from the Normal distribution with the mean of this distribution being our estimate of the proportion minimally proficient and the variance being the squared standard error of that estimated proportion.  Then our final global and regional numbers are calculated in each of these 100 bootstrap simulated databases, and our standard error is the standard deviation of our estimate across those 100 bootstrap datasets.
+Our learning data is sample-based, and as such their error term reflect the sample error and the psychometrical procedure used to estimate the latent learning variable; our out-of-school measure is a population measure estimated using administrative records and census data, as such does not have a sample error. Both measures, however, are also affected by non-sampling error, such as questionnaire or measurement error, implementation challenges, and behavior effects. Unfortunately, we have no basis to capture this later term, hence we use bootstrap for error propagation of the sample error associated with our learning measure.
 
-We assume that enrollment numbers, which also feed into our adjusted non-proficiency measure, are reported without error, as they are typically calculated using administrative records.  We acknowledge that in some cases, even using administrative records can lead to inaccurate counts of students enrolled in schools.  These types of misreporting errors are difficult to account for, and we are unable to incorporate this type of error into our standard error calculations.  We acknowledge this as a limitation.
+Using our student level assessment microdata, we form an indicator for whether each student is above the minimum proficiency level defined above and estimate the mean to produce the proportion proficient in each country, along with the standard error of that mean estimate for each country-year-assessment combination. Applying the Central Limit Theorem, which can be justified because the assessment databases typically contain several hundred student observations, our estimator of the proportion above minimum proficiency in each country follows an asymptotically Normal distribution. To produce standard errors for our final numbers, which are based on these country-year-assessment level proficiency numbers, we take 100 bootstrap random draws of our country-year-assessment level proficiency database, where each individual observation in our database is drawn from the Normal distribution with the mean of this distribution being our estimate of the proportion minimally proficient and the variance being the squared standard error of that estimated proportion. Then our final global and regional numbers are calculated in each of these 100 bootstrap simulated databases, and our standard error is the standard deviation of our estimate across those 100 bootstrap datasets.
+
+As discussed, our enrollment numbers, which also feed into our Learning Poverty measure, are population measures based on administrative records without an associated sample error. We acknowledge that this indicator might suffer from non-sample errors, which can lead to inaccurate counts of students enrolled in schools. Non-sample errors affect both of our measures, as they have a direct impact on the out-of-school measure, and an indirect effect in our learning estimates as they impact the sample frame.  These types of misreporting errors are difficult to account for, and we are unable to incorporate this type of error into our standard error calculations. We acknowledge this as a limitation.
 
 #### Special Cases for Standard Error Calculations
-In some cases, where we are using country-year observations based on national assessments, we do not have a standard error associated with this observation.  When no standard error is available, we use a value of 0.5, which is approximately the median standard error across all country-year-assessment combinations used.
+In some cases, where we are using country-year observations based on national assessments, we do not have a standard error associated with this observation.  When no standard error is available, we use a value of 1.2pp, which is approximately the median standard error across all country-year-assessment combinations used.

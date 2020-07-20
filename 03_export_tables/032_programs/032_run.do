@@ -23,13 +23,18 @@ global chosen_preference 1005  // Chosen preference created in 01 rawlatest
 *-----------------------------------------------------------------------------
 * Subroutines for this task
 *-----------------------------------------------------------------------------
-* Run script to produce tables for paper (Part 1)
-do "${clone}/03_export_tables/032_programs/0321_put_to_excel.do"
+* Run script to produce SPELLS summary statistics tables for paper
+do "${clone}/03_export_tables/032_programs/0320_spells_statistics.do"
 
-* Run script to produce tables for paper (Part 2)
-do "${clone}/03_export_tables/032_programs/0322_gender_tables.do"
+* Run script to produce CURRENT SITUATION tables for paper
+do "${clone}/03_export_tables/032_programs/0321_create_outlines.do"
+
+* Produce decomposition of Learning Poverty levels and change
+do "${clone}/03_export_tables/032_programs/0322_decomposition.do"
 
 * Produce numbers for learning poverty for the country annex table
 do "${clone}/03_export_tables/032_programs/0323_country_annex.do"
 
+* Export indicators to WDI
+do "${clone}/03_export_tables/032_programs/0324_export_WDI.do"
 *-----------------------------------------------------------------------------

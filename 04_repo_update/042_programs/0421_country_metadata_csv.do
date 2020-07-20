@@ -36,8 +36,18 @@ qui {
   *****************************************/
   noi di "{phang}Getting other metadata from wbopendata{p_end}"
 
+  * Ensures the metadata is up to date
+  cap wbopendata, update all
+
   * Get metadata from wbopendata - doesn't matter the indicator or year
-  wbopendata, indicator(SP.POP.TOTL) year(2000) clear long nometadata full
+  wbopendata, indicator(SP.POP.TOTL) latest clear long nometadata full
+
+  preserve
+    * Keep only the aggregates (non-countries)
+    keep if region == "NA"
+    keep countrycode countryname
+    export delimited using "${clone}/04_repo_update/043_outputs/region_metadata.csv", replace
+  restore
 
   * Drop all aggregates (non-countries)
   drop if region == "NA"
