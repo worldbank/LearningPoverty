@@ -91,7 +91,7 @@ quietly {
   label values preferred ny
 
   * Mark whether it is a comparable spell
-  merge m:1 countrycode idgrade test spell using "${clone}\02_simulation\021_rawdata\comparability_TIMSS_PIRLS_yr.dta", keep(master match) keepusing(comparable) nogen
+  merge m:1 countrycode idgrade test spell using "${clone}/02_simulation/021_rawdata/comparability_TIMSS_PIRLS_yr.dta", keep(master match) keepusing(comparable) nogen
   replace comparable = 0 if inlist(test, "EGRA", "PASEC")
   replace comparable = 1 if test == "PASEC" & y1 >= 2014
   replace comparable = 1 if missing(comparable)
