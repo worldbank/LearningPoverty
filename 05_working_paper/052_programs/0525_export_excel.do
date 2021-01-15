@@ -111,7 +111,7 @@ qui {
   *-----------------------------------------------------------------------------
   * Table 1 Assessment data used in constructing the consolidated global dataset
   *-----------------------------------------------------------------------------
-  use "${clone}/05_working_paper/053_outputs/assessment_correlations.dta"
+  use "${clone}/05_working_paper/053_outputs/assessment_correlations.dta", clear
   gen blank = .
   order r_country r_county r_school r_student blank assessment subject
   export excel using "${excel_file}", sheet("T1", modify) cell(D7) nolabel keepcellfmt
@@ -156,6 +156,22 @@ qui {
   drop aux_order test
   export excel using "${excel_file}", sheet("T2", modify) cell(F7) nolabel keepcellfmt
 
+  * Annex with NLA info
+  import delimited "${clone}/04_repo_update/041_rawdata/national_assessment_proficiency.md", delimiter("|") varnames(1) clear
+  keep wbcode year cutoff source
+  destring year, replace force
+  tempfile cutoff_nla
+  save `cutoff_nla', replace
+  use "${clone}/01_data/013_outputs/preference1005.dta", clear
+  replace test = "PASEC" if inlist(countrycode,"MLI","MDG","COD")
+  keep if test == "NLA"
+  keep countryname year_assessment nla_code
+  rename (year_assessment nla_code) (year wbcode)
+  merge 1:1 year wbcode using `cutoff_nla', assert(match using) keep(match) nogen
+  drop wbcode
+  order countryname year
+  export excel using "${excel_file}", sheet("T2", modify) cell(B21) nolabel keepcellfmt
+
   noi disp as txt "Table 2 exported"
 
 
@@ -168,10 +184,10 @@ qui {
   foreach i in 0 1 {
     use "${clone}/03_export_tables/033_outputs/individual_tables/outline_all_current_lp.dta", clear
     keep if inlist(aggregated_by, "incomelevel", "global", "lendingtype", "region") & old == `i'
-    keep   group coverage n_countries total_countries part2_only aggregated_by
-    reshape wide coverage n_countries total_countries, i(group) j(part2_only)
-    rename_regions, regionvar(group)
-    order_incomelevel, incomelevelvar(group)
+    keep   group coverage n_countries total_countries part2_only aggregated_by population_w_data
+    reshape wide coverage n_countries total_countries population_w_data, i(group) j(part2_only)
+    rename_regions,    regionvar(group)      namevar(group)
+    order_incomelevel, incomelevelvar(group) namevar(group)
     order_lendingtype, lendingtypevar(group) namevar(group)
     generate order_groups = .
     replace order_groups = 1 if aggregated_by == "global"
@@ -180,15 +196,15 @@ qui {
     replace order_groups = 4 if aggregated_by == "lendingtype"
     sort  order_groups order_incomelevel order_lendingtype group
     gen blank = .
-    order group n_countries0 total_countries0 coverage0 blank n_countries1 total_countries1 coverage1
+    order group n_countries0 total_countries0 population_w_data0 coverage0 blank n_countries1 total_countries1 population_w_data1 coverage1
     keep  group - coverage1
     replace group = "Overall" if group == "TOTAL"
     export excel using "${excel_file}", sheet("T3", modify) cell(`cell_old_`i'') nolabel keepcellfmt
   }
 
   * N/A trick for NAC and Part1 in "Low and Middle Contries" panel
-  fill_na, ncol(3)
-  foreach cell in H13 H20 H34 H41 {
+  fill_na, ncol(4)
+  foreach cell in I13 I20 I34 I41 {
     export excel using "${excel_file}", sheet("T3", modify) cell(`cell') nolabel keepcellfmt
   }
 
@@ -291,8 +307,8 @@ qui {
   keep if inlist(aggregated_by, "global", "region", "incomelevel", "lendingtype") & old == 0
   keep   group mean_lp se_lp min_lp max_lp part2_only aggregated_by
   reshape wide mean_lp se_lp min_lp max_lp, i(group) j(part2_only)
-  rename_regions, regionvar(group)
-  order_incomelevel, incomelevelvar(group)
+  rename_regions,    regionvar(group)      namevar(group)
+  order_incomelevel, incomelevelvar(group) namevar(group)
   order_lendingtype, lendingtypevar(group) namevar(group)
   generate order_groups = .
   replace order_groups = 1 if aggregated_by == "global"
@@ -353,7 +369,7 @@ qui {
   use "${clone}/03_export_tables/033_outputs/individual_tables/outline_all_SA_lp.dta", clear
   keep if aggregated_by == "global"
   gen auxfile = substr(file, 20, .)
-  keep if inlist(auxfile, "1014_part2", "1014_world", "10_part2", "10_world", "9plus_part2", "9plus_world", "primary_part2", "primary_world")
+  keep if inlist(auxfile, "1014_part2", "1014_world", "0516_part2", "0516_world") | inlist(auxfile, "10_part2", "10_world", "9plus_part2", "9plus_world", "primary_part2", "primary_world")
   split auxfile, p("_")
   rename (auxfile1 auxfile2 total_population) (age globaldef population)
   keep         mean_lp se_lp population coverage learning_poor age globaldef
@@ -366,6 +382,8 @@ qui {
     label var learning_poor`globaldef' "Learning Poor (millions)"
   }
   replace age = "10-14" if age == "1014"
+  replace age = "5-16" if age == "0516"
+  sort age
   label var age "Population Definition"
   gen blank = .
   label var blank " "
@@ -384,9 +402,9 @@ qui {
   gen byte part2_only = (filter != "all ctrys")
   drop filter
   reshape wide total bmp oos shr_bmp shr_oos, i(category panel) j(part2_only)
-  rename_regions, regionvar(category)
+  rename_regions,    regionvar(category)      namevar(category)
+  order_incomelevel, incomelevelvar(category) namevar(category)
   order_lendingtype, lendingtypevar(category) namevar(category)
-  order_incomelevel, incomelevelvar(category)
   replace category = "Overall" if category == "WLD" & panel == "reg"
   drop if category == "WLD"
   generate order_groups = .
@@ -434,8 +452,8 @@ qui {
   keep if inlist(aggregated_by, "global", "region", "incomelevel", "lendingtype")
   drop concatenated agg_file file *allcomp*
   reshape wide n_countries mean_lp_ma se_lp_ma mean_lp_fe se_lp_fe, i(group aggregated_by) j(part2_only)
-  rename_regions, regionvar(group)
-  order_incomelevel, incomelevelvar(group)
+  rename_regions,    regionvar(group)      namevar(group)
+  order_incomelevel, incomelevelvar(group) namevar(group)
   order_lendingtype, lendingtypevar(group) namevar(group)
   generate order_groups = .
   replace order_groups = 1 if aggregated_by == "global"
@@ -491,9 +509,9 @@ qui {
   replace gender = 1 if missing(gender)
   keep if filter == "all ctrys"
   reshape wide total bmp oos shr_bmp shr_oos, i(category panel filter) j(gender)
-  rename_regions, regionvar(category)
+  rename_regions,    regionvar(category)      namevar(category)
+  order_incomelevel, incomelevelvar(category) namevar(category)
   order_lendingtype, lendingtypevar(category) namevar(category)
-  order_incomelevel, incomelevelvar(category)
   replace category = "Overall" if category == "WLD" & panel == "reg"
   drop if category == "WLD"
   generate order_groups = .
@@ -515,7 +533,7 @@ qui {
   * Table 13 Decomposition of the change in learning poverty by learning and schooling
   *-----------------------------------------------------------------------------
   use "${clone}/03_export_tables/033_outputs/individual_tables/decomposition_spells.dta", clear
-  rename_regions, regionvar(category)
+  rename_regions, regionvar(category) namevar(category)
   replace category = "Overall" if category == "WLD"
   export excel using "${excel_file}", sheet("T13", modify) cell(B6) firstrow(varlabels) nolabel keepcellfmt
 
@@ -529,13 +547,17 @@ qui {
   **** By Region ****
   use "${clone}/02_simulation/021_rawdata/simulation_spells_weighted_region.dta", clear
   label var region "Region"
-  rename_regions
+  rename_regions, namevar(region)
   label var delta_reg_50 "BaU (p50)"
   forvalues p=60(10)90 {
     label var delta_reg_`p' "r`p'"
   }
   keep region *50 *60 *70 *80 *90
-  drop if region == "Overall"
+  * Trick to move overall line to firstrow
+  gen sortaux = _n
+  replace sortaux = 0 if region == "Overall"
+  sort sortaux
+  drop sortaux
   export excel using "${excel_file}", sheet("T14", modify) cell(C7) nolabel keepcellfmt
 
   **** By Income Level ****
@@ -546,11 +568,11 @@ qui {
     label var delta_reg_`p' "r`p'"
   }
   keep incomelevel *50 *60 *70 *80 *90
-  order_incomelevel
+  order_incomelevel, namevar(incomelevel)
   sort order_incomelevel
   drop order_incomelevel
   drop if incomelevel == "Overall"
-  export excel using "${excel_file}", sheet("T14", modify) cell(C13) nolabel keepcellfmt
+  export excel using "${excel_file}", sheet("T14", modify) cell(C14) nolabel keepcellfmt
 
   **** By Initial Learning Poverty ****
   use "${clone}/02_simulation/021_rawdata/sensitivity_checks/simulation_spells_weighted_initial_poverty_level.dta", clear
@@ -561,7 +583,7 @@ qui {
   }
   keep initial* *50 *60 *70 *80 *90
   drop if initial_poverty_level == "Overall"
-  export excel using "${excel_file}", sheet("T14", modify) cell(C17) nolabel keepcellfmt
+  export excel using "${excel_file}", sheet("T14", modify) cell(C18) nolabel keepcellfmt
 
   noi disp as txt "Table 14 exported"
 
@@ -589,7 +611,7 @@ qui {
     }
     order region pop_2015 pop_2030 blank1 lpv_own_2015 blank2 lpv_own_2030 ///
           lpv_r80_2030 blank3 lps_own_2015 blank4 lps_own_2030 lps_r80_2030
-    rename_regions
+    rename_regions, namevar(region)
     replace region = "Overall" if region == "_Overall"
     export excel using "${excel_file}", sheet("T15", modify) cell(``table'_place') nolabel keepcellfmt
   }
@@ -666,10 +688,10 @@ qui {
   keep regionname incomelevel population_2015_all
   separate population_2015_all , by(incomelevel)
   collapse (sum) population_2015_all?, by(regionname)
-  label var population_2015_all1 "HIC"
-  label var population_2015_all2 "LIC"
-  label var population_2015_all3 "LMC"
-  label var population_2015_all4 "UMC"
+  label var population_2015_all1 "High income Countries"
+  label var population_2015_all2 "Low income Countries"
+  label var population_2015_all3 "Low-middle income"
+  label var population_2015_all4 "Upper-middle income"
   order regionname population_2015_all1 population_2015_all4 population_2015_all3 population_2015_all2
   preserve
     collapse (sum) population*
@@ -748,6 +770,10 @@ qui {
   gen oos_all = 100 - enrollment_all
   sort region countryname
   rename_regions
+  * Those 3 PASEC are "desguised" as NLAs because they belong to an earlier round
+  * and COD also had the actual year of 2010 disguised as 2011
+  replace year_assessment = 2010 if countrycode == "COD"
+  replace test = "PASEC"         if inlist(countrycode,"MLI","MDG","COD")
   local  vars2keep "region countryname oos_all nonprof_all adj_nonprof_all test year_assessment"
   order `vars2keep'
   keep  `vars2keep'
@@ -796,7 +822,7 @@ qui {
   set obs `=_N +1'
   replace obs_n = 7.5 if missing(obs_n)
   sort obs_n
-  rename_regions
+  rename_regions, namevar(region)
   export excel using "${excel_file}", sheet("T25", modify) cell(C8) nolabel keepcellfmt
 
   noi disp as txt "Table 25 exported"

@@ -66,7 +66,7 @@ qui {
   * Sensitivity analysis: changing the population definitions
 
   * NOTE: the list of preferences generated as sensitivity analysis is hard numbered
-  local preferences_in_SA "1005_1014 1005_10 1005_primary 1005_9plus"
+  local preferences_in_SA "1005_1014 1005_10 1005_0516 1005_primary 1005_9plus"
   foreach preference of local preferences_in_SA {
 
     * Part 2 countries only

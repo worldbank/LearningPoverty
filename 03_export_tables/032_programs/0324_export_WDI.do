@@ -169,6 +169,15 @@ qui {
   * Will only generate series if has learning poverty data for the subgroup
   drop if missing(adj_nonprof)
 
+
+  *----------------------------------------------------------------------------*
+  * Manual corrections that need to be done to rawlatest wrt "exceptions"
+  * that were disguised as NLAs (Mali Madagascar) and with recent year (Congo)
+  replace year_assessment = 2010 if countrycode == "COD"
+  replace test = "PASEC"         if inlist(countrycode,"MLI","MDG","COD")
+  *----------------------------------------------------------------------------*
+
+
   * Creates fields that will be exported to WDI
   * Indicator follows grammar in: https://datahelpdesk.worldbank.org/knowledgebase/articles/201175-how-does-the-world-bank-code-its-indicators
   * with topic = SE (social: education); general subject = LPV (learning poverty); specific subject (primary)

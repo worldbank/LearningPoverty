@@ -21,6 +21,10 @@ quietly {
   * Starts with rawfull
   use "${clone}/01_data/013_outputs/rawfull.dta", clear
 
+  * Correct the few of PASEC desguised as NLAs
+  replace nla_code = "N.A." if inlist(countrycode,"MLI","MDG","COD") & test == "NLA"
+  replace test = "PASEC"    if inlist(countrycode,"MLI","MDG","COD") & test == "NLA"
+
   * More intuitive/shorter names for key variables
   rename (enrollment_`enrollment_def'_all nonprof_all) (enrollment bmp)
 
@@ -89,6 +93,7 @@ quietly {
   * Mark whether it is a comparable spell
   merge m:1 countrycode idgrade test spell using "${clone}\02_simulation\021_rawdata\comparability_TIMSS_PIRLS_yr.dta", keep(master match) keepusing(comparable) nogen
   replace comparable = 0 if inlist(test, "EGRA", "PASEC")
+  replace comparable = 1 if test == "PASEC" & y1 >= 2014
   replace comparable = 1 if missing(comparable)
   label var comparable "Spell is comparable"
   label values comparable ny

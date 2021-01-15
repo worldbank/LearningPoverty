@@ -14,7 +14,7 @@ if _rc {
 }
 
 *-------------------------------------------------------------------------------
-* 4) Run all tasks in this project
+* Run all tasks in this project
 *-------------------------------------------------------------------------------
 * TASK 01_DATA: calculates learning poverty by combining multiple data sources
 do "${clone}/01_data/012_programs/012_run.do"

@@ -78,6 +78,13 @@ qui {
   keep  region adminregion countrycode countryname adj_nonprof_all enrollment_all pct_reading_low_target population_2015_all incomelevel lendingtype test year_assessment
   order region adminregion countrycode countryname adj_nonprof_all enrollment_all pct_reading_low_target population_2015_all incomelevel lendingtype test year_assessment
 
+  *----------------------------------------------------------------------------*
+  * Manual corrections that need to be done to rawlatest wrt "exceptions"
+  * that were disguised as NLAs (Mali Madagascar) and with recent year (Congo)
+  replace year_assessment = 2010 if countrycode == "COD"
+  replace test = "PASEC"         if inlist(countrycode,"MLI","MDG","COD")
+  *----------------------------------------------------------------------------*
+
   export excel  using "${clone}/03_export_tables/033_outputs/rawlatest_cntry_file.xlsx", replace firstrow(varl)
 
   noi disp as res _newline "Finished exporting excel for country annex."
