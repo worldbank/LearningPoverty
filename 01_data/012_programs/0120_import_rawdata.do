@@ -66,6 +66,8 @@ qui {
   foreach subgroup in all fe ma {
     label var nonprof_`subgroup'    "% pupils below minimum proficiency (`subgroup')"
     label var se_nonprof_`subgroup' "SE of pupils below minimum proficiency (`subgroup')"
+    label var fgt1_`subgroup'       "Avg gap to minimum proficiency (`subgroup', FGT1)"
+    label var fgt2_`subgroup'       "Avg gap squared to minimum proficiency (`subgroup', FGT2)"
   }
   label var countrycode  "WB country code (3 letters)"
   label var idgrade      "Grade ID"
@@ -74,8 +76,8 @@ qui {
   label var year         "Year of assessment"
 
   *Only relevant variables kept
-  order countrycode idgrade test year subject *nonprof*
-  keep  countrycode idgrade test year subject *nonprof*
+  order countrycode idgrade test year subject *nonprof* fgt1* fgt2*
+  keep  countrycode idgrade test year subject *nonprof* fgt1* fgt2*
 
   * Add source for CLO file
   gen source_assessment = "CLO (Country Level Outcomes from GLAD)"

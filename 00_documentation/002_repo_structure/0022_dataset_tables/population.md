@@ -10,7 +10,6 @@ Dataset of late primary aged population. Long in countrycode and year, wide in p
 
 ~~~~
 sources:     World Bank staff estimates using the World Bank's total population and age distributions of the United Nations Population Division's World Population Prospects.
-lastsave:    16 Oct 2019 21:57:14 by wb255520
 ~~~~
 
 
@@ -27,7 +26,7 @@ traitvars: population_source
 . codebook, compact
 
 Variable        Obs Unique      Mean   Min       Max  Label
-----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
 countrycode   13237    217         .     .         .  WB country code (3 letters)
 year_popul~n  13237     61      2020  1990      2050  Year of population
 populat~e_10  11795   6667  320676.7   479  1.33e+07  Female population aged 10 (WB API)
@@ -43,6 +42,6 @@ popul~e_1014  11792   8026   1582075  2300  6.21e+07  Female population between 
 popul~a_1014  11792   8055   1676621  2300  6.72e+07  Male population between ages 10 to 14 (WB API)
 popul~l_1014  11792   8758   3258696  4600  1.29e+08  Total population between ages 10 to 14 (WB API)
 population~e  13237      1         .     .         .  The source used for population variables
-----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
 
 ~~~~

@@ -57,7 +57,7 @@ qui {
       timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX")  worldalso
 
 
-  noi disp as err _newline "Sensitivity analysis: change population definitions (1014, 10, primary, 9plus)"
+  noi disp as err _newline "Sensitivity analysis: change population definitions (1014, 10, 0516, primary, 9plus)"
 
   * Preference = 1005_1014
   noi preferred_list, runname("1005_1014") timss_subject(science) drop_assessment(SACMEQ EGRA) ///
@@ -69,6 +69,12 @@ qui {
   noi preferred_list, runname("1005_10") timss_subject(science) drop_assessment(SACMEQ EGRA) ///
       nla_keep(AFG_2 CHN BGD_3 IND_4 PAK_3 LKA_3 VNM_1 UGA_2 ETH_3 COD KHM_1 MYS_1 KGZ_1 MDG_1 MLI_1) ///
       enrollment(validated) population(10) exception("HND_2013_LLECE CHL_2013_LLECE COL_2013_LLECE") ///
+      timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX")
+
+  * Preference = 1005_0516
+  noi preferred_list, runname("1005_0516") timss_subject(science) drop_assessment(SACMEQ EGRA) ///
+      nla_keep(AFG_2 CHN BGD_3 IND_4 PAK_3 LKA_3 VNM_1 UGA_2 ETH_3 COD KHM_1 MYS_1 KGZ_1 MDG_1 MLI_1) ///
+      enrollment(validated) population(0516) exception("HND_2013_LLECE CHL_2013_LLECE COL_2013_LLECE") ///
       timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX")
 
   * Preference = 1005_primary
@@ -84,9 +90,9 @@ qui {
       timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX")
 
 
-  noi disp as err _newline "Sensitivity analysis: change reporting window (8, 6 and 4 years)"
+  noi disp as err _newline "Sensitivity analysis: change reporting window (Latest available, 8, 6 and 4 years)"
 
-  foreach year in 2011 2013 2015 {
+  foreach year in 2001 2011 2013 2015 {
 
     * Displays output for chosen preferences for PART2 countries (`year')
     noi population_weights, preference(1005) timewindow(year_assessment>=`year') countryfilter(lendingtype!="LNX")

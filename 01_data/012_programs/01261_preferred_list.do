@@ -23,6 +23,7 @@ program define   preferred_list, rclass
            [                       ///
            NLA_keep(string)        ///
            DROP_assessment(string) ///
+           DROP_round(string)      ///
            ENROLLment(string)      ///
            POPulation(string)      ///
            EXCEPTION(string)       ///
@@ -36,6 +37,7 @@ program define   preferred_list, rclass
 (2) TIMSS_subject()   - dictates either math or science for TIMSS. Either enter string "math" or "science"
 (3) NLA_keep()        - dictates that the countries in the list are to use the National Learning Assessment. This option takes nla_codes or countrycodes
 (4) DROP_assessment() - dictates which assessments to disregard when calculating proficiency levels. This option takes assessment names (ie: SACMEQ)
+(4) DROP_round()      - dictates which rounds to disregard when calculating proficiency levels. This option takes assessment_year (ie: TIMSS_2011)
 (5) ENROLLment()      - dictates which enrollment to use (options: "validated" or "interpolated"
 (6) POPulation()      - dictates which population to use (options: "10" "1014" "primary" "9plus")
 (7) EXCEPTION()       - takes assessments (ie: HND_2013_LLECE) that will trump preferred order to ease adding exceptions to the rule
@@ -83,6 +85,20 @@ qui {
       * Drop observations with this_test if it belongs to drop list
       if strmatch("`drop_assessment'", "*`this_test'*") == 1 {
         drop if test == "`this_test'"
+      }
+    }
+  }
+
+  * Drop surveys listed in DROP_ROUND option
+  * First, check if the option was used
+  if "`drop_round'" != "" {
+    * For each round found in rawfull
+    gen round = test + "_" + strofreal(year_assessment)
+    levelsof round, local(all_rounds)
+    foreach this_round of local all_rounds {
+      * Drop observations with this_round if it belongs to drop list
+      if strmatch("`drop_round'", "*`this_round'*") == 1 {
+        drop if round == "`this_round'"
       }
     }
   }
@@ -148,9 +164,9 @@ qui {
   *-----------------
   * For multiple instances of the same test, the one closest to the anchor_year
   * is preferred, any other is dropped.
-  * When tied, chose the least recent (ie: anchor_year=2015, 2015 > 2014 > 2016)
-  * which is why we subtract the .01 in the aux variable below
-  gen years_from_anchor = abs($anchor_year - year_assessment - .01)
+  * When tied, chose the most recent (ie: anchor_year=2015, 2015 > 2016 > 2014)
+  * which is why we add the .01 in the aux variable below
+  gen years_from_anchor = abs($anchor_year - year_assessment + .01)
   bysort countrycode test: egen min_years_from_anchor = min(years_from_anchor)
   * Will only keep the preferred year for each test (including test = "None")
   keep if (years_from_anchor == min_years_from_anchor)
@@ -168,24 +184,28 @@ qui {
     gen byte is_`assessment' = (test == "`assessment'")
   }
   * Regional Learning Assessments are bundled together
-  gen byte is_RLA   = inlist(test,"LLECE","LLECE-T","PASEC","SACMEQ")
+  gen byte is_RLA   = inlist(test,"LLECE","LLECE-T","PASEC","SACMEQ","SEA-PLM")
+
+  * Originally anchor year of 2015, the exceptions were defined in relation to 2010
+  * To make it flexible for future updates
+  local year_limit = $anchor_year - 5
 
   * Preferred ranking of assessments:
   gen int assessment_ranking = .
   * 0. Countries without assessment data should be kept, as well as NLA observations
   replace assessment_ranking = 0 if  is_NLA
   * 1. PIRLS from 2010 or more recent
-  replace assessment_ranking = 1 if (is_PIRLS & year_assessment >= 2010)
+  replace assessment_ranking = 1 if (is_PIRLS & year_assessment >= `year_limit')
   * 2. TIMSS from 2010 or more recent
-  replace assessment_ranking = 2 if (is_TIMSS & year_assessment >= 2010)
+  replace assessment_ranking = 2 if (is_TIMSS & year_assessment >= `year_limit')
   * 3. Regional Learning Assessment from 2010 or more recent
-  replace assessment_ranking = 3 if (is_RLA   & year_assessment >= 2010)
+  replace assessment_ranking = 3 if (is_RLA   & year_assessment >= `year_limit')
   * 4. PIRLS older than 2010
-  replace assessment_ranking = 4 if (is_PIRLS & year_assessment <  2010)
+  replace assessment_ranking = 4 if (is_PIRLS & year_assessment <  `year_limit')
   * 5. TIMSS older than 2010
-  replace assessment_ranking = 5 if (is_TIMSS & year_assessment <  2010)
+  replace assessment_ranking = 5 if (is_TIMSS & year_assessment <  `year_limit')
   * 6. Regional Learning Assessment older than 2010
-  replace assessment_ranking = 6 if (is_RLA   & year_assessment <  2010)
+  replace assessment_ranking = 6 if (is_RLA   & year_assessment <  `year_limit')
   * 7. EGRAs
   replace assessment_ranking = 7 if (is_EGRA)
   * 8. No assessment data
@@ -259,7 +279,7 @@ qui {
     local sources "All population, enrollment and proficiency sources combined."
     edukit_save, filename("preference`runname'") path("${clone}/01_data/013_outputs/")   ///
                  idvars(countrycode preference) ///
-                 varc("value *nonprof* enrollment_all enrollment_ma enrollment_fe population_* anchor_*; trait idgrade test nla_code subject *year* enrollment_flag enrollment_*source* *definition* *threshold* surveyid countryname region* adminregion* incomelevel* lendingtype* cmu preference_description lp_by_gender_is_available") ///
+                 varc("value *nonprof* fgt* enrollment_all enrollment_ma enrollment_fe population_* anchor_*; trait idgrade test nla_code subject *year* enrollment_flag enrollment_*source* *definition* *threshold* surveyid countryname region* adminregion* incomelevel* lendingtype* cmu preference_description lp_by_gender_is_available") ///
                  metadata("description `description'; sources `sources'; filename Rawlatest")
   }
   else save "${clone}/01_data/013_outputs/preference`runname'.dta", replace

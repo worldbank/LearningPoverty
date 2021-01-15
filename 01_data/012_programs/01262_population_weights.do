@@ -8,6 +8,7 @@ program define   population_weights, rclass
        PREFERENCE(string)			///
        TIMEwindow(string)     ///
        COUNTRYfilter(string)  ///
+       combine_ida_blend      ///
        ]
 
   qui {
@@ -25,6 +26,10 @@ program define   population_weights, rclass
   * If preference is specified, open that file from outputs
   else {
     use "${clone}/01_data/013_outputs/preference`preference'.dta", clear
+  }
+
+  if "`combine_ida_blend'" == "combine_ida_blend" {
+    replace lendingtype = "IDXB" if inlist(lendingtype, "IDX", "IDB")
   }
 
   * Generate dummy on whether assessment data in LP is inside TIMEWINDOW()
@@ -111,7 +116,7 @@ program define   population_weights, rclass
   replace global_weight = region_weight
 
   * Drop excessive amount of auxiliary variables created
-  drop include_country include_assessment global
+  drop include_assessment global
 
 
 

@@ -60,7 +60,7 @@ From rawfull, we construct multiple _preference_ datasets, each being the result
 
 ### Task 02_simulation
 
-In this task folder we project the proficiency scores in 2030. It runs partly in Stata, partly in R.
+In this task folder we project the proficiency scores in 2030. It contains code in Stata and in R.
 
 | Sub-Folder Name | Usage |
 |---|---|
@@ -68,15 +68,19 @@ In this task folder we project the proficiency scores in 2030. It runs partly in
 |**022_programs**|Programs that run all the simulations|
 |**023_outputs**|This folder should start empty. It will store the outputs for all simulations.|
 
+In this task, first, all valid spells are created (0220), then, they are aggregated according to various rules into markdown files (0221). Those markdown files are inputs of growth rates to the simulations (0222), which use an ado file to allow for flexibility in the simulation. This part runs exclusively in Stata.
+
+Though not incorporated in the technical paper, there are also files in R to allow for users to play around with the simulation.
+
 ### Task 03_export_tables
 
-In this task folder we generate tables and graphs for the Learning Poverty technical paper. We also export the data in this project as indicators to the World Bank API. It runs exclusively in Stata.
+In this task folder we manipulate results from the previous tasks into summary tables. We also export the data in this project as indicators to the World Bank API. It runs exclusively in Stata.
 
 | Sub-Folder Name | Usage |
 |---|---|
 |**031_rawdata**|Contains only one csv, with the metadata of WB API indicators produced by this project|
 |**032_programs**|Programs that export all tables and graphs|
-|**033_outputs**|Starts empty, will receive all tables and graphs that went into the paper, plus the series of _learning poverty_ indicators for the WB API|
+|**033_outputs**|Starts empty, will receive several tables, plus the series of _learning poverty_ indicators for the WB API|
 
 ### Task 04_repo_update
 
@@ -86,7 +90,19 @@ For reproducibility purposes, we 'froze' the data gathered from multiple APIs an
 |---|---|
 |**041_rawdata**|Raw data that does not come from APIs|
 |**042_programs**|Programs that update all input data files|
-|**043_outputs**|Starts empty, will receive updated files that may be transfered to 011_rawdata|
+|**043_outputs**|Starts empty, will receive updated files that may be transferred to 011_rawdata|
+
+### Task 05_working_paper
+
+In this task folder we generate tables and graphs for the Learning Poverty technical paper. This includes some validation of the Learning Poverty measure using other assessments, such as PISA. It runs exclusively in Stata.
+
+| Sub-Folder Name | Usage |
+|---|---|
+|**051_rawdata**|Contains one Excel file that is the structure of all tables and graphs in the technical paper, plus inputs to the validation performed in the task|
+|**052_programs**|Programs that export all tables and graphs|
+|**053_outputs**|Starts with a ready-to-use copy of the Excel with tables and figures, and one correlation analysis that require access to microdata that is only available to WBG users. More files are added.|
+
+If you execute this task, you will have two Excel files in 053_outputs. One contains ready-to-use tables and figures (LPV_Tables_Figures_PAPER.xlsx) while the other is created on the fly (LPV_Tables_Figures.xlsx) based on the empty template and the results produced in the local clone of this repository. Unless the task 04_repo_update is run or any input file is changed by the user, both files will be identical.
 
 ## Generating flowcharts
 
