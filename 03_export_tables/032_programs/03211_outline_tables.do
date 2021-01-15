@@ -29,8 +29,11 @@ program define   outline_current_lp, rclass
     local file_marker  = substr("`filename'", `end_of_path' + 1, `total_lenght' - `end_of_path' - 4)
 
     * Creates empty files where all will be appended
-    touch "`filename_dta'" , replace
-    if "`repetitions'"!=""  touch "`filename_bs_dta'", replace
+    preserve
+      clear
+      save "`filename_dta'" , emptyok replace
+      if "`repetitions'"!=""  save "`filename_bs_dta'", emptyok replace
+    restore
 
     * Aggregations we want to create tables for
     local possible_aggregations "incomelevel lendingtype adminregion region global"
@@ -190,8 +193,11 @@ program define   outline_gender_lp, rclass
     local file_marker  = substr("`filename'", `end_of_path' + 1, `total_lenght' - `end_of_path' - 4)
 
     * Creates empty files where all will be appended
-    touch "`filename_dta'" , replace
-    if "`repetitions'"!=""  touch "`filename_bs_dta'", replace
+    preserve
+      clear
+      save "`filename_dta'" , emptyok replace
+      if "`repetitions'"!=""  save "`filename_bs_dta'", emptyok replace
+    restore
 
     * Aggregations we want to create tables for
     local possible_aggregations "incomelevel lendingtype adminregion region global"
