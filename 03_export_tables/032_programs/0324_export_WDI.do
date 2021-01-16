@@ -72,7 +72,10 @@ qui {
   rename (part2      global      region      adminregion      incomelevel      lendingtype) ///
          (part2_code global_code region_code adminregion_code incomelevel_code lendingtype_code)
 
-  touch "${clone}/03_export_tables/033_outputs/WDI_TEMP_aggregates.dta", replace
+  preserve
+    clear
+    save "${clone}/03_export_tables/033_outputs/WDI_TEMP_aggregates.dta", emptyok replace
+  restore
 
   foreach aggregation in part2 global region adminregion incomelevel lendingtype {
     preserve

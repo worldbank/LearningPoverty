@@ -118,7 +118,7 @@ quietly {
   *-----------------------------------------------------------------------------
   * Fill this list will all user-written commands this project requires
   * that can be installed automatically from ssc
-  local user_commands wbopendata carryforward touch _gwtmean mdensity estout grqreg missings adecomp repest
+  local user_commands wbopendata carryforward _gwtmean mdensity estout grqreg missings adecomp repest
 
   * Loop over all the commands to test if they are already installed, if not, then install
   foreach command of local user_commands {
