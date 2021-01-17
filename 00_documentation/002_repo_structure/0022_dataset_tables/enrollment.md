@@ -10,7 +10,6 @@ Dataset of enrollment. Long in countrycode and year, wide in enrollment definiti
 
 ~~~~
 sources:     Multiple enrollment definitions were combined according to a ranking. Original data from World Bank (country team validation, ANER) and UIS (TNER, NET, GER)
-lastsave:    16 Oct 2019 21:57:15 by wb255520
 ~~~~
 
 
@@ -27,7 +26,7 @@ traitvars: enrollment_source enrollment_definition year_enrollment
 . codebook, compact
 
 Variable       Obs Unique      Mean       Min       Max  Label
-----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
 countrycode   6293    217         .         .         .  WB country code (3 letters)
 year          6293     29      2004      1990      2018  Year
 en~dated_all  5771   2908  87.21567  19.10539       100  Validated % of children enrolled in school (using closest year, both genders)
@@ -38,9 +37,9 @@ en~lated_all  5771   3755  87.24924  19.10539       100  Validated % of children
 enr~lated_fe  4739   2857  87.20877  15.50506       100  Validated % of children enrolled in school (using interpolation, female only)
 enr~lated_ma  4739   2858  88.61073     22.14  100.4548  Validated % of children enrolled in school (using interpolation, male only)
 e~lated_flag  6293      2  .1978389         0         1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
-enrollmen~ce  6293      5         .         .         .  The source used for this enrollment value
-enrollment~n  6293      5         .         .         .  The definition used for this enrollment value
+enrollmen~ce  6293      4         .         .         .  The source used for this enrollment value
+enrollment~n  6293      6         .         .         .  The definition used for this enrollment value
 year_enrol~t  5771     29  2005.041      1990      2018  The year that the enrollment value is from
-----------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
 
 ~~~~

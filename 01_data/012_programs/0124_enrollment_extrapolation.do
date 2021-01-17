@@ -169,6 +169,8 @@ qui {
   replace enrollment_definition = enrollment_definition + " (capped at 100%)" if enrollment_validated > 100 & !missing(enrollment_validated)
   replace enrollment_validated 	= 100										if enrollment_validated > 100 & !missing(enrollment_validated)
 
+  * Correct metadata for Afghanistan 
+  replace enrollment_definition = "National household survey" if countrycode == "AFG" & enrollment_definition == "Country Team Validation"
   ***********************************
 
   *In some cases, we could not interpolate enrollment, because there was only one value for the country.  In this case, use the carry forward value

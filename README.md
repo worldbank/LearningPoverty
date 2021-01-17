@@ -2,7 +2,7 @@
 
 This repository contains the analysis presented in the paper _“Will Every Child Be Able to Read by 2030? Why Eliminating Learning Poverty Will Be Harder Than You Think, and What to Do About It.”_ [1].
 
-As a significant contributor to human capital deficits, the learning crisis undermines sustainable growth and poverty reduction. The paper introduces the new concept of _learning poverty_ and provides a synthetic indicator with global coverage to spotlight this crisis. _Learning poverty_ means being unable to read and understand a short, age-appropriate text by age 10. This indicator brings together schooling and learning by adjusting the proportion of kids in school bellow a proficiency threshold by the out-of-school population.
+As a significant contributor to human capital deficits, the learning crisis undermines sustainable growth and poverty reduction. The paper introduces the new concept of _learning poverty_ and provides a synthetic indicator with global coverage to spotlight this crisis. _Learning poverty_ means being unable to read and understand a short, age-appropriate text by age 10. This indicator brings together schooling and learning by adjusting the proportion of kids in school below a proficiency threshold by the out-of-school population.
 
 The new data show that **more than half of all children in World Bank client countries suffer from _learning poverty_** – the majority of them low- and middle-income countries. And progress in reducing _learning poverty_ is far too slow to meet the SDG aspirations: even if countries reduce their _learning poverty_ at the fastest rates we have seen so far in this century, the goal of ending it will not be attained by 2030.
 

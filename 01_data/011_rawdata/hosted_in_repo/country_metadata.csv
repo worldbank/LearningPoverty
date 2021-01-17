@@ -215,5 +215,5 @@ XKX,Kosovo,ECS,Z7,Europe and Central Asia,ECA,7E,Europe and Central Asia (exclud
 YEM,"Yemen, Rep.",MEA,ZQ,Middle East and North Africa,MNA,XQ,Middle East and North Africa (excluding high income),LIC,XM,Low income,IDX,XI,IDA,MNC03
 ZAF,South Africa,SSF,ZG,Sub-Saharan Africa,SSA,ZF,Sub-Saharan Africa (excluding high income),UMC,XT,Upper middle income,IBD,XF,IBRD,AFCS1
 ZMB,Zambia,SSF,ZG,Sub-Saharan Africa,SSA,ZF,Sub-Saharan Africa (excluding high income),LMC,XN,Lower middle income,IDX,XI,IDA,AFCE1
-ZWE,Zimbabwe,SSF,ZG,Sub-Saharan Africa,SSA,ZF,Sub-Saharan Africa (excluding high income),LMC,XN,Lower middle income,IDB,XH,,AFCE1
+ZWE,Zimbabwe,SSF,ZG,Sub-Saharan Africa,SSA,ZF,Sub-Saharan Africa (excluding high income),LMC,XN,Lower middle income,IDB,XH,Blend,AFCE1
 Country Code,Country Name,Region Code,Region Code (ISO 2 digits),Region Name,Administrative Region Code,Administrative Region Code (ISO 2 digits),Administrative Region Name,Income Level Code,Income Level Code (ISO 2 digits),Income Level Name,Lending Type Code,Lending Type Code (ISO 2 digits),Lending Type Name,WB Country Management Unit

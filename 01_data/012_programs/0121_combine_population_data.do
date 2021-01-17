@@ -44,6 +44,7 @@ qui {
   foreach popvar in population_fe population_ma population_all {
     * Age: 10 only
     gen `popvar'_10    = `popvar' if age == 10
+    gen `popvar'_0516  = `popvar' if age >= 5 & age <= 16
     **** NOTE: THIS OPTION IS COMMENTED OUT FOR IT IS LESS ADEQUATE THAN THE SP.POP.1014 SERIES
     //* Age: 10-14 only
     //gen `popvar'_api1014 = `popvar' if age >= 10 & age <= 14
@@ -72,6 +73,7 @@ qui {
     if "`aggregation'" == "all" local agg_label "Total population"
 
     label var population_`aggregation'_10      "`agg_label' aged 10 (WB API)"
+    label var population_`aggregation'_0516    "`agg_label' aged 05-16 (WB API)"    
     label var population_`aggregation'_primary "`agg_label' primary age, country specific (WB API)"
     label var population_`aggregation'_9plus   "`agg_label' aged 9 to end of primary, country specific (WB API)"
   }

@@ -25,8 +25,6 @@ qui {
   gen enrollment_GER_source   = "UIS"
   gen enrollment_VALID_source = "Country Team Validation"
 
-  replace enrollment_VALID_source = "National household survey" if countrycode == "AFG" & enrollment_VALID_source == "Country Team Validation"
-
   * Label source variables
   label var enrollment_ANER_source  "Source used for the ANER indicator"
   label var enrollment_TNER_source  "Source used for the TNER indicator"
