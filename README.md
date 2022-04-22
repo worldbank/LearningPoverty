@@ -16,11 +16,11 @@ See the [Technical Note](https://github.com/worldbank/LearningPoverty/blob/maste
 
 ## Repository Structure
 
-See the [Repository Structure Note](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/002_repo_structure/Repo_Structure.md) to understand the sequencing of the tasks, visualizing the data flowcharts in this project and for an overview of the variables in each dataset.
+See the [Repository Structure Note](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/002_repo_structure/) to understand the sequencing of the tasks, visualizing the data flowcharts in this project and for an overview of the variables in each dataset.
 
 ## Contribution and Replication
 
-See the [Contribution and Replication Note](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/003_contribution_and_replication/Contribution_and_Replication.md) for information on how to navigate this repository, how to contribute to the code and how to replicate the numbers.
+See the [Contribution and Replication Note](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/003_contribution_and_replication/) for information on how to navigate this repository, how to contribute to the code and how to replicate the numbers.
 
 ## Contact
 <img align="left" src="https://user-images.githubusercontent.com/43160181/66895172-211fc400-efc0-11e9-998e-c5090e51730d.png" width="120">
