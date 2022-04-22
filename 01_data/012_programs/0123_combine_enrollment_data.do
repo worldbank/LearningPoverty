@@ -15,7 +15,7 @@ qui {
   * Bring in UIS enrollment data (keep only the 217 countries in wbopendata)
   merge 1:1 countrycode year using "${clone}/01_data/011_rawdata/enrollment_edulit_uis.dta", keep(master match) nogen
 
-  * Bring in enrollment validation by country teams (which is unfortunately not split by gender)
+  * Bring in enrollment validation by country teams (option to add gender disagregated values)
   merge 1:1 countrycode year using "${clone}/01_data/011_rawdata/enrollment_validated.dta", keep(master match) nogen
 
   * Generate source variables
