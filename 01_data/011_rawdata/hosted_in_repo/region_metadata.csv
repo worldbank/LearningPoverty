@@ -3,33 +3,33 @@ ARB,Arab World
 CSS,Caribbean small states
 CEB,Central Europe and the Baltics
 EAR,Early-demographic dividend
-EAS,East Asia & Pacific
-TEA,East Asia & Pacific (IDA & IBRD countries)
-EAP,East Asia & Pacific (excluding high income)
+EAS,East Asia and Pacific
+TEA,East Asia and Pacific (IDA and IBRD countries)
+EAP,East Asia and Pacific (excluding high income)
 EMU,Euro area
-ECS,Europe & Central Asia
-TEC,Europe & Central Asia (IDA & IBRD countries)
-ECA,Europe & Central Asia (excluding high income)
+ECS,Europe and Central Asia
+TEC,Europe and Central Asia (IDA and IBRD countries)
+ECA,Europe and Central Asia (excluding high income)
 EUU,European Union
 FCS,Fragile and conflict affected situations
 HPC,Heavily indebted poor countries (HIPC)
 HIC,High income
 IBD,IBRD only
-IBT,IDA & IBRD total
+IBT,IDA and IBRD total
 IDB,IDA blend
 IDX,IDA only
 IDA,IDA total
 LTE,Late-demographic dividend
-LCN,Latin America & Caribbean
-LAC,Latin America & Caribbean (excluding high income)
-TLA,Latin America & the Caribbean (IDA & IBRD countries)
+LCN,Latin America and Caribbean
+LAC,Latin America and Caribbean (excluding high income)
+TLA,Latin America and the Caribbean (IDA and IBRD countries)
 LDC,Least developed countries: UN classification
-LMY,Low & middle income
+LMY,Low and middle income
 LIC,Low income
 LMC,Lower middle income
-MEA,Middle East & North Africa
-TMN,Middle East & North Africa (IDA & IBRD countries)
-MNA,Middle East & North Africa (excluding high income)
+MEA,Middle East and North Africa
+TMN,Middle East and North Africa (IDA and IBRD countries)
+MNA,Middle East and North Africa (excluding high income)
 MIC,Middle income
 NAC,North America
 OED,OECD members
@@ -39,9 +39,9 @@ PST,Post-demographic dividend
 PRE,Pre-demographic dividend
 SST,Small states
 SAS,South Asia
-TSA,South Asia (IDA & IBRD)
+TSA,South Asia (IDA and IBRD)
 SSF,Sub-Saharan Africa
-TSS,Sub-Saharan Africa (IDA & IBRD countries)
+TSS,Sub-Saharan Africa (IDA and IBRD countries)
 SSA,Sub-Saharan Africa (excluding high income)
 UMC,Upper middle income
 WLD,World
