@@ -57,7 +57,7 @@ qui {
   local get_request	"`api_url'/`api_cnt'/`indicators'/`api_parameters'"
 
   * Copy the file from API to csv folder
-  copy "`get_request'" "`clonefile'"
+  copy "`get_request'" "`clonefile'", replace
 
   * Import the csv file
   import delimited "`clonefile'", varnames(5) rowrange(6) clear
@@ -126,7 +126,7 @@ qui {
     local get_request	"`api_url'/`api_cnt'/`indicators'/`api_parameters'"
 
     * Copy the file from API to csv folder
-    copy "`get_request'" "`temp_csvfile'"
+    copy "`get_request'" "`temp_csvfile'", replace
 
     * Import the csv file
     import delimited "`temp_csvfile'", varnames(5) rowrange(6) clear
