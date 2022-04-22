@@ -12,15 +12,15 @@ The new data show that **more than half of all children in World Bank client cou
 
 Most of the data used to calculate _learning poverty_ comes from the **[Global Learning Assessment Database (GLAD)](https://github.com/worldbank/GLAD)**, a collection of harmonized datasets at the individual and country level. This harmonization has been made possible thanks to the leadership of the UNESCO Institute for Statistics (UIS), the custodian agency for SDG 4, in coordinating a Global Alliance for the Monitoring of Learning (GAML), and in establishing Minimum Proficiency Levels (MPLs) that enable countries to benchmark learning. Working with the UIS, we have built a consolidated global database representing 80% of the population of primary-age children globally.
 
-See the [Technical Note](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/001_technical_note/Technical_Note.md) for more contextual information on the _learning poverty_ measure, how it was calculated and which sources were used.
+See the [Technical Note](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/001_technical_note/) for more contextual information on the _learning poverty_ measure, how it was calculated and which sources were used.
 
 ## Repository Structure
 
-See the [Repository Structure Note](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/002_repo_structure/Repo_Structure.md) to understand the sequencing of the tasks, visualizing the data flowcharts in this project and for an overview of the variables in each dataset.
+See the [Repository Structure Note](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/002_repo_structure/) to understand the sequencing of the tasks, visualizing the data flowcharts in this project and for an overview of the variables in each dataset.
 
 ## Contribution and Replication
 
-See the [Contribution and Replication Note](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/003_contribution_and_replication/Contribution_and_Replication.md) for information on how to navigate this repository, how to contribute to the code and how to replicate the numbers.
+See the [Contribution and Replication Note](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/003_contribution_and_replication/) for information on how to navigate this repository, how to contribute to the code and how to replicate the numbers.
 
 ## Contact
 <img align="left" src="https://user-images.githubusercontent.com/43160181/66895172-211fc400-efc0-11e9-998e-c5090e51730d.png" width="120">
