@@ -12,7 +12,7 @@ The new data show that **more than half of all children in World Bank client cou
 
 Most of the data used to calculate _learning poverty_ comes from the **[Global Learning Assessment Database (GLAD)](https://github.com/worldbank/GLAD)**, a collection of harmonized datasets at the individual and country level. This harmonization has been made possible thanks to the leadership of the UNESCO Institute for Statistics (UIS), the custodian agency for SDG 4, in coordinating a Global Alliance for the Monitoring of Learning (GAML), and in establishing Minimum Proficiency Levels (MPLs) that enable countries to benchmark learning. Working with the UIS, we have built a consolidated global database representing 80% of the population of primary-age children globally.
 
-See the [Technical Note](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/001_technical_note/Technical_Note.md) for more contextual information on the _learning poverty_ measure, how it was calculated and which sources were used.
+See the [Technical Note](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/001_technical_note/) for more contextual information on the _learning poverty_ measure, how it was calculated and which sources were used.
 
 ## Repository Structure
 
