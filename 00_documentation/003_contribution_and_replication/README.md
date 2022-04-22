@@ -2,8 +2,8 @@
 <sup>back to the [README](https://github.com/worldbank/LearningPoverty/blob/master/README.md) :leftwards_arrow_with_hook:</sup>
 
 ### Table of Contents
-1. [Replicating this Repository](#replicating-this-repository)
-1. [Contributing to this Repository](#contributing-to-this-repository)
+1. [Replicating this Repository](#replicating-this-repository)	
+1. [Contributing to this Repository](#contributing-to-this-repository)	
   2.1. [Bug reports and feature requests](#bug-reports-and-feature-requests)   
   2.2. [Contribution conventions](#contribution-conventions)  
 1. [Workflow in this Repository](#workflow-in-this-repository)   
