@@ -9,7 +9,7 @@ qui {
   local chosen_preference = $chosen_preference
 
   * Countries we don't want to report
-  local countries_not_reported "CUB PHL"
+  local countries_not_reported "CUB"
 
   *--------------------
   * Aggregates
@@ -24,7 +24,7 @@ qui {
   }
 
   * Get proper regional and incomelevel averages - PART2 countries
-  population_weights, timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX")
+  population_weights, timewindow(year_assessment>=2013) countryfilter(lendingtype!="LNX")
   gen part2 = "WBC"
 
   * Creates aggregated values of Learning Poverty, Below Minimum Prof and Enrollment by gender subgroups
@@ -39,7 +39,7 @@ qui {
 
 
   * Get proper regional and incomelevel averages - WORLD
-  population_weights, timewindow(year_assessment>=2011)
+  population_weights, timewindow(year_assessment>=2013)
   gen global = "WLD"
 
   * Creates aggregated values of Learning Poverty, Below Minimum Prof and Enrollment by gender subgroups
@@ -104,7 +104,7 @@ qui {
   replace value_metadata = "Aggregated BMP in reading per GAML MPL; reporting window 2011-2019" if aux=="_bmp"
 
   * Final touches
-  gen year = 2015
+  gen year = 2017
   rename code countrycode
   keep  countrycode year indicator value value_metadata
   gen str cty_or_agg = "agg"
