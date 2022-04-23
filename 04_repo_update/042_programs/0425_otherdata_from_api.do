@@ -17,7 +17,7 @@ qui {
 
   * Remove region aggregates and future values
   drop if region == "NA"
-  drop if year >= 2019
+  drop if year >= 2020
 
   * Keep only relevant variables
   keep countrycode year uis_x_pppconst_1_fsg sp_prm_totl_in se_prm_enrr uis_xunit_pppconst_1 region incomelevel
@@ -38,12 +38,13 @@ qui {
   * Import the rawdata from WB Opendata
   * Get all the relevant HCI data. GDP per capita is included to also get
   * countries for which there is no HCI data
+  * always pull the latest available data
   wbopendata, indicator(HD.HCI.HLOS; HD.HCI.HLOS.FE; HD.HCI.HLOS.MA; ///
               HD.HCI.LAYS; HD.HCI.LAYS.FE; HD.HCI.LAYS.MA; ///
               HD.HCI.EYRS; HD.HCI.EYRS.FE; HD.HCI.EYRS.MA; ///
               HD.HCI.OVRL; HD.HCI.OVRL.FE; HD.HCI.OVRL.MA; ///
-              NY.GDP.PCAP.CD) year(2017) clear long
-
+              NY.GDP.PCAP.CD) clear long year(2020)
+			  			  
   * Remove variables used to get all countries, and remove regional aggregates
   drop ny_gdp_pcap_cd
   drop if region == "NA"

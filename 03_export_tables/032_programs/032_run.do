@@ -17,7 +17,7 @@ if _rc != 0 {
 }
 
 * Execution parameters
-global chosen_preference 1005  // Chosen preference created in 01 rawlatest
+global chosen_preference 1108  // Chosen preference created in 01 rawlatest
 *-----------------------------------------------------------------------------
 
 *-----------------------------------------------------------------------------

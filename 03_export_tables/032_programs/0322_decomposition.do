@@ -2,6 +2,12 @@
 * 0322 SUBTASK: DECOMPOSITION OF LPV LEVELS AND CHANGE
 *==============================================================================*
 
+  * Change here only if wanting to use a different preference
+  * than what is being passed in the global in 032_run
+  * But don't commit any change here (only commit in global 032_run)
+  local chosen_preference = $chosen_preference
+  
+  
 quietly {
 
   tempfile tmp1 tmp2
@@ -24,12 +30,12 @@ quietly {
 
         ** prepare dataset
         if "`gender'" == "all" ///
-               population_weights, preference(1005) timewindow(year_assessment>=2011) combine_ida_blend `filter'
+               population_weights, preference(`chosen_preference') timewindow(year_assessment>=2011) combine_ida_blend `filter'
         else {
-          if "`filter'" == "" local aux_filter `"countryfilter(inlist(countrycode,"MNG","PHL")==0)"'
-          else local aux_filter `"countryfilter(lendingtype!="LNX" & inlist(countrycode,"MNG","PHL")==0)"'
-          population_weights, preference(1005) combine_ida_blend `aux_filter'
-          drop if inlist(countrycode,"MNG","PHL")
+          if "`filter'" == "" local aux_filter `"countryfilter(inlist(countrycode,"MNG")==0)"'
+          else local aux_filter `"countryfilter(lendingtype!="LNX" & inlist(countrycode,"MNG")==0)"'
+          population_weights, preference(`chosen_preference') combine_ida_blend `aux_filter'
+          drop if inlist(countrycode,"MNG")
         }
 
         keep if adj_nonprof_`gender' != .
