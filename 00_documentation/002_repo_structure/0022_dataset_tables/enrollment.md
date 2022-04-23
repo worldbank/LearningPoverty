@@ -25,21 +25,21 @@ traitvars: enrollment_source enrollment_definition year_enrollment
 
 . codebook, compact
 
-Variable       Obs Unique      Mean       Min       Max  Label
+Variable       Obs Unique      Mean       Min   Max  Label
 ---------------------------------------------------------------------------------------------------------------------------------------
-countrycode   6293    217         .         .         .  WB country code (3 letters)
-year          6293     29      2004      1990      2018  Year
-en~dated_all  5771   2908  87.21567  19.10539       100  Validated % of children enrolled in school (using closest year, both genders)
-enr~dated_fe  5348   2742  86.29536  15.50506       100  Validated % of children enrolled in school (using closest year, female only)
-enr~dated_ma  5348   2743  87.94001     22.14  100.4548  Validated % of children enrolled in school (using closest year, male only)
-e~dated_flag  6293      2   .194184         0         1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
-en~lated_all  5771   3755  87.24924  19.10539       100  Validated % of children enrolled in school (using interpolation, both genders)
-enr~lated_fe  4739   2857  87.20877  15.50506       100  Validated % of children enrolled in school (using interpolation, female only)
-enr~lated_ma  4739   2858  88.61073     22.14  100.4548  Validated % of children enrolled in school (using interpolation, male only)
-e~lated_flag  6293      2  .1978389         0         1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
-enrollmen~ce  6293      4         .         .         .  The source used for this enrollment value
-enrollment~n  6293      6         .         .         .  The definition used for this enrollment value
-year_enrol~t  5771     29  2005.041      1990      2018  The year that the enrollment value is from
+countrycode   6727    217         .         .     .  WB country code (3 letters)
+year          6727     31      2005      1990  2020  Year
+en~dated_all  6231   2964  87.78292  19.18834   100  Validated % of children enrolled in school (using closest year, both genders)
+enr~dated_fe  5220   2565  86.06985  15.47124   100  Validated % of children enrolled in school (using closest year, female only)
+enr~dated_ma  5224   2567  87.75847   22.7423   100  Validated % of children enrolled in school (using closest year, male only)
+e~dated_flag  6727      2  .2332392         0     1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
+en~lated_all  6231   3967  87.81469  19.18834   100  Validated % of children enrolled in school (using interpolation, both genders)
+enr~lated_fe  4614   2766  87.00985  15.47124   100  Validated % of children enrolled in school (using interpolation, female only)
+enr~lated_ma  4618   2769  88.48919   22.7423   100  Validated % of children enrolled in school (using interpolation, male only)
+e~lated_flag  6727      2  .2357663         0     1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
+enrollmen~ce  6727      4         .         .     .  The source used for this enrollment value
+enrollment~n  6727      6         .         .     .  The definition used for this enrollment value
+year_enrol~t  6231     30  2005.948      1990  2019  The year that the enrollment value is from
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 ~~~~

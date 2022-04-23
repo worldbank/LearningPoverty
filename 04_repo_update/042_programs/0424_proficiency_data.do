@@ -3,6 +3,7 @@
 *==============================================================================*
 qui {
 
+
   /***********************************
       Proficiency from NLA md
   ***********************************/
@@ -41,6 +42,8 @@ qui {
   noi di "{phang}Saved `clonefile'{p_end}"
 
 
+
+/*
   /***********************************
       Proficiency from L4A RAWFULL
   ***********************************/
@@ -58,7 +61,7 @@ qui {
 
   * If L4A could be opened, extract info from it
   if _rc == 0 {
-
+  
     * Keep only proficiency-related variables
     local vars_to_keep "countrycode idgrade test nlacode subject threshold pct_reading_low pct_reading_low_doubl pct_reading_low_target nonprof assessment_cutoff year_assessment source_assessment"
     keep `vars_to_keep'
@@ -78,6 +81,8 @@ qui {
     * In LP, we use read for reading
     replace subject = "read" if subject == "reading"
 
+
+
     * Plus other attempts to reconcile LP and L4A
     rename  nlacode nla_code
     replace nla_code = "N.A." if nla_code=="-99"
@@ -85,6 +90,7 @@ qui {
     rename  assessment_cutoff min_proficiency_threshold
     rename  year_assessment year
     replace source_assessment = "HAD (Harmonized Assessment Database)"
+*/
 
     //* Saving to compare_files in proficiency, not needed in this task
     //save "${clone}/04_repo_update/043_outputs/proficiency_in_L4A_rawfull.dta", replace
@@ -93,16 +99,24 @@ qui {
     * - SACMEQ from 2013 (we have Excel only, no microdata)
     * - PASEC before 2014 (only the 2014 was harmonized in GLAD)
     * - EGRA's didnt make it to GLAD yet
-    keep if (test=="PASEC" & year < 2014) | (test=="SACMEQ" & year == 2013) | (test=="EGRA")
+*    keep if (test=="PASEC" & year < 2014) | (test=="SACMEQ" & year == 2013) | (test=="EGRA")
 
+/*
     * Export csv
     export delimited using "`clonefile'", replace
     noi di "{phang}Saved `clonefile'{p_end}"
+ 
   }
 
+*/
+
+
+/*
   else {
     noi di as error "{phang}Could not update `clonefile' (L4A rawfull not available){p_end}"
   }
+*/
+
 
 
   /***********************************
@@ -117,13 +131,13 @@ if $network_is_available {
   local clonefile "${clone}/04_repo_update/043_outputs/proficiency_from_GLAD.csv"
 
   * If getting the files from the network, the path is
-  local networkfile "${network}/GDB/Projects/WLD_2020_FGT-CLO/clo_fgt_learning.dta"
+  local networkfile "${network}/GDB/Projects/WLD_2021_FGT-CLO/clo_fgt_learning.dta"
 
   * Open the file
   use "`networkfile'", clear
 
   * List of needed CLO for Learning Poverty (only those for which we have microdata)
-  local lp_clos "LAC_2006_LLECE LAC_2013_LLECE SSA_2000_SACMEQ SSA_2007_SACMEQ SSA_2014_PASEC WLD_2001_PIRLS WLD_2006_PIRLS WLD_2011_PIRLS WLD_2016_PIRLS WLD_2003_TIMSS WLD_2007_TIMSS WLD_2011_TIMSS WLD_2015_TIMSS"
+  local lp_clos "LAC_2006_LLECE LAC_2013_LLECE SSA_2000_SACMEQ SSA_2007_SACMEQ SSA_2014_PASEC SSA_2019_PASEC WLD_2001_PIRLS WLD_2006_PIRLS WLD_2011_PIRLS WLD_2016_PIRLS WLD_2003_TIMSS WLD_2007_TIMSS WLD_2011_TIMSS WLD_2015_TIMSS WLD_2019_TIMSS EAP_2019_SEA-PLM "
 
   * Check that it contains all the CLO of all surveys required for LP
   levelsof survey, local(clos_in_networkfile)
@@ -138,7 +152,7 @@ if $network_is_available {
 
   * Only valuevar needed in L4A is harmonized proficiency (hpro)
   local idvars  "countrycode year test idgrade subgroup"
-  keep `idvars' *hpro*
+  keep `idvars' *bmp* *_fgt1_* *_fgt2_*
 
   * Though urban breakdown is calculated in clo, not relevant for L4A
   keep if inlist(subgroup,"all", "male=0","male=1")
@@ -149,13 +163,13 @@ if $network_is_available {
   replace subgroup = "_ma"  if subgroup == "male=1"
 
   * From harmonized_ proficiency to non-proficiency and from share to percentage
-  unab subjects : m_hpro_*
-  local subjects = subinstr("`subjects'" , "m_hpro_" , "" , .)
+  unab subjects : m_bmp_*
+  local subjects = subinstr("`subjects'" , "m_bmp_" , "" , .)
   foreach subject of local subjects {
-    gen nonprof`subject'    = 100 * (1 - m_hpro_`subject')
-    gen se_nonprof`subject' = 100 * (se_hpro_`subject')
-    clonevar fgt1`subject' = m_fgt1_hpro_`subject'
-    clonevar fgt2`subject' = m_fgt2_hpro_`subject'
+    gen nonprof`subject'    = 100 * (m_bmp_`subject')
+    gen se_nonprof`subject' = 100 * (se_bmp_`subject')
+    clonevar fgt1`subject' = m_fgt1_`subject'
+    clonevar fgt2`subject' = m_fgt2_`subject'
     drop m_*_`subject' se_*_`subject' n_*_`subject'
   }
 
@@ -168,6 +182,13 @@ if $network_is_available {
   * Drop observations with all nonprof values (_all, _fe, _ma) missing
   missings dropobs nonprof_*, force
 
+  * keep only relevant IDGRADES (only End of Primary Grades included, except 3 PIRLS from 3rd Grade)
+  keep if idgrade >= 3 & idgrade <= 6
+
+  * drop MATH results from SEA-PLM and PASEC
+  drop if subject == "math" & test == "SEA-PLM"
+  drop if subject == "math" & test == "PASEC"
+  
   * Beautify: format, order and label
   order countrycode year test idgrade subject *nonprof_all *nonprof_ma *nonprof_fe fgt1* fgt2*
   sort  countrycode year test idgrade subject

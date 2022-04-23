@@ -27,27 +27,27 @@ traitvars: min_proficiency_threshold source_assessment surveyid
 
 Variable      Obs Unique      Mean       Min       Max  Label
 ---------------------------------------------------------------------------------------------------------------------------------------
-countrycode   697    146         .         .         .  WB country code (3 letters)
-year          697     20  2009.898      1996      2017  Year of assessment
-idgrade       697      4  4.308465         3         6  Grade ID
-test          697      7         .         .         .  Assessment
-nla_code      697     22         .         .         .  Reference code for NLA in markdown documentation
-subject       697      3         .         .         .  Subject
-nonprof_all   697    697  30.44595  .2252221  99.89659  % pupils below minimum proficiency (all)
-se_nonprof~l  559    559   1.05663  .1218972  3.419903  SE of pupils below minimum proficiency (all)
-nonprof_ma    561    561  25.08579  .1586974  97.96137  % pupils below minimum proficiency (ma)
-se_nonprof~a  559    559  1.297817  .1287481  3.848194  SE of pupils below minimum proficiency (ma)
-nonprof_fe    561    561  22.18714  .1284599  97.83222  % pupils below minimum proficiency (fe)
-se_nonprof~e  559    559  1.245255  .1141958  4.098772  SE of pupils below minimum proficiency (fe)
-fgt1_all      559    559  .1708391  .0308948  .7537994  Avg gap to minimum proficiency (all, FGT1)
-fgt1_fe       559    559  .1641004  .0257019  .7643428  Avg gap to minimum proficiency (fe, FGT1)
-fgt1_ma       559    559  .1757896  .0298228  .7457443  Avg gap to minimum proficiency (ma, FGT1)
-fgt2_all      559    559  .0610742   .001687  .6159182  Avg gap squared to minimum proficiency (all, FGT2)
-fgt2_fe       559    559  .0572421  .0011683  .6308874  Avg gap squared to minimum proficiency (fe, FGT2)
-fgt2_ma       559    559  .0639653  .0017091  .6044815  Avg gap squared to minimum proficiency (ma, FGT2)
-min_profic~d  694     18         .         .         .  Minimum Proficiency Threshold (assessment-specific)
-source_ass~t  697      3         .         .         .  Source of assessment data
-surveyid      697    503         .         .         .  SurveyID (countrycode_year_assessment)
+countrycode   831    153         .         .         .  WB country code (3 letters)
+year          831     21  2011.366      1996      2019  Year of assessment
+idgrade       831      4  4.309266         3         6  Grade ID
+test          831      8         .         .         .  Assessment
+nla_code      831     22         .         .         .  Reference code for NLA in markdown documentation
+subject       831      3         .         .         .  Subject
+nonprof_all   831    831  29.61033  .2252197  99.89659  % pupils below minimum proficiency (all)
+se_nonprof~l  693    693  1.100099  .1218972  4.659985  SE of pupils below minimum proficiency (all)
+nonprof_ma    696    696  25.37036  .1586986  97.97008  % pupils below minimum proficiency (ma)
+se_nonprof~a  693    693  1.344615  .1287481  5.034541  SE of pupils below minimum proficiency (ma)
+nonprof_fe    696    696  22.64117  .1284603  97.83222  % pupils below minimum proficiency (fe)
+se_nonprof~e  693    693  1.303262  .1141958  6.059458  SE of pupils below minimum proficiency (fe)
+fgt1_all      693    693   .135403  .0308948  .5614824  Avg gap to minimum proficiency (all, FGT1)
+fgt1_fe       693    693  .1293705  .0257019  .5376112  Avg gap to minimum proficiency (fe, FGT1)
+fgt1_ma       693    693  .1398457  .0298228  .5797679  Avg gap to minimum proficiency (ma, FGT1)
+fgt2_all      693    693  .0364274   .001687   .390271  Avg gap squared to minimum proficiency (all, FGT2)
+fgt2_fe       693    693  .0333626  .0011683  .3641997  Avg gap squared to minimum proficiency (fe, FGT2)
+fgt2_ma       693    693  .0387286  .0017091  .4102417  Avg gap squared to minimum proficiency (ma, FGT2)
+min_profic~d  822     18         .         .         .  Minimum Proficiency Threshold (assessment-specific)
+source_ass~t  831      3         .         .         .  Source of assessment data
+surveyid      831    580         .         .         .  SurveyID (countrycode_year_assessment)
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 ~~~~

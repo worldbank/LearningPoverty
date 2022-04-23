@@ -26,8 +26,8 @@ Optional parameters (with default):
 
 * Run simulation with tabulations done by region and growth rates calculated using regional growth
 simulate_learning_poverty, ifspell(if used_sim == 1) ///
-  preference(1005) timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX") ///
-  filename(simfile_preference_1005_regional_growth) groupingspells(region)  ///
+  preference(1108) timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX") ///
+  filename(simfile_preference_1108_regional_growth) groupingspells(region)  ///
   usefile("${clone}/02_simulation/021_rawdata/simulation_spells_weighted_region.md") ///
 
 
@@ -35,14 +35,14 @@ simulate_learning_poverty, ifspell(if used_sim == 1) ///
 
 * Same as main one, but with minspell = 2 instead of 1
 simulate_learning_poverty, ifspell(if used_sim == 1) minspell(2) ///
-  preference(1005) timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX") ///
-  filename(simfile_preference_1005_regional_growth_min2) groupingspells(region)  ///
+  preference(1108) timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX") ///
+  filename(simfile_preference_1108_regional_growth_min2) groupingspells(region)  ///
   usefile("${clone}/02_simulation/021_rawdata/simulation_spells_weighted_region.md")
 
 * Same as above, but using the spells that were in the Glossy
 simulate_learning_poverty, ifspell(if glossy_sim == 1) minspell(2) ///
-  preference(1005) timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX") ///
-  filename(simfile_preference_1005_regional_growth_glossy) groupingspells(region)  ///
+  preference(1108) timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX") ///
+  filename(simfile_preference_1108_regional_growth_glossy) groupingspells(region)  ///
   usefile("${clone}/02_simulation/021_rawdata/sensitivity_checks/simulation_spells_glossy_sim_weighted_region.md")
 
 
@@ -50,14 +50,14 @@ simulate_learning_poverty, ifspell(if glossy_sim == 1) minspell(2) ///
 
 * Run simulation with growth rates calculated using income level growth
 simulate_learning_poverty, ifspell(if used_sim == 1) ///
-  preference(1005) timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX") ///
-  filename(simfile_preference_1005_income_level) groupingspells(incomelevel)  ///
+  preference(1108) timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX") ///
+  filename(simfile_preference_1108_income_level) groupingspells(incomelevel)  ///
   usefile("${clone}/02_simulation/021_rawdata/sensitivity_checks/simulation_spells_weighted_incomelevel.md")
 
 * Run simulation with growth rates calculated using initial learning poverty
 simulate_learning_poverty, ifspell(if used_sim == 1) ///
-  preference(1005) timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX") ///
-  filename(simfile_preference_1005_initial_poverty_level) groupingspells(initial_poverty_level)  ///
+  preference(1108) timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX") ///
+  filename(simfile_preference_1108_initial_poverty_level) groupingspells(initial_poverty_level)  ///
   usefile("${clone}/02_simulation/021_rawdata/sensitivity_checks/simulation_spells_weighted_initial_poverty_level.md")
 
 

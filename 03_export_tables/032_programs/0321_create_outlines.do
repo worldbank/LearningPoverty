@@ -66,7 +66,7 @@ qui {
   * Sensitivity analysis: changing the population definitions
 
   * NOTE: the list of preferences generated as sensitivity analysis is hard numbered
-  local preferences_in_SA "1005_1014 1005_10 1005_0516 1005_primary 1005_9plus"
+  local preferences_in_SA "`chosen_preference'_1014 `chosen_preference'_10 `chosen_preference'_0516 `chosen_preference'_primary `chosen_preference'_9plus"
   foreach preference of local preferences_in_SA {
 
     * Part 2 countries only
@@ -87,15 +87,17 @@ qui {
   *-----------------------------------------------------------------------------
 
   * Part 2 countries only
-  * there was a decision to drop MNG and PHL
-  population_weights, preference(`chosen_preference') countryfilter(lendingtype!="LNX" & inlist(countrycode,"MNG","PHL")==0) combine_ida_blend
-  replace lp_by_gender_is_available = 0 if inlist(countrycode,"MNG","PHL")
+  * there was a decision to drop MNG and PHL in October/2019 since learning data was too old
+  * In July/2021 PHL was included thanks to SEA-PLM results
+  population_weights, preference(`chosen_preference') countryfilter(lendingtype!="LNX" & inlist(countrycode,"MNG")==0) combine_ida_blend
+  replace lp_by_gender_is_available = 0 if inlist(countrycode,"MNG")
   outline_gender_lp, filename("`outputs_folder'/outline_gender_lp_part2.csv") `reps'
 
   *  All countries in the world
-  * there was a decision to drop MNG and PHL
-  population_weights, preference(`chosen_preference') countryfilter(inlist(countrycode,"MNG","PHL")==0) combine_ida_blend
-  replace lp_by_gender_is_available = 0 if inlist(countrycode,"MNG","PHL")
+  * there was a decision to drop MNG and PHL in October/2019 since learning data was too old
+  * In July/2021 PHL was included thanks to SEA-PLM results
+  population_weights, preference(`chosen_preference') countryfilter(inlist(countrycode,"MNG")==0) combine_ida_blend
+  replace lp_by_gender_is_available = 0 if inlist(countrycode,"MNG")
   outline_gender_lp, filename("`outputs_folder'/outline_gender_lp_world.csv") `reps'
 
   noi disp as res _newline "Finished exporting outline with Gender Breakdown."

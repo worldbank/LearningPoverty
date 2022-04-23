@@ -3,6 +3,11 @@
 *==============================================================================*
 qui {
 
+  * Change here only if wanting to use a different preference
+  * than what is being passed in the global in 032_run
+  * But don't commit any change here (only commit in global 032_run)
+  local chosen_preference = $chosen_preference
+
   *-----------------------------------------------------------------------------
   local outputs   "${clone}/05_working_paper/053_outputs"
   local rawdata   "${clone}/05_working_paper/051_rawdata"
@@ -14,7 +19,7 @@ qui {
   *-----------------------------------------------------------------------------
   * create and save Learning Poverty dataset
 
-  use "${clone}/01_data/013_outputs/preference1005.dta", clear
+  use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
   keep if !missing(adj_nonprof_all)
   sort region countryname
   local  vars2keep "countrycode countryname enrollment_all nonprof_all adj_nonprof_all test year_assessment"

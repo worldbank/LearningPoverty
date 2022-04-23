@@ -144,13 +144,6 @@ qui {
 
   }
 
-  *Validation has multiple defintion see table in url above.
-  replace enrollment_definition = "Country Team Validation" if enrollment_definition == "VALID"
-
-  *Replace source and defintions for countries with no data
-  replace enrollment_definition = "No data" if missing(enrollment_definition)
-  replace enrollment_source     = "No data" if missing(enrollment_source)
-
   ***********************************
   * Copy values from the closest year within country
 
@@ -183,12 +176,17 @@ qui {
   label var countrycode "WB country code (3 letters)"
   label var year "Year"
 
-
-
   ********* PLACEHOLDER *************
   **** QUICK FIX - GENDER SPLIT *****
 
   merge m:1 countrycode year_enrollment enrollment_definition using "${clone}/01_data/011_rawdata/enrollment_uis_wb_reshapedlong.dta", keep(master match) nogen
+
+  *Validation has multiple defintion see table in url above.
+  replace enrollment_definition = "Country Team Validation" if enrollment_definition == "VALID"
+
+  *Replace source and defintions for countries with no data
+  replace enrollment_definition = "No data" if missing(enrollment_definition)
+  replace enrollment_source     = "No data" if missing(enrollment_source)
 
   * Generate empty variables
   gen enrollment_validated_fe    = .
