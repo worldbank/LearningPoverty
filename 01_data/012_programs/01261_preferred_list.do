@@ -38,7 +38,7 @@ program define   preferred_list, rclass
 (3) NLA_keep()        - dictates that the countries in the list are to use the National Learning Assessment. This option takes nla_codes or countrycodes
 (4) DROP_assessment() - dictates which assessments to disregard when calculating proficiency levels. This option takes assessment names (ie: SACMEQ)
 (4) DROP_round()      - dictates which rounds to disregard when calculating proficiency levels. This option takes assessment_year (ie: TIMSS_2011)
-(5) ENROLLment()      - dictates which enrollment to use (options: "validated" or "interpolated"
+(5) ENROLLment()      - dictates which enrollment to use (options: "validated" or "interpolated")
 (6) POPulation()      - dictates which population to use (options: "10" "1014" "primary" "9plus")
 (7) EXCEPTION()       - takes assessments (ie: HND_2013_LLECE) that will trump preferred order to ease adding exceptions to the rule
 (8) TIMEwindow()      - option to be passed to population_weight program, to display a global number
@@ -96,7 +96,7 @@ qui {
     gen round = test + "_" + strofreal(year_assessment)
     levelsof round, local(all_rounds)
     foreach this_round of local all_rounds {
-      * Drop observations with this_round if it belongs to drop list
+      * Drop observations with this_test if it belongs to drop list
       if strmatch("`drop_round'", "*`this_round'*") == 1 {
         drop if round == "`this_round'"
       }
@@ -123,12 +123,12 @@ qui {
   * Assume "1014" as default if not specified
   if "`population'"=="" local population == "1014"
   * Give error if option specified does not exist
-  if inlist("`population'","10","1014","primary","9plus") == 0 {
-    noi dis as error `"POPULATION method not supported. Try again (use: "10", "1014", "primary" or "9plus")."'
+  if inlist("`population'","10","1014","0516","primary","9plus") == 0 {
+    noi dis as error `"POPULATION method not supported. Try again (use: "10", "1014", "0516", "primary" or "9plus")."'
     break
   }
   else {
-    foreach method in 10 1014 primary 9plus {
+    foreach method in 10 0516 1014 primary 9plus {
       * Drop population variables that were not specified
       if "`population'" != "`method'" drop population_*_`method'
     }
@@ -164,8 +164,8 @@ qui {
   *-----------------
   * For multiple instances of the same test, the one closest to the anchor_year
   * is preferred, any other is dropped.
-  * When tied, chose the most recent (ie: anchor_year=2015, 2015 > 2016 > 2014)
-  * which is why we add the .01 in the aux variable below
+  * When tied, chose the least recent (ie: anchor_year=2015, 2015 > 2014 > 2016)
+  * which is why we subtract the .01 in the aux variable below
   gen years_from_anchor = abs($anchor_year - year_assessment + .01)
   bysort countrycode test: egen min_years_from_anchor = min(years_from_anchor)
   * Will only keep the preferred year for each test (including test = "None")
@@ -186,7 +186,7 @@ qui {
   * Regional Learning Assessments are bundled together
   gen byte is_RLA   = inlist(test,"LLECE","LLECE-T","PASEC","SACMEQ","SEA-PLM")
 
-  * Originally anchor year of 2015, the exceptions were defined in relation to 2010
+  * Originally (anchor year of 2015), exceptions defined in relationship to 2010.
   * To make it flexible for future updates
   local year_limit = $anchor_year - 5
 

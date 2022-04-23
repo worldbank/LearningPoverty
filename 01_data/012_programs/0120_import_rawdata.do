@@ -19,6 +19,8 @@ qui {
      - poverty_gdp_indicators (Poverty @ ILP; LMCL; UMCL; GDP per capita PPP$)
   */
 
+version 15
+
   * Directory where to find the CSVs or MDs (from the repo)
   local input_dir  "${clone}/01_data/011_rawdata/hosted_in_repo"
   * Directory where to save the newly created DTAs
@@ -280,6 +282,13 @@ qui {
   /*******************************
       Enrollment validated md
   *******************************/
+  
+  
+  * Directory where to find the CSVs or MDs (from the repo)
+  local input_dir  "${clone}/01_data/011_rawdata/hosted_in_repo"
+  * Directory where to save the newly created DTAs
+  local output_dir "${clone}/01_data/011_rawdata"
+  
   * Prepare local to create file
   local clonefile "enrollment_validated"
 
@@ -287,7 +296,7 @@ qui {
   import delimited using "`input_dir'/`clonefile'.md", delimiter("|") varnames(1) clear
 
   * Corrections/problems that come with the md importing
-  keep countrycode year suggested_enrollment decision
+  keep countrycode year suggested_enrollment suggested_enrollment_fe  suggested_enrollment_ma decision
   drop if countrycode=="---"
   destring year, replace
 
@@ -295,12 +304,19 @@ qui {
   replace suggested_enrollment = "" if suggested_enrollment == "NA"
   destring suggested_enrollment, replace
 
+  replace suggested_enrollment_fe = "" if suggested_enrollment_fe == "NA"
+  destring suggested_enrollment_fe, replace
+  
+    replace suggested_enrollment_ma = "" if suggested_enrollment_ma == "NA"
+  destring suggested_enrollment_ma, replace
+  
   * This line of code make sure that within a country there is only one type of decision
   by countrycode (decision), sort : gen same = (decision[1] == decision[_N])
   assert same == 1
   drop same
 
   * Keep countries that has a to-use value and then drop variable
+  * need to clarify the difference between accepted and use
   keep if decision == "use"
   drop decision
 
@@ -308,6 +324,12 @@ qui {
   rename    suggested_enrollment enrollment_VALID_ALL
   label var enrollment_VALID_ALL "Enrollment value validated by country team"
 
+  rename    suggested_enrollment_fe enrollment_VALID_FE
+  label var enrollment_VALID_FE "Female Enrollment value validated by country team"
+  
+  rename    suggested_enrollment_ma enrollment_VALID_MA
+  label var enrollment_VALID_MA "Male Enrollment value validated by country team"
+  
   * Compress and save in rawdata
   compress
   noi save "`output_dir'/`clonefile'.dta", replace

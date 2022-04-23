@@ -23,7 +23,7 @@ qui {
   *Build sub-totals and totals
   *regional sub-totals
   preserve
-    collapse adj_nonprof_all  population_2015_all  [fw=region_weight], by(region)
+    collapse adj_nonprof_all  population_2017_all  [fw=region_weight], by(region)
     gen countryname="ZZZ"
     tempfile rgn_98
     save `rgn_98'
@@ -75,8 +75,8 @@ qui {
 
   drop if test=="None"
 
-  keep  region adminregion countrycode countryname adj_nonprof_all enrollment_all pct_reading_low_target population_2015_all incomelevel lendingtype test year_assessment
-  order region adminregion countrycode countryname adj_nonprof_all enrollment_all pct_reading_low_target population_2015_all incomelevel lendingtype test year_assessment
+  keep  region adminregion countrycode countryname adj_nonprof_all enrollment_all pct_reading_low_target population_2017_all incomelevel lendingtype test year_assessment
+  order region adminregion countrycode countryname adj_nonprof_all enrollment_all pct_reading_low_target population_2017_all incomelevel lendingtype test year_assessment
 
   *----------------------------------------------------------------------------*
   * Manual corrections that need to be done to rawlatest wrt "exceptions"

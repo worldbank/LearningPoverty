@@ -2,16 +2,18 @@
 * 0220 SUBTASK: CREATE ALL LEARNING POVERTY SPELLS (PLUS DUMMIES OF USE)
 *==============================================================================*
 
-local chosen_preference = 1005
+local chosen_preference = 1108
 local enrollment_def "validated"
 
-quietly {
+*quietly {
 
   * Ensure comparability file is up to date
   import delimited "${clone}/02_simulation/021_rawdata/comparability_TIMSS_PIRLS.csv", clear
 	gen year_assessment_i = substr(spell,1,4)
   gen year_assessment   = substr(spell,6,4)
 	destring year_assessment_i year_assessment, replace
+	  sort countrycode idgrade test
+
 	save "${clone}/02_simulation/021_rawdata/comparability_TIMSS_PIRLS_yr.dta", replace
 
   *-----------------------------------------------------------------------------*
@@ -20,6 +22,11 @@ quietly {
 
   * Starts with rawfull
   use "${clone}/01_data/013_outputs/rawfull.dta", clear
+  replace year_assessment = 2010 if year_assessment == 2011 & countrycode == "COD"
+  replace nla_code = "N.A." if inlist(countrycode,"MLI","MDG","COD") & test == "NLA"
+  replace test = "PASEC" if inlist(countrycode,"MLI","MDG","COD") & test == "NLA"
+  drop if test == "LLECE" & year_assessment >= 2018
+  replace year_assessment = 2019 if year_assessment == 2018 & inlist(test, "PASEC", "TIMSS")
 
   * Correct the few of PASEC desguised as NLAs
   replace nla_code = "N.A." if inlist(countrycode,"MLI","MDG","COD") & test == "NLA"
@@ -77,7 +84,7 @@ quietly {
 
   * For TIMSS, only keeps science, except for Jordan, should be equivalent to
   * if a country has TIMMS spells for a given year interval, keep the science only
-  gen byte  excess_timss: ny = (subject!= "science" & test == "TIMSS"  & countrycode != "JOR")
+  gen byte  excess_timss: ny = (subject!= "scie" & test == "TIMSS"  & countrycode != "JOR")
   label var excess_timss "Redundant TIMSS spell (least preferred subject)"
 
   * SACMEQ round IV (2013) has some quality issues, mark those as doubtful
@@ -91,9 +98,13 @@ quietly {
   label values preferred ny
 
   * Mark whether it is a comparable spell
-  merge m:1 countrycode idgrade test spell using "${clone}/02_simulation/021_rawdata/comparability_TIMSS_PIRLS_yr.dta", keep(master match) keepusing(comparable) nogen
+  merge m:1 countrycode idgrade test spell using "${clone}/02_simulation/021_rawdata/comparability_TIMSS_PIRLS_yr.dta", keep(master match) keepusing(comparable) 
+  
+  
   replace comparable = 0 if inlist(test, "EGRA", "PASEC")
   replace comparable = 1 if test == "PASEC" & y1 >= 2014
+  replace comparable = 0 if test == "TIMSS" & comparable == .
+  
   replace comparable = 1 if missing(comparable)
   label var comparable "Spell is comparable"
   label values comparable ny
@@ -128,6 +139,9 @@ quietly {
   * What actually matters: the value of the spell
   gen delta_lp = (learningpoverty_y2 - learningpoverty_y1) / (y1 - y2)
   label var delta_lp "Annualized change in Learning Poverty in this spell (pp)"
+  
+  * drop spells with missing values
+  drop if delta_lp == .
 
   * Adds filter of spells neither too big nor small
   gen byte  range_old: ny = (delta_lp > -2 & delta_lp < 4)
@@ -136,7 +150,7 @@ quietly {
   label var range_new "Spell is between -4 and 4 annual change in Learning Poverty"
 
   * What was used for the simulation in the glossy (Part2 only)
-  gen byte  glossy_sim: ny = (lendingtype != "LNX" & comparable == 1 & y1 >= 2000 & excess_timss == 0 & test != "NLA" & range_old == 1)
+  gen byte  glossy_sim: ny = (lendingtype != "LNX" & comparable == 1 & y1 >= 2000 & excess_timss == 0 & test != "NLA" & range_new == 1 & spell_id != "ZAF_PIRLS_read_2011-2016_grade5")
   label var glossy_sim "Spell was used in the simulation for the Glossy (N=70)"
 
   * What we are actually using in the tehnical paper (Part2 only)
@@ -181,7 +195,8 @@ quietly {
   save "${clone}/02_simulation/023_outputs/all_spells.dta", replace
 
   noi disp as result _n "Saved all spells." _n
-}
+  
+* }
 
 * Display summary stats of spells to double check results (copied below)
 

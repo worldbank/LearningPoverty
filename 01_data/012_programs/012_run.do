@@ -1,3 +1,4 @@
+version 16
 *==============================================================================*
 * LEARNING POVERTY (LP)
 * Project information at: https://github.com/worldbank/LearningPoverty
@@ -18,7 +19,7 @@ if _rc != 0 {
 
 * Execution parameters
 global master_seed  17893   // Ensures reproducibility
-global anchor_year = 2015   // Anchor year for learning poverty numbers produced
+global anchor_year = 2017   // Anchor year for learning poverty numbers produced
 *-------------------------------------------------------------------------------
 
 
