@@ -391,7 +391,11 @@ qui {
   gen share = population_`anchor_year'_all / `r(sum)'
   gen group = "all countries"
   export excel using "${excel_file}", sheet("T8", modify) cell(J29) firstrow(variables) nolabel keepcellfmt
+<<<<<<< HEAD
   use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
+=======
+  use "${clone}/01_data/013_outputs/preference1005.dta", clear
+>>>>>>> develop
   keep if lendingtype != "LNX"
   collapse (sum) population_`anchor_year'_all, by(lp_by_gender_is_available)
   sum population_`anchor_year'_all
@@ -495,11 +499,19 @@ qui {
   *-----------------------------------------------------------------------------
   * Table 12 Learning poverty rates in 2030 under two scenarios (simulation using spells by region)
   *-----------------------------------------------------------------------------
+<<<<<<< HEAD
   local table_12_A_file "simfile_preference_`chosen_preference'_regional_growth_summarytable.dta"
   local table_12_B_file "simfile_preference_`chosen_preference'_income_level_summarytable.dta"
   local table_12_C_file "simfile_preference_`chosen_preference'_initial_poverty_level_summarytable.dta"
   local table_12_D_file "simfile_preference_`chosen_preference'_regional_growth_glossy_summarytable.dta"
   local table_12_E_file "simfile_preference_`chosen_preference'_regional_growth_min2_summarytable.dta"
+=======
+  local table_12_A_file "simfile_preference_1005_regional_growth_summarytable.dta"
+  local table_12_B_file "simfile_preference_1005_income_level_summarytable.dta"
+  local table_12_C_file "simfile_preference_1005_initial_poverty_level_summarytable.dta"
+  local table_12_D_file "simfile_preference_1005_regional_growth_glossy_summarytable.dta"
+  local table_12_E_file "simfile_preference_1005_regional_growth_min2_summarytable.dta"
+>>>>>>> develop
   local table_12_A_place "B9"
   local table_12_B_place "B25"
   local table_12_C_place "B37"
@@ -566,6 +578,11 @@ qui {
   *-----------------------------------------------------------------------------
 
 
+<<<<<<< HEAD
+=======
+  *-----------------------------------------------------------------------------
+  * Table 16  Source of enrollment data
+>>>>>>> develop
   *-----------------------------------------------------------------------------
   * Table 16  Source of enrollment data
   *-----------------------------------------------------------------------------
@@ -609,8 +626,13 @@ qui {
     save `globalpop', replace
   restore
   append using `globalpop'
+<<<<<<< HEAD
   egen population_`anchor_year'_alltotal = rowtotal(population_`anchor_year'_all?)
   label var population_`anchor_year'_alltotal "Total"
+=======
+  egen population_2015_alltotal = rowtotal(population_2015_all?)
+  label var population_2015_alltotal "Total"
+>>>>>>> develop
   export excel using "${excel_file}", sheet("T17", modify) cell(B6) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Table 17 exported"
@@ -773,8 +795,13 @@ qui {
   collapse (max) *_countries, by(countrycode idgrade)
   keep if rich_countries == 1 | client_countries == 1
   merge m:1 countrycode using "${clone}/01_data/013_outputs/rawlatest.dta", keepusing(population_2017_all) assert(match using) keep(match) nogen
+<<<<<<< HEAD
   gen population_rich   = population_`anchor_year'_all * rich_countries
   gen population_client = population_`anchor_year'_all * client_countries
+=======
+  gen population_rich   = population_2017_all * rich_countries
+  gen population_client = population_2017_all * client_countries
+>>>>>>> develop
   collapse (sum) population_rich population_client, by(idgrade)
   egen population_all = rowtotal(population_rich population_client)
   assert _N == 3
@@ -874,7 +901,11 @@ qui {
   * Figure 4 Learning poverty gender gap, by country
   * Figure 5 Learning poverty gender gap by the level of Learning Poverty
   *-----------------------------------------------------------------------------
+<<<<<<< HEAD
   use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
+=======
+  use "${clone}/01_data/013_outputs/preference1005.dta", clear
+>>>>>>> develop
   replace lp_by_gender_is_available = 0 if inlist(countrycode,"MNG","PHL")
   keep if lp_by_gender_is_available
   keep countrycode adj_*
