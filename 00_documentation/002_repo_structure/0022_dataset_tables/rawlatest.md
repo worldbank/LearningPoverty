@@ -13,20 +13,32 @@ sources:     All population, enrollment and proficiency sources combined.
 ~~~~
 
 
+<<<<<<< HEAD
+About the **49 variables** in this dataset:
+=======
 About the **52 variables** in this dataset:
+>>>>>>> develop
 
 ~~~~
 The variables belong to the following variable classifications:
 idvars valuevars traitvars
 
 idvars:    countrycode preference
+<<<<<<< HEAD
+valuevars: adj_nonprof_all adj_nonprof_fe adj_nonprof_ma nonprof_all se_nonprof_all nonprof_ma se_nonprof_ma nonprof_fe se_nonprof_fe fgt1_all fgt1_fe fgt1_ma fgt2_all fgt2_fe fgt2_ma enrollment_all enrollment_ma enrollment_fe population_2017_fe population_2017_ma population_2017_all population_source anchor_population anchor_population_w_assessment
+=======
 valuevars: adj_nonprof_all adj_nonprof_fe adj_nonprof_ma nonprof_all se_nonprof_all nonprof_ma se_nonprof_ma nonprof_fe se_nonprof_fe fgt1_all fgt1_fe fgt1_ma fgt2_all fgt2_fe fgt2_ma enrollment_all enrollment_ma enrollment_fe population_fe_0516 population_ma_0516 population_all_0516 population_2017_fe population_2017_ma population_2017_all population_source anchor_population anchor_population_w_assessment
+>>>>>>> develop
 traitvars: idgrade test nla_code subject year_assessment year_enrollment enrollment_flag enrollment_source enrollment_definition min_proficiency_threshold surveyid countryname region regionname adminregion adminregionname incomelevel incomelevelname lendingtype lendingtypename cmu preference_description lp_by_gender_is_available
 
 . codebook, compact
 
 Variable      Obs Unique      Mean       Min       Max  Label
+<<<<<<< HEAD
+---------------------------------------------------------------------------------------------------------------------------------------
+=======
 -----------------------------------------------------------------------------------------------------------------------
+>>>>>>> develop
 countrycode   217    217         .         .         .  WB country code (3 letters)
 preference    217      1         .         .         .  Preference
 adj_nonpro~l  121    121  40.24131  2.186121  97.71729  Learning Poverty (adjusted non-proficiency, all)
@@ -44,12 +56,18 @@ fgt1_ma       110    110  .1503822  .0448706  .5445552  Avg gap to minimum profi
 fgt2_all      110    110  .0393368  .0034088  .3331398  Avg gap squared to minimum proficiency (all, FGT2)
 fgt2_fe       110    110  .0356563  .0031767  .2936567  Avg gap squared to minimum proficiency (fe, FGT2)
 fgt2_ma       110    110  .0419848  .0035797  .3594563  Avg gap squared to minimum proficiency (ma, FGT2)
+<<<<<<< HEAD
+enrollment~l  201    197   90.5746  23.54786       100  Validated % of children enrolled in school (using closest year, both genders)
+enrollment~a  161    157  90.01606  30.29106       100  Validated % of children enrolled in school (using closest year, male only)
+enrollmen~fe  160    156    89.272  16.75778       100  Validated % of children enrolled in school (using closest year, female only)
+=======
 enrollment~l  201    197   90.5746  23.54786       100  Validated % of children enrolled in school (using closest ye...
 enrollment~a  161    157  90.01606  30.29106       100  Validated % of children enrolled in school (using closest ye...
 enrollmen~fe  160    156    89.272  16.75778       100  Validated % of children enrolled in school (using closest ye...
 popul~e_0516  193    193   3799861      8061  1.43e+08  Female population aged 05-16 (WB API)
 popul~a_0516  193    193   4067900      8324  1.59e+08  Male population aged 05-16 (WB API)
 popul~l_0516  193    193   7867761     16385  3.02e+08  Total population aged 05-16 (WB API)
+>>>>>>> develop
 populatio~fe  193    193   1553426      3328  6.01e+07  Female population between ages 10 to 14 (WB API)
 population~a  193    193   1664672      3467  6.72e+07  Male population between ages 10 to 14 (WB API)
 population~l  193    193   3218098      6795  1.27e+08  Total population between ages 10 to 14 (WB API)
@@ -62,7 +80,11 @@ nla_code      217     11         .         .         .  Reference code for NLA i
 subject       217      4         .         .         .  Subject
 year_asses~t  217     13  2015.857      2001      2019  Year of assessment
 year_enrol~t  201     18   2013.99      1993      2018  The year that the enrollment value is from
+<<<<<<< HEAD
+enrollment~g  217      2   .235023         0         1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
+=======
 enrollment~g  217      2   .235023         0         1  Flag for enrollment by gender filled up from aggregate (>=98...
+>>>>>>> develop
 enrollmen~ce  217      4         .         .         .  The source used for this enrollment value
 enrollment~n  217      6         .         .         .  The definition used for this enrollment value
 min_profic~d  116     10         .         .         .  Minimum Proficiency Threshold (assessment-specific)
@@ -79,6 +101,10 @@ lendingty~me  217      4         .         .         .  Lending Type Name
 cmu           169     48         .         .         .  WB Country Management Unit
 preference~n  217      1         .         .         .  Preference description
 lp_by_gend~e  217      2  .4239631         0         1  Dummy for availibility of Learning Poverty gender disaggregated
+<<<<<<< HEAD
+---------------------------------------------------------------------------------------------------------------------------------------
+=======
 -----------------------------------------------------------------------------------------------------------------------
+>>>>>>> develop
 
 ~~~~

@@ -26,7 +26,11 @@ traitvars: year_enrollment year_population source_assessment enrollment_source p
 . codebook, compact
 
 Variable       Obs Unique       Mean       Min       Max  Label
+<<<<<<< HEAD
+---------------------------------------------------------------------------------------------------------------------------------------
+=======
 -----------------------------------------------------------------------------------------------------------------------
+>>>>>>> develop
 countrycode   1042    217          .         .         .  WB country code (3 letters)
 year_asses~t  1042     21   2012.495      1996      2019  Year of assessment
 idgrade       1042      5  -204.6315      -999         6  Grade ID
@@ -45,6 +49,28 @@ fgt1_ma        687    687   .1403113  .0298228  .5797679  Avg gap to minimum pro
 fgt2_all       687    687   .0366347   .001687   .390271  Avg gap squared to minimum proficiency (all, FGT2)
 fgt2_fe        687    687   .0335486  .0011683  .3641997  Avg gap squared to minimum proficiency (fe, FGT2)
 fgt2_ma        687    687   .0389487  .0017091  .4102417  Avg gap squared to minimum proficiency (ma, FGT2)
+<<<<<<< HEAD
+en~dated_all  1022    584   92.44464  23.54786       100  Validated % of children enrolled in school (using closest year, both genders)
+enr~dated_fe   862    486    91.9935  16.75778       100  Validated % of children enrolled in school (using closest year, female only)
+enr~dated_ma   864    488   92.50133  30.29106       100  Validated % of children enrolled in school (using closest year, male only)
+e~dated_flag  1042      2   .2303263         0         1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
+en~lated_all  1022    622    92.4566  23.54786       100  Validated % of children enrolled in school (using interpolation, both gend...
+enr~lated_fe   792    463    92.7003  16.75778       100  Validated % of children enrolled in school (using interpolation, female only)
+enr~lated_ma   794    464   93.03792  30.29106       100  Validated % of children enrolled in school (using interpolation, male only)
+e~lated_flag  1042      2   .2447217         0         1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
+populat~e_10  1016    193   293790.7       672  1.21e+07  Female population aged 10 (WB API)
+popul~e_0516  1016    193    3507837      8061  1.43e+08  Female population aged 05-16 (WB API)
+po~e_primary   970    179    2013042      4379  7.18e+07  Female population primary age, country specific (WB API)
+popu~e_9plus   990    186    1085839      1356  3.63e+07  Female population aged 9 to end of primary, country specific (WB API)
+populat~a_10  1016    193   310473.2       687  1.34e+07  Male population aged 10 (WB API)
+popul~a_0516  1016    193    3706547      8324  1.59e+08  Male population aged 05-16 (WB API)
+po~a_primary   970    179    2125880      4534  7.94e+07  Male population primary age, country specific (WB API)
+popu~a_9plus   990    186    1143901      1400  4.03e+07  Male population aged 9 to end of primary, country specific (WB API)
+populat~l_10  1016    193   604263.9      1359  2.55e+07  Total population aged 10 (WB API)
+popul~l_0516  1016    193    7214384     16385  3.02e+08  Total population aged 05-16 (WB API)
+po~l_primary   970    179    4138922      8913  1.51e+08  Total population primary age, country specific (WB API)
+popu~l_9plus   990    186    2229740      2756  7.65e+07  Total population aged 9 to end of primary, country specific (WB API)
+=======
 en~dated_all  1022    584   92.44464  23.54786       100  Validated % of children enrolled in school (using closest ...
 enr~dated_fe   862    486    91.9935  16.75778       100  Validated % of children enrolled in school (using closest ...
 enr~dated_ma   864    488   92.50133  30.29106       100  Validated % of children enrolled in school (using closest ...
@@ -65,6 +91,7 @@ populat~l_10  1016    193   604263.9      1359  2.55e+07  Total population aged 
 popul~l_0516  1016    193    7214384     16385  3.02e+08  Total population aged 05-16 (WB API)
 po~l_primary   970    179    4138922      8913  1.51e+08  Total population primary age, country specific (WB API)
 popu~l_9plus   990    186    2229740      2756  7.65e+07  Total population aged 9 to end of primary, country specifi...
+>>>>>>> develop
 popul~e_1014  1016    193    1432652      3328  6.01e+07  Female population between ages 10 to 14 (WB API)
 popul~a_1014  1016    193    1514505      3467  6.72e+07  Male population between ages 10 to 14 (WB API)
 popul~l_1014  1016    193    2947158      6795  1.27e+08  Total population between ages 10 to 14 (WB API)
@@ -86,6 +113,10 @@ incomeleve~e  1042      4          .         .         .  Income Level Name
 lendingtype   1042      4          .         .         .  Lending Type Code
 lendingty~me  1042      4          .         .         .  Lending Type Name
 cmu            774     48          .         .         .  WB Country Management Unit
+<<<<<<< HEAD
+---------------------------------------------------------------------------------------------------------------------------------------
+=======
 -----------------------------------------------------------------------------------------------------------------------
+>>>>>>> develop
 
 ~~~~

@@ -3,6 +3,16 @@
 *==============================================================================*
 qui {
 
+  * Change here only if wanting to use a different preference
+  * than what is being passed in the global in 032_run
+  * But don't commit any change here (only commit in global 032_run)
+  local chosen_preference = $chosen_preference
+  
+  * Change here only if wanting to use a different anchor year
+  * than what is being passed in the global in 012_run
+  * But don't commit any change here (only commit in global 012_run)
+  local anchor_year = $anchor_year
+
   * File that will be updated, one worksheet at a time from the template
   global template_file "${clone}/05_working_paper/051_rawdata/LPV_Tables_Figures_Template.xlsx"
   global excel_file "${clone}/05_working_paper/053_outputs/LPV_Tables_Figures.xlsx"
@@ -123,7 +133,7 @@ qui {
   *-----------------------------------------------------------------------------
   * Only count what is in the Global Number
   tempfile in_global_number
-  use "${clone}/01_data/013_outputs/preference1005.dta", clear
+  use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
   * Those 3 PASEC are "desguised" as NLAs because they belong to an earlier round
   replace test = "PASEC" if inlist(countrycode,"MLI","MDG","COD")
   gen byte included = (year_assessment >= 2011 & lendingtype != "LNX")
@@ -162,7 +172,7 @@ qui {
   destring year, replace force
   tempfile cutoff_nla
   save `cutoff_nla', replace
-  use "${clone}/01_data/013_outputs/preference1005.dta", clear
+  use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
   replace test = "PASEC" if inlist(countrycode,"MLI","MDG","COD")
   keep if test == "NLA"
   keep countryname year_assessment nla_code
@@ -369,23 +379,27 @@ qui {
   * Corresponding notes below the table:
 
   * - list of Enrollment gender flag countries
-  use "${clone}/01_data/013_outputs/preference1005.dta", clear
+  use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
   keep if enrollment_flag & lp_by_gender_is_available
   keep countrycode countryname
   export excel using "${excel_file}", sheet("T8", modify) cell(B29) nolabel keepcellfmt
 
   * - share of population with gender disaggregated data
-  use "${clone}/01_data/013_outputs/preference1005.dta", clear
-  collapse (sum) population_2015_all, by(lp_by_gender_is_available)
-  sum population_2015_all
-  gen share = population_2015_all / `r(sum)'
+  use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
+  collapse (sum) population_`anchor_year'_all, by(lp_by_gender_is_available)
+  sum population_`anchor_year'_all
+  gen share = population_`anchor_year'_all / `r(sum)'
   gen group = "all countries"
   export excel using "${excel_file}", sheet("T8", modify) cell(J29) firstrow(variables) nolabel keepcellfmt
+<<<<<<< HEAD
+  use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
+=======
   use "${clone}/01_data/013_outputs/preference1005.dta", clear
+>>>>>>> develop
   keep if lendingtype != "LNX"
-  collapse (sum) population_2015_all, by(lp_by_gender_is_available)
-  sum population_2015_all
-  gen share = population_2015_all / `r(sum)'
+  collapse (sum) population_`anchor_year'_all, by(lp_by_gender_is_available)
+  sum population_`anchor_year'_all
+  gen share = population_`anchor_year'_all / `r(sum)'
   gen group = "low and middle income countries"
   export excel using "${excel_file}", sheet("T8", modify) cell(J34) firstrow(variables) nolabel keepcellfmt
 
@@ -485,11 +499,19 @@ qui {
   *-----------------------------------------------------------------------------
   * Table 12 Learning poverty rates in 2030 under two scenarios (simulation using spells by region)
   *-----------------------------------------------------------------------------
+<<<<<<< HEAD
+  local table_12_A_file "simfile_preference_`chosen_preference'_regional_growth_summarytable.dta"
+  local table_12_B_file "simfile_preference_`chosen_preference'_income_level_summarytable.dta"
+  local table_12_C_file "simfile_preference_`chosen_preference'_initial_poverty_level_summarytable.dta"
+  local table_12_D_file "simfile_preference_`chosen_preference'_regional_growth_glossy_summarytable.dta"
+  local table_12_E_file "simfile_preference_`chosen_preference'_regional_growth_min2_summarytable.dta"
+=======
   local table_12_A_file "simfile_preference_1005_regional_growth_summarytable.dta"
   local table_12_B_file "simfile_preference_1005_income_level_summarytable.dta"
   local table_12_C_file "simfile_preference_1005_initial_poverty_level_summarytable.dta"
   local table_12_D_file "simfile_preference_1005_regional_growth_glossy_summarytable.dta"
   local table_12_E_file "simfile_preference_1005_regional_growth_min2_summarytable.dta"
+>>>>>>> develop
   local table_12_A_place "B9"
   local table_12_B_place "B25"
   local table_12_C_place "B37"
@@ -556,10 +578,15 @@ qui {
   *-----------------------------------------------------------------------------
 
 
+<<<<<<< HEAD
+=======
+  *-----------------------------------------------------------------------------
+  * Table 16  Source of enrollment data
+>>>>>>> develop
   *-----------------------------------------------------------------------------
   * Table 16  Source of enrollment data
   *-----------------------------------------------------------------------------
-  use "${clone}/01_data/013_outputs/preference1005.dta", clear
+  use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
   keep if !missing(adj_nonprof_all)
   preserve
     collapse (count) freq=adj_nonprof_all, by(enrollment_definition)
@@ -583,15 +610,15 @@ qui {
   *-----------------------------------------------------------------------------
   * Table 17 Population ages 10-14 years old by region and income classifications (Year = 2015)
   *-----------------------------------------------------------------------------
-  use "${clone}/01_data/013_outputs/preference1005.dta", clear
-  keep regionname incomelevel population_2015_all
-  separate population_2015_all , by(incomelevel)
-  collapse (sum) population_2015_all?, by(regionname)
-  label var population_2015_all1 "High income Countries"
-  label var population_2015_all2 "Low income Countries"
-  label var population_2015_all3 "Low-middle income"
-  label var population_2015_all4 "Upper-middle income"
-  order regionname population_2015_all1 population_2015_all4 population_2015_all3 population_2015_all2
+  use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
+  keep regionname incomelevel population_`anchor_year'_all
+  separate population_`anchor_year'_all , by(incomelevel)
+  collapse (sum) population_`anchor_year'_all?, by(regionname)
+  label var population_`anchor_year'_all1 "High income Countries"
+  label var population_`anchor_year'_all2 "Low income Countries"
+  label var population_`anchor_year'_all3 "Low-middle income"
+  label var population_`anchor_year'_all4 "Upper-middle income"
+  order regionname population_`anchor_year'_all1 population_`anchor_year'_all4 population_`anchor_year'_all3 population_`anchor_year'_all2
   preserve
     collapse (sum) population*
     gen regionname = "Global"
@@ -599,8 +626,13 @@ qui {
     save `globalpop', replace
   restore
   append using `globalpop'
+<<<<<<< HEAD
+  egen population_`anchor_year'_alltotal = rowtotal(population_`anchor_year'_all?)
+  label var population_`anchor_year'_alltotal "Total"
+=======
   egen population_2015_alltotal = rowtotal(population_2015_all?)
   label var population_2015_alltotal "Total"
+>>>>>>> develop
   export excel using "${excel_file}", sheet("T17", modify) cell(B6) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Table 17 exported"
@@ -664,7 +696,7 @@ qui {
   *-----------------------------------------------------------------------------
   * Table 20 Country Numbers
   *-----------------------------------------------------------------------------
-  use "${clone}/01_data/013_outputs/preference1005.dta", clear
+  use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
   keep if year_assessment >= 2011 & !missing(adj_nonprof_all)
   gen oos_all = 100 - enrollment_all
   sort region countryname
@@ -763,8 +795,13 @@ qui {
   collapse (max) *_countries, by(countrycode idgrade)
   keep if rich_countries == 1 | client_countries == 1
   merge m:1 countrycode using "${clone}/01_data/013_outputs/rawlatest.dta", keepusing(population_2017_all) assert(match using) keep(match) nogen
+<<<<<<< HEAD
+  gen population_rich   = population_`anchor_year'_all * rich_countries
+  gen population_client = population_`anchor_year'_all * client_countries
+=======
   gen population_rich   = population_2017_all * rich_countries
   gen population_client = population_2017_all * client_countries
+>>>>>>> develop
   collapse (sum) population_rich population_client, by(idgrade)
   egen population_all = rowtotal(population_rich population_client)
   assert _N == 3
@@ -864,7 +901,11 @@ qui {
   * Figure 4 Learning poverty gender gap, by country
   * Figure 5 Learning poverty gender gap by the level of Learning Poverty
   *-----------------------------------------------------------------------------
+<<<<<<< HEAD
+  use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
+=======
   use "${clone}/01_data/013_outputs/preference1005.dta", clear
+>>>>>>> develop
   replace lp_by_gender_is_available = 0 if inlist(countrycode,"MNG","PHL")
   keep if lp_by_gender_is_available
   keep countrycode adj_*
@@ -902,7 +943,7 @@ qui {
   *-----------------------------------------------------------------------------
   * Figure 8  Learning poverty under two scenarios, 2015-30 (simulation)
   *-----------------------------------------------------------------------------
-  use "${clone}/02_simulation/023_outputs/simfile_preference_1005_regional_growth_fulltable.dta", clear
+  use "${clone}/02_simulation/023_outputs/simfile_preference_`chosen_preference'_regional_growth_fulltable.dta", clear
   keep if year>=2015 & year<=2030
   keep if region == "_Overall"
   keep if inlist(benchmark,"_own_","_r80_")

@@ -26,7 +26,11 @@ traitvars: min_proficiency_threshold source_assessment surveyid
 . codebook, compact
 
 Variable      Obs Unique      Mean       Min       Max  Label
+<<<<<<< HEAD
+---------------------------------------------------------------------------------------------------------------------------------------
+=======
 -----------------------------------------------------------------------------------------------------------------------
+>>>>>>> develop
 countrycode   831    153         .         .         .  WB country code (3 letters)
 year          831     21  2011.366      1996      2019  Year of assessment
 idgrade       831      4  4.309266         3         6  Grade ID
@@ -48,6 +52,10 @@ fgt2_ma       693    693  .0387286  .0017091  .4102417  Avg gap squared to minim
 min_profic~d  822     18         .         .         .  Minimum Proficiency Threshold (assessment-specific)
 source_ass~t  831      3         .         .         .  Source of assessment data
 surveyid      831    580         .         .         .  SurveyID (countrycode_year_assessment)
+<<<<<<< HEAD
+---------------------------------------------------------------------------------------------------------------------------------------
+=======
 -----------------------------------------------------------------------------------------------------------------------
+>>>>>>> develop
 
 ~~~~
