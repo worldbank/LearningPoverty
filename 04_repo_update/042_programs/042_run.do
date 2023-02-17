@@ -22,19 +22,19 @@ if _rc != 0 {
 * Subroutines for this task
 *-------------------------------------------------------------------------------
 * Update COUNTRY METADATA to store as csv in 011_rawdata
-* do "${clone}/04_repo_update/042_programs/0421_country_metadata_csv.do"
+do "${clone}/04_repo_update/042_programs/0421_country_metadata_csv.do"
 
 * Update POPULATION DATA from APIs to store as csv in 011_rawdata
-* do "${clone}/04_repo_update/042_programs/0422_population_data_from_api.do"
+do "${clone}/04_repo_update/042_programs/0422_population_data_from_api.do"
 
 * Update ENROLLMENT DATA from APIs to store as csv in 011_rawdata
-* do "${clone}/04_repo_update/042_programs/0423_enrollment_data_from_api.do"
+do "${clone}/04_repo_update/042_programs/0423_enrollment_data_from_api.do"
 
 * Update PROFICIENCY DATA from multiple sources to store as csv in 011_rawdata
 do "${clone}/04_repo_update/042_programs/0424_proficiency_data.do"
 
 * Update Other WB API data to store as csv in 011_rawdata
-* do "${clone}/04_repo_update/042_programs/0425_otherdata_from_api.do"
+do "${clone}/04_repo_update/042_programs/0425_otherdata_from_api.do"
 *-------------------------------------------------------------------------------
 
 

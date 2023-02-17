@@ -13,110 +13,658 @@ sources:     All population, enrollment and proficiency sources combined.
 ~~~~
 
 
-About the **59 variables** in this dataset:
+About the **637 variables** in this dataset:
 
 ~~~~
 The variables belong to the following variable classifications:
 idvars valuevars traitvars
 
 idvars:    countrycode year_assessment idgrade test nla_code subject
-valuevars: nonprof_all se_nonprof_all nonprof_ma se_nonprof_ma nonprof_fe se_nonprof_fe fgt1_all fgt1_fe fgt1_ma fgt2_all fgt2_fe fgt2_ma enrollment_validated_all enrollment_validated_fe enrollment_validated_ma enrollment_validated_flag enrollment_interpolated_all enrollment_interpolated_fe enrollment_interpolated_ma enrollment_interpolated_flag population_fe_10 population_fe_0516 population_fe_primary population_fe_9plus population_ma_10 population_ma_0516 population_ma_primary population_ma_9plus population_all_10 population_all_0516 population_all_primary population_all_9plus population_fe_1014 population_ma_1014 population_all_1014 population_source
-traitvars: year_enrollment year_population source_assessment enrollment_source population_source enrollment_definition min_proficiency_threshold surveyid countryname region regionname adminregion adminregionname incomelevel incomelevelname lendingtype lendingtypename cmu
+valuevars: nonprof_all se_nonprof_all nonprof_ma se_nonprof_ma nonprof_fe se_nonprof_fe fgt1_all fgt1_fe fgt1_ma fgt2_all fgt2_fe fgt2_ma enrollment_validated_all_1990 enrollment_validated_fe_1990 enrollment_validated_ma_1990 enrollment_validated_flag_1990 enrollment_validated_all_1991 enrollment_validated_fe_1991 enrollment_validated_ma_1991 enrollment_validated_flag_1991 enrollment_validated_all_1992 enrollment_validated_fe_1992 enrollment_validated_ma_1992 enrollment_validated_flag_1992 enrollment_validated_all_1993 enrollment_validated_fe_1993 enrollment_validated_ma_1993 enrollment_validated_flag_1993 enrollment_validated_all_1994 enrollment_validated_fe_1994 enrollment_validated_ma_1994 enrollment_validated_flag_1994 enrollment_validated_all_1995 enrollment_validated_fe_1995 enrollment_validated_ma_1995 enrollment_validated_flag_1995 enrollment_validated_all_1996 enrollment_validated_fe_1996 enrollment_validated_ma_1996 enrollment_validated_flag_1996 enrollment_validated_all_1997 enrollment_validated_fe_1997 enrollment_validated_ma_1997 enrollment_validated_flag_1997 enrollment_validated_all_1998 enrollment_validated_fe_1998 enrollment_validated_ma_1998 enrollment_validated_flag_1998 enrollment_validated_all_1999 enrollment_validated_fe_1999 enrollment_validated_ma_1999 enrollment_validated_flag_1999 enrollment_validated_all_2000 enrollment_validated_fe_2000 enrollment_validated_ma_2000 enrollment_validated_flag_2000 enrollment_validated_all_2001 enrollment_validated_fe_2001 enrollment_validated_ma_2001 enrollment_validated_flag_2001 enrollment_validated_all_2002 enrollment_validated_fe_2002 enrollment_validated_ma_2002 enrollment_validated_flag_2002 enrollment_validated_all_2003 enrollment_validated_fe_2003 enrollment_validated_ma_2003 enrollment_validated_flag_2003 enrollment_validated_all_2004 enrollment_validated_fe_2004 enrollment_validated_ma_2004 enrollment_validated_flag_2004 enrollment_validated_all_2005 enrollment_validated_fe_2005 enrollment_validated_ma_2005 enrollment_validated_flag_2005 enrollment_validated_all_2006 enrollment_validated_fe_2006 enrollment_validated_ma_2006 enrollment_validated_flag_2006 enrollment_validated_all_2007 enrollment_validated_fe_2007 enrollment_validated_ma_2007 enrollment_validated_flag_2007 enrollment_validated_all_2008 enrollment_validated_fe_2008 enrollment_validated_ma_2008 enrollment_validated_flag_2008 enrollment_validated_all_2009 enrollment_validated_fe_2009 enrollment_validated_ma_2009 enrollment_validated_flag_2009 enrollment_validated_all_2010 enrollment_validated_fe_2010 enrollment_validated_ma_2010 enrollment_validated_flag_2010 enrollment_validated_all_2011 enrollment_validated_fe_2011 enrollment_validated_ma_2011 enrollment_validated_flag_2011 enrollment_validated_all_2012 enrollment_validated_fe_2012 enrollment_validated_ma_2012 enrollment_validated_flag_2012 enrollment_validated_all_2013 enrollment_validated_fe_2013 enrollment_validated_ma_2013 enrollment_validated_flag_2013 enrollment_validated_all_2014 enrollment_validated_fe_2014 enrollment_validated_ma_2014 enrollment_validated_flag_2014 enrollment_validated_all_2015 enrollment_validated_fe_2015 enrollment_validated_ma_2015 enrollment_validated_flag_2015 enrollment_validated_all_2016 enrollment_validated_fe_2016 enrollment_validated_ma_2016 enrollment_validated_flag_2016 enrollment_validated_all_2017 enrollment_validated_fe_2017 enrollment_validated_ma_2017 enrollment_validated_flag_2017 enrollment_validated_all_2018 enrollment_validated_fe_2018 enrollment_validated_ma_2018 enrollment_validated_flag_2018 enrollment_validated_all_2019 enrollment_validated_fe_2019 enrollment_validated_ma_2019 enrollment_validated_flag_2019 enrollment_validated_all_2020 enrollment_validated_fe_2020 enrollment_validated_ma_2020 enrollment_validated_flag_2020 enrollment_validated_all_2021 enrollment_validated_fe_2021 enrollment_validated_ma_2021 enrollment_validated_flag_2021 enrollment_interpolated_all_1990 enrollment_interpolated_fe_1990 enrollment_interpolated_ma_1990 enrollment_interpolated_flag1990 enrollment_interpolated_all_1991 enrollment_interpolated_fe_1991 enrollment_interpolated_ma_1991 enrollment_interpolated_flag1991 enrollment_interpolated_all_1992 enrollment_interpolated_fe_1992 enrollment_interpolated_ma_1992 enrollment_interpolated_flag1992 enrollment_interpolated_all_1993 enrollment_interpolated_fe_1993 enrollment_interpolated_ma_1993 enrollment_interpolated_flag1993 enrollment_interpolated_all_1994 enrollment_interpolated_fe_1994 enrollment_interpolated_ma_1994 enrollment_interpolated_flag1994 enrollment_interpolated_all_1995 enrollment_interpolated_fe_1995 enrollment_interpolated_ma_1995 enrollment_interpolated_flag1995 enrollment_interpolated_all_1996 enrollment_interpolated_fe_1996 enrollment_interpolated_ma_1996 enrollment_interpolated_flag1996 enrollment_interpolated_all_1997 enrollment_interpolated_fe_1997 enrollment_interpolated_ma_1997 enrollment_interpolated_flag1997 enrollment_interpolated_all_1998 enrollment_interpolated_fe_1998 enrollment_interpolated_ma_1998 enrollment_interpolated_flag1998 enrollment_interpolated_all_1999 enrollment_interpolated_fe_1999 enrollment_interpolated_ma_1999 enrollment_interpolated_flag1999 enrollment_interpolated_all_2000 enrollment_interpolated_fe_2000 enrollment_interpolated_ma_2000 enrollment_interpolated_flag2000 enrollment_interpolated_all_2001 enrollment_interpolated_fe_2001 enrollment_interpolated_ma_2001 enrollment_interpolated_flag2001 enrollment_interpolated_all_2002 enrollment_interpolated_fe_2002 enrollment_interpolated_ma_2002 enrollment_interpolated_flag2002 enrollment_interpolated_all_2003 enrollment_interpolated_fe_2003 enrollment_interpolated_ma_2003 enrollment_interpolated_flag2003 enrollment_interpolated_all_2004 enrollment_interpolated_fe_2004 enrollment_interpolated_ma_2004 enrollment_interpolated_flag2004 enrollment_interpolated_all_2005 enrollment_interpolated_fe_2005 enrollment_interpolated_ma_2005 enrollment_interpolated_flag2005 enrollment_interpolated_all_2006 enrollment_interpolated_fe_2006 enrollment_interpolated_ma_2006 enrollment_interpolated_flag2006 enrollment_interpolated_all_2007 enrollment_interpolated_fe_2007 enrollment_interpolated_ma_2007 enrollment_interpolated_flag2007 enrollment_interpolated_all_2008 enrollment_interpolated_fe_2008 enrollment_interpolated_ma_2008 enrollment_interpolated_flag2008 enrollment_interpolated_all_2009 enrollment_interpolated_fe_2009 enrollment_interpolated_ma_2009 enrollment_interpolated_flag2009 enrollment_interpolated_all_2010 enrollment_interpolated_fe_2010 enrollment_interpolated_ma_2010 enrollment_interpolated_flag2010 enrollment_interpolated_all_2011 enrollment_interpolated_fe_2011 enrollment_interpolated_ma_2011 enrollment_interpolated_flag2011 enrollment_interpolated_all_2012 enrollment_interpolated_fe_2012 enrollment_interpolated_ma_2012 enrollment_interpolated_flag2012 enrollment_interpolated_all_2013 enrollment_interpolated_fe_2013 enrollment_interpolated_ma_2013 enrollment_interpolated_flag2013 enrollment_interpolated_all_2014 enrollment_interpolated_fe_2014 enrollment_interpolated_ma_2014 enrollment_interpolated_flag2014 enrollment_interpolated_all_2015 enrollment_interpolated_fe_2015 enrollment_interpolated_ma_2015 enrollment_interpolated_flag2015 enrollment_interpolated_all_2016 enrollment_interpolated_fe_2016 enrollment_interpolated_ma_2016 enrollment_interpolated_flag2016 enrollment_interpolated_all_2017 enrollment_interpolated_fe_2017 enrollment_interpolated_ma_2017 enrollment_interpolated_flag2017 enrollment_interpolated_all_2018 enrollment_interpolated_fe_2018 enrollment_interpolated_ma_2018 enrollment_interpolated_flag2018 enrollment_interpolated_all_2019 enrollment_interpolated_fe_2019 enrollment_interpolated_ma_2019 enrollment_interpolated_flag2019 enrollment_interpolated_all_2020 enrollment_interpolated_fe_2020 enrollment_interpolated_ma_2020 enrollment_interpolated_flag2020 enrollment_interpolated_all_2021 enrollment_interpolated_fe_2021 enrollment_interpolated_ma_2021 enrollment_interpolated_flag2021 year_enrollment_1990 year_enrollment_1991 year_enrollment_1992 year_enrollment_1993 year_enrollment_1994 year_enrollment_1995 year_enrollment_1996 year_enrollment_1997 year_enrollment_1998 year_enrollment_1999 year_enrollment_2000 year_enrollment_2001 year_enrollment_2002 year_enrollment_2003 year_enrollment_2004 year_enrollment_2005 year_enrollment_2006 year_enrollment_2007 year_enrollment_2008 year_enrollment_2009 year_enrollment_2010 year_enrollment_2011 year_enrollment_2012 year_enrollment_2013 year_enrollment_2014 year_enrollment_2015 year_enrollment_2016 year_enrollment_2017 year_enrollment_2018 year_enrollment_2019 year_enrollment_2020 year_enrollment_2021 population_source population_fe_10_2010 population_fe_0516_2010 population_fe_primary_2010 population_fe_9plus_2010 population_ma_10_2010 population_ma_0516_2010 population_ma_primary_2010 population_ma_9plus_2010 population_all_10_2010 population_all_0516_2010 population_all_primary_2010 population_all_9plus_2010 population_fe_1014_2010 population_ma_1014_2010 population_all_1014_2010 population_fe_10_2011 population_fe_0516_2011 population_fe_primary_2011 population_fe_9plus_2011 population_ma_10_2011 population_ma_0516_2011 population_ma_primary_2011 population_ma_9plus_2011 population_all_10_2011 population_all_0516_2011 population_all_primary_2011 population_all_9plus_2011 population_fe_1014_2011 population_ma_1014_2011 population_all_1014_2011 population_fe_10_2012 population_fe_0516_2012 population_fe_primary_2012 population_fe_9plus_2012 population_ma_10_2012 population_ma_0516_2012 population_ma_primary_2012 population_ma_9plus_2012 population_all_10_2012 population_all_0516_2012 population_all_primary_2012 population_all_9plus_2012 population_fe_1014_2012 population_ma_1014_2012 population_all_1014_2012 population_fe_10_2013 population_fe_0516_2013 population_fe_primary_2013 population_fe_9plus_2013 population_ma_10_2013 population_ma_0516_2013 population_ma_primary_2013 population_ma_9plus_2013 population_all_10_2013 population_all_0516_2013 population_all_primary_2013 population_all_9plus_2013 population_fe_1014_2013 population_ma_1014_2013 population_all_1014_2013 population_fe_10_2014 population_fe_0516_2014 population_fe_primary_2014 population_fe_9plus_2014 population_ma_10_2014 population_ma_0516_2014 population_ma_primary_2014 population_ma_9plus_2014 population_all_10_2014 population_all_0516_2014 population_all_primary_2014 population_all_9plus_2014 population_fe_1014_2014 population_ma_1014_2014 population_all_1014_2014 population_fe_10_2015 population_fe_0516_2015 population_fe_primary_2015 population_fe_9plus_2015 population_ma_10_2015 population_ma_0516_2015 population_ma_primary_2015 population_ma_9plus_2015 population_all_10_2015 population_all_0516_2015 population_all_primary_2015 population_all_9plus_2015 population_fe_1014_2015 population_ma_1014_2015 population_all_1014_2015 population_fe_10_2016 population_fe_0516_2016 population_fe_primary_2016 population_fe_9plus_2016 population_ma_10_2016 population_ma_0516_2016 population_ma_primary_2016 population_ma_9plus_2016 population_all_10_2016 population_all_0516_2016 population_all_primary_2016 population_all_9plus_2016 population_fe_1014_2016 population_ma_1014_2016 population_all_1014_2016 population_fe_10_2017 population_fe_0516_2017 population_fe_primary_2017 population_fe_9plus_2017 population_ma_10_2017 population_ma_0516_2017 population_ma_primary_2017 population_ma_9plus_2017 population_all_10_2017 population_all_0516_2017 population_all_primary_2017 population_all_9plus_2017 population_fe_1014_2017 population_ma_1014_2017 population_all_1014_2017 population_fe_10_2018 population_fe_0516_2018 population_fe_primary_2018 population_fe_9plus_2018 population_ma_10_2018 population_ma_0516_2018 population_ma_primary_2018 population_ma_9plus_2018 population_all_10_2018 population_all_0516_2018 population_all_primary_2018 population_all_9plus_2018 population_fe_1014_2018 population_ma_1014_2018 population_all_1014_2018 population_fe_10_2019 population_fe_0516_2019 population_fe_primary_2019 population_fe_9plus_2019 population_ma_10_2019 population_ma_0516_2019 population_ma_primary_2019 population_ma_9plus_2019 population_all_10_2019 population_all_0516_2019 population_all_primary_2019 population_all_9plus_2019 population_fe_1014_2019 population_ma_1014_2019 population_all_1014_2019 population_fe_10_2020 population_fe_0516_2020 population_fe_primary_2020 population_fe_9plus_2020 population_ma_10_2020 population_ma_0516_2020 population_ma_primary_2020 population_ma_9plus_2020 population_all_10_2020 population_all_0516_2020 population_all_primary_2020 population_all_9plus_2020 population_fe_1014_2020 population_ma_1014_2020 population_all_1014_2020 population_fe_10_2021 population_fe_0516_2021 population_fe_primary_2021 population_fe_9plus_2021 population_ma_10_2021 population_ma_0516_2021 population_ma_primary_2021 population_ma_9plus_2021 population_all_10_2021 population_all_0516_2021 population_all_primary_2021 population_all_9plus_2021 population_fe_1014_2021 population_ma_1014_2021 population_all_1014_2021 population_fe_10_2022 population_fe_0516_2022 population_fe_primary_2022 population_fe_9plus_2022 population_ma_10_2022 population_ma_0516_2022 population_ma_primary_2022 population_ma_9plus_2022 population_all_10_2022 population_all_0516_2022 population_all_primary_2022 population_all_9plus_2022 population_fe_1014_2022 population_ma_1014_2022 population_all_1014_2022 population_fe_10_2023 population_fe_0516_2023 population_fe_primary_2023 population_fe_9plus_2023 population_ma_10_2023 population_ma_0516_2023 population_ma_primary_2023 population_ma_9plus_2023 population_all_10_2023 population_all_0516_2023 population_all_primary_2023 population_all_9plus_2023 population_fe_1014_2023 population_ma_1014_2023 population_all_1014_2023 population_fe_10_2024 population_fe_0516_2024 population_fe_primary_2024 population_fe_9plus_2024 population_ma_10_2024 population_ma_0516_2024 population_ma_primary_2024 population_ma_9plus_2024 population_all_10_2024 population_all_0516_2024 population_all_primary_2024 population_all_9plus_2024 population_fe_1014_2024 population_ma_1014_2024 population_all_1014_2024 population_fe_10_2025 population_fe_0516_2025 population_fe_primary_2025 population_fe_9plus_2025 population_ma_10_2025 population_ma_0516_2025 population_ma_primary_2025 population_ma_9plus_2025 population_all_10_2025 population_all_0516_2025 population_all_primary_2025 population_all_9plus_2025 population_fe_1014_2025 population_ma_1014_2025 population_all_1014_2025 population_fe_10_2026 population_fe_0516_2026 population_fe_primary_2026 population_fe_9plus_2026 population_ma_10_2026 population_ma_0516_2026 population_ma_primary_2026 population_ma_9plus_2026 population_all_10_2026 population_all_0516_2026 population_all_primary_2026 population_all_9plus_2026 population_fe_1014_2026 population_ma_1014_2026 population_all_1014_2026 population_fe_10_2027 population_fe_0516_2027 population_fe_primary_2027 population_fe_9plus_2027 population_ma_10_2027 population_ma_0516_2027 population_ma_primary_2027 population_ma_9plus_2027 population_all_10_2027 population_all_0516_2027 population_all_primary_2027 population_all_9plus_2027 population_fe_1014_2027 population_ma_1014_2027 population_all_1014_2027 population_fe_10_2028 population_fe_0516_2028 population_fe_primary_2028 population_fe_9plus_2028 population_ma_10_2028 population_ma_0516_2028 population_ma_primary_2028 population_ma_9plus_2028 population_all_10_2028 population_all_0516_2028 population_all_primary_2028 population_all_9plus_2028 population_fe_1014_2028 population_ma_1014_2028 population_all_1014_2028 population_fe_10_2029 population_fe_0516_2029 population_fe_primary_2029 population_fe_9plus_2029 population_ma_10_2029 population_ma_0516_2029 population_ma_primary_2029 population_ma_9plus_2029 population_all_10_2029 population_all_0516_2029 population_all_primary_2029 population_all_9plus_2029 population_fe_1014_2029 population_ma_1014_2029 population_all_1014_2029 population_fe_10_2030 population_fe_0516_2030 population_fe_primary_2030 population_fe_9plus_2030 population_ma_10_2030 population_ma_0516_2030 population_ma_primary_2030 population_ma_9plus_2030 population_all_10_2030 population_all_0516_2030 population_all_primary_2030 population_all_9plus_2030 population_fe_1014_2030 population_ma_1014_2030 population_all_1014_2030
+traitvars: source_assessment enrollment_source population_source enrollment_definition min_proficiency_threshold surveyid countryname region regionname adminregion adminregionname incomelevel incomelevelname lendingtype lendingtypename cmu
 
 . codebook, compact
 
 Variable       Obs Unique       Mean       Min       Max  Label
-<<<<<<< HEAD
----------------------------------------------------------------------------------------------------------------------------------------
-=======
------------------------------------------------------------------------------------------------------------------------
->>>>>>> develop
-countrycode   1042    217          .         .         .  WB country code (3 letters)
-year_asses~t  1042     21   2012.495      1996      2019  Year of assessment
-idgrade       1042      5  -204.6315      -999         6  Grade ID
-test          1042      9          .         .         .  Assessment
-nla_code      1042     22          .         .         .  Reference code for NLA in markdown documentation
-subject       1042      4          .         .         .  Subject
-nonprof_all    825    825   29.79082  .2252197  99.89659  % pupils below minimum proficiency (all)
-se_nonprof~l   687    687   1.103412  .1218972  4.659985  SE of pupils below minimum proficiency (all)
-nonprof_ma     690    690   25.54863  .1586986  97.97008  % pupils below minimum proficiency (ma)
-se_nonprof~a   687    687   1.347357  .1287481  5.034541  SE of pupils below minimum proficiency (ma)
-nonprof_fe     690    690   22.79707  .1284603  97.83222  % pupils below minimum proficiency (fe)
-se_nonprof~e   687    687   1.306891  .1141958  6.059458  SE of pupils below minimum proficiency (fe)
+-----------------------------------------------------------------------------------------------------------------------------------------
+countrycode   1100    217          .         .         .  WB country code (3 letters)
+year_asses~t  1100     23    -357.67     -9999      2021  Year of assessment
+idgrade       1100      5  -193.5264      -999         6  Grade ID
+test          1100     11          .         .         .  Assessment
+nla_code      1100     25          .         .         .  Reference code for NLA in markdown documentation
+subject       1100      4          .         .         .  Subject
+nonprof_all    883    881   32.62992  .2252197  99.90289  % pupils below minimum proficiency (all)
+se_nonprof~l   697    697   1.091134  .0367675  4.659985  SE of pupils below minimum proficiency (all)
+nonprof_ma     699    699   26.41638  .1586986  99.86842  % pupils below minimum proficiency (ma)
+se_nonprof~a   696    696   1.335122  .0378272  5.034541  SE of pupils below minimum proficiency (ma)
+nonprof_fe     699    699   23.69211  .1284603  99.93002  % pupils below minimum proficiency (fe)
+se_nonprof~e   696    696   1.294384  .0490543  6.059458  SE of pupils below minimum proficiency (fe)
 fgt1_all       687    687   .1358525  .0308948  .5614824  Avg gap to minimum proficiency (all, FGT1)
 fgt1_fe        687    687   .1297836  .0257019  .5376112  Avg gap to minimum proficiency (fe, FGT1)
 fgt1_ma        687    687   .1403113  .0298228  .5797679  Avg gap to minimum proficiency (ma, FGT1)
 fgt2_all       687    687   .0366347   .001687   .390271  Avg gap squared to minimum proficiency (all, FGT2)
 fgt2_fe        687    687   .0335486  .0011683  .3641997  Avg gap squared to minimum proficiency (fe, FGT2)
 fgt2_ma        687    687   .0389487  .0017091  .4102417  Avg gap squared to minimum proficiency (ma, FGT2)
-<<<<<<< HEAD
-en~dated_all  1022    584   92.44464  23.54786       100  Validated % of children enrolled in school (using closest year, both genders)
-enr~dated_fe   862    486    91.9935  16.75778       100  Validated % of children enrolled in school (using closest year, female only)
-enr~dated_ma   864    488   92.50133  30.29106       100  Validated % of children enrolled in school (using closest year, male only)
-e~dated_flag  1042      2   .2303263         0         1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
-en~lated_all  1022    622    92.4566  23.54786       100  Validated % of children enrolled in school (using interpolation, both gend...
-enr~lated_fe   792    463    92.7003  16.75778       100  Validated % of children enrolled in school (using interpolation, female only)
-enr~lated_ma   794    464   93.03792  30.29106       100  Validated % of children enrolled in school (using interpolation, male only)
-e~lated_flag  1042      2   .2447217         0         1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
-populat~e_10  1016    193   293790.7       672  1.21e+07  Female population aged 10 (WB API)
-popul~e_0516  1016    193    3507837      8061  1.43e+08  Female population aged 05-16 (WB API)
-po~e_primary   970    179    2013042      4379  7.18e+07  Female population primary age, country specific (WB API)
-popu~e_9plus   990    186    1085839      1356  3.63e+07  Female population aged 9 to end of primary, country specific (WB API)
-populat~a_10  1016    193   310473.2       687  1.34e+07  Male population aged 10 (WB API)
-popul~a_0516  1016    193    3706547      8324  1.59e+08  Male population aged 05-16 (WB API)
-po~a_primary   970    179    2125880      4534  7.94e+07  Male population primary age, country specific (WB API)
-popu~a_9plus   990    186    1143901      1400  4.03e+07  Male population aged 9 to end of primary, country specific (WB API)
-populat~l_10  1016    193   604263.9      1359  2.55e+07  Total population aged 10 (WB API)
-popul~l_0516  1016    193    7214384     16385  3.02e+08  Total population aged 05-16 (WB API)
-po~l_primary   970    179    4138922      8913  1.51e+08  Total population primary age, country specific (WB API)
-popu~l_9plus   990    186    2229740      2756  7.65e+07  Total population aged 9 to end of primary, country specific (WB API)
-=======
-en~dated_all  1022    584   92.44464  23.54786       100  Validated % of children enrolled in school (using closest ...
-enr~dated_fe   862    486    91.9935  16.75778       100  Validated % of children enrolled in school (using closest ...
-enr~dated_ma   864    488   92.50133  30.29106       100  Validated % of children enrolled in school (using closest ...
-e~dated_flag  1042      2   .2303263         0         1  Flag for enrollment by gender filled up from aggregate (>=...
-en~lated_all  1022    622    92.4566  23.54786       100  Validated % of children enrolled in school (using interpol...
-enr~lated_fe   792    463    92.7003  16.75778       100  Validated % of children enrolled in school (using interpol...
-enr~lated_ma   794    464   93.03792  30.29106       100  Validated % of children enrolled in school (using interpol...
-e~lated_flag  1042      2   .2447217         0         1  Flag for enrollment by gender filled up from aggregate (>=...
-populat~e_10  1016    193   293790.7       672  1.21e+07  Female population aged 10 (WB API)
-popul~e_0516  1016    193    3507837      8061  1.43e+08  Female population aged 05-16 (WB API)
-po~e_primary   970    179    2013042      4379  7.18e+07  Female population primary age, country specific (WB API)
-popu~e_9plus   990    186    1085839      1356  3.63e+07  Female population aged 9 to end of primary, country specif...
-populat~a_10  1016    193   310473.2       687  1.34e+07  Male population aged 10 (WB API)
-popul~a_0516  1016    193    3706547      8324  1.59e+08  Male population aged 05-16 (WB API)
-po~a_primary   970    179    2125880      4534  7.94e+07  Male population primary age, country specific (WB API)
-popu~a_9plus   990    186    1143901      1400  4.03e+07  Male population aged 9 to end of primary, country specific...
-populat~l_10  1016    193   604263.9      1359  2.55e+07  Total population aged 10 (WB API)
-popul~l_0516  1016    193    7214384     16385  3.02e+08  Total population aged 05-16 (WB API)
-po~l_primary   970    179    4138922      8913  1.51e+08  Total population primary age, country specific (WB API)
-popu~l_9plus   990    186    2229740      2756  7.65e+07  Total population aged 9 to end of primary, country specifi...
->>>>>>> develop
-popul~e_1014  1016    193    1432652      3328  6.01e+07  Female population between ages 10 to 14 (WB API)
-popul~a_1014  1016    193    1514505      3467  6.72e+07  Male population between ages 10 to 14 (WB API)
-popul~l_1014  1016    193    2947158      6795  1.27e+08  Total population between ages 10 to 14 (WB API)
-population~e  1042      1          .         .         .  The source used for population variables
-year_enrol~t  1022     26   2011.796      1991      2019  The year that the enrollment value is from
-year_popul~n  1042      1       2017      2017      2017  Year of population
-source_ass~t   825      3          .         .         .  Source of assessment data
-enrollmen~ce  1042      4          .         .         .  The source used for this enrollment value
-enrollment~n  1042      6          .         .         .  The definition used for this enrollment value
-min_profic~d   816     18          .         .         .  Minimum Proficiency Threshold (assessment-specific)
-surveyid       825    577          .         .         .  SurveyID (countrycode_year_assessment)
-countryname   1042    217          .         .         .  Country Name
-region        1042      7          .         .         .  Region Code
-regionname    1042      7          .         .         .  Region Name
-adminregion    519      6          .         .         .  Administrative Region Code
-adminregio~e   519      6          .         .         .  Administrative Region Name
-incomelevel   1042      4          .         .         .  Income Level Code
-incomeleve~e  1042      4          .         .         .  Income Level Name
-lendingtype   1042      4          .         .         .  Lending Type Code
-lendingty~me  1042      4          .         .         .  Lending Type Name
-cmu            774     48          .         .         .  WB Country Management Unit
-<<<<<<< HEAD
----------------------------------------------------------------------------------------------------------------------------------------
-=======
------------------------------------------------------------------------------------------------------------------------
->>>>>>> develop
+enrollment..  1080    197   85.56315  19.18834       100  1990 enrollment_validated_all_
+enrollment..   940    169   84.29973  15.47124       100  1990 enrollment_validated_fe_
+enrollment..   940    170   86.45046   22.7423       100  1990 enrollment_validated_ma_
+enrol~g_1990  1100      2   .1281818         0         1  1990 enrollment_validated_flag_
+enrollment..  1080    197   85.52629  19.18834       100  1991 enrollment_validated_all_
+enrollment..   942    170   84.20938  15.57176       100  1991 enrollment_validated_fe_
+enrollment..   942    170   86.35304   22.7423       100  1991 enrollment_validated_ma_
+enrol~g_1991  1100      2   .1190909         0         1  1991 enrollment_validated_flag_
+enrollment..  1080    197   85.44443  19.18834       100  1992 enrollment_validated_all_
+enrollment..   942    172   83.74351  15.57176       100  1992 enrollment_validated_fe_
+enrollment..   942    172   86.08607   22.7423       100  1992 enrollment_validated_ma_
+enrol~g_1992  1100      2   .0981818         0         1  1992 enrollment_validated_flag_
+enrollment..  1080    197   85.58796  19.18834       100  1993 enrollment_validated_all_
+enrollment..   942    172   83.99659  15.57176       100  1993 enrollment_validated_fe_
+enrollment..   942    172   86.21115   22.7423       100  1993 enrollment_validated_ma_
+enrol~g_1993  1100      2   .1072727         0         1  1993 enrollment_validated_flag_
+enrollment..  1080    197   86.02849  19.18834       100  1994 enrollment_validated_all_
+enrollment..   936    169   84.87381  15.57176       100  1994 enrollment_validated_fe_
+enrollment..   936    169    87.1699   22.7423       100  1994 enrollment_validated_ma_
+enrol~g_1994  1100      2   .0981818         0         1  1994 enrollment_validated_flag_
+enrollment..  1080    196   86.21029  21.94671       100  1995 enrollment_validated_all_
+enrollment..   928    165   85.04853  16.75778       100  1995 enrollment_validated_fe_
+enrollment..   928    166   87.27215  26.53065       100  1995 enrollment_validated_ma_
+enrol~g_1995  1100      2   .1109091         0         1  1995 enrollment_validated_flag_
+enrollment..  1080    196   86.84961  23.54786       100  1996 enrollment_validated_all_
+enrollment..   951    166   85.54307  16.75778       100  1996 enrollment_validated_fe_
+enrollment..   951    167   88.02004    29.307       100  1996 enrollment_validated_ma_
+enrol~g_1996  1100      2   .1345455         0         1  1996 enrollment_validated_flag_
+enrollment..  1080    196     86.974  23.54786       100  1997 enrollment_validated_all_
+enrollment..   961    171   85.41633  16.75778       100  1997 enrollment_validated_fe_
+enrollment..   961    172   88.00643    29.307       100  1997 enrollment_validated_ma_
+enrol~g_1997  1100      2   .1590909         0         1  1997 enrollment_validated_flag_
+enrollment..  1080    197   88.08702  23.54786       100  1998 enrollment_validated_all_
+enrollment..   961    171   86.52237  16.75778       100  1998 enrollment_validated_fe_
+enrollment..   961    173   88.64603  29.43147       100  1998 enrollment_validated_ma_
+enrol~g_1998  1100      2        .21         0         1  1998 enrollment_validated_flag_
+enrollment..  1080    196   88.42645  23.54786       100  1999 enrollment_validated_all_
+enrollment..   960    170   86.99409  16.75778       100  1999 enrollment_validated_fe_
+enrollment..   960    170   88.89725  30.29106       100  1999 enrollment_validated_ma_
+enrol~g_1999  1100      2   .2436364         0         1  1999 enrollment_validated_flag_
+enrollment..  1080    196   88.91961  23.54786       100  2000 enrollment_validated_all_
+enrollment..   937    165   87.49582  16.75778       100  2000 enrollment_validated_fe_
+enrollment..   937    167   89.06215  30.29106       100  2000 enrollment_validated_ma_
+enrol~g_2000  1100      2   .2081818         0         1  2000 enrollment_validated_flag_
+enrollment..  1080    196   89.29791  23.54786       100  2001 enrollment_validated_all_
+enrollment..   908    163   88.51956  16.75778       100  2001 enrollment_validated_fe_
+enrollment..   908    165    89.6454  30.29106       100  2001 enrollment_validated_ma_
+enrol~g_2001  1100      2   .2336364         0         1  2001 enrollment_validated_flag_
+enrollment..  1080    197   89.99085  23.54786       100  2002 enrollment_validated_all_
+enrollment..   884    161   89.06565  16.75778       100  2002 enrollment_validated_fe_
+enrollment..   884    161   89.94578  30.29106       100  2002 enrollment_validated_ma_
+enrol~g_2002  1100      2   .2090909         0         1  2002 enrollment_validated_flag_
+enrollment..  1080    197   90.25775  23.54786       100  2003 enrollment_validated_all_
+enrollment..   925    162   89.22003  16.75778       100  2003 enrollment_validated_fe_
+enrollment..   925    162   90.50121  30.29106       100  2003 enrollment_validated_ma_
+enrol~g_2003  1100      2   .2054545         0         1  2003 enrollment_validated_flag_
+enrollment..  1080    197    90.6525  23.54786       100  2004 enrollment_validated_all_
+enrollment..   917    163   89.72664  16.75778       100  2004 enrollment_validated_fe_
+enrollment..   917    164    90.7559  30.29106       100  2004 enrollment_validated_ma_
+enrol~g_2004  1100      2   .2027273         0         1  2004 enrollment_validated_flag_
+enrollment..  1080    197   91.08077  23.54786       100  2005 enrollment_validated_all_
+enrollment..   939    166   90.41504  16.75778       100  2005 enrollment_validated_fe_
+enrollment..   939    166   91.37433  30.29106       100  2005 enrollment_validated_ma_
+enrol~g_2005  1100      2   .2672727         0         1  2005 enrollment_validated_flag_
+enrollment..  1080    197   91.31626  23.54786       100  2006 enrollment_validated_all_
+enrollment..   948    168   90.86329  16.75778       100  2006 enrollment_validated_fe_
+enrollment..   948    168   91.62072  30.29106       100  2006 enrollment_validated_ma_
+enrol~g_2006  1100      2   .2127273         0         1  2006 enrollment_validated_flag_
+enrollment..  1080    198    91.8148  23.54786       100  2007 enrollment_validated_all_
+enrollment..   955    168   91.39429  16.75778       100  2007 enrollment_validated_fe_
+enrollment..   955    168   92.19939  30.29106       100  2007 enrollment_validated_ma_
+enrol~g_2007  1100      2   .2354545         0         1  2007 enrollment_validated_flag_
+enrollment..  1080    198    92.1186  23.54786       100  2008 enrollment_validated_all_
+enrollment..   962    167   91.83396  16.75778       100  2008 enrollment_validated_fe_
+enrollment..   962    167   92.50019  30.29106       100  2008 enrollment_validated_ma_
+enrol~g_2008  1100      2   .2254545         0         1  2008 enrollment_validated_flag_
+enrollment..  1080    198   92.31108  23.54786       100  2009 enrollment_validated_all_
+enrollment..   949    170   92.03206  16.75778       100  2009 enrollment_validated_fe_
+enrollment..   949    170   92.56608  30.29106       100  2009 enrollment_validated_ma_
+enrol~g_2009  1100      2   .2172727         0         1  2009 enrollment_validated_flag_
+enrollment..  1080    198   92.55287  23.54786       100  2010 enrollment_validated_all_
+enrollment..   956    168   92.27244  16.75778       100  2010 enrollment_validated_fe_
+enrollment..   956    168   92.81886  30.29106       100  2010 enrollment_validated_ma_
+enrol~g_2010  1100      2        .22         0         1  2010 enrollment_validated_flag_
+enrollment..  1080    198    92.8799  23.54786       100  2011 enrollment_validated_all_
+enrollment..   965    168   92.61705  16.75778       100  2011 enrollment_validated_fe_
+enrollment..   965    168   93.12723  30.29106       100  2011 enrollment_validated_ma_
+enrol~g_2011  1100      2   .2281818         0         1  2011 enrollment_validated_flag_
+enrollment..  1080    197   92.90698  23.54786       100  2012 enrollment_validated_all_
+enrollment..   936    167   92.58819  16.75778       100  2012 enrollment_validated_fe_
+enrollment..   936    167   92.95136  30.29106       100  2012 enrollment_validated_ma_
+enrol~g_2012  1100      2   .2436364         0         1  2012 enrollment_validated_flag_
+enrollment..  1080    197   93.00681  23.54786       100  2013 enrollment_validated_all_
+enrollment..   879    159   92.60444  16.75778       100  2013 enrollment_validated_fe_
+enrollment..   879    159   92.91673  30.29106       100  2013 enrollment_validated_ma_
+enrol~g_2013  1100      2   .2172727         0         1  2013 enrollment_validated_flag_
+enrollment..  1080    198   92.83991  23.54786       100  2014 enrollment_validated_all_
+enrollment..   895    158   92.34154  16.75778       100  2014 enrollment_validated_fe_
+enrollment..   895    158   92.64553  30.29106       100  2014 enrollment_validated_ma_
+enrol~g_2014  1100      2   .1881818         0         1  2014 enrollment_validated_flag_
+enrollment..  1080    198   92.93987  23.54786       100  2015 enrollment_validated_all_
+enrollment..   876    154    92.4891  16.75778       100  2015 enrollment_validated_fe_
+enrollment..   876    154   92.73843  30.29106       100  2015 enrollment_validated_ma_
+enrol~g_2015  1100      2   .2318182         0         1  2015 enrollment_validated_flag_
+enrollment..  1080    197   93.04179  23.54786       100  2016 enrollment_validated_all_
+enrollment..   888    157   92.62789  16.75778       100  2016 enrollment_validated_fe_
+enrollment..   888    157   92.93039  30.29106       100  2016 enrollment_validated_ma_
+enrol~g_2016  1100      2        .21         0         1  2016 enrollment_validated_flag_
+enrollment..  1080    197   92.94882  23.54786       100  2017 enrollment_validated_all_
+enrollment..   878    157    92.7269  16.75778       100  2017 enrollment_validated_fe_
+enrollment..   882    158   92.88062  30.29106       100  2017 enrollment_validated_ma_
+enrol~g_2017  1100      2   .2554545         0         1  2017 enrollment_validated_flag_
+enrollment..  1080    197   92.86111  23.54786       100  2018 enrollment_validated_all_
+enrollment..   872    155   92.66119  16.75778       100  2018 enrollment_validated_fe_
+enrollment..   876    156   92.74278  30.29106       100  2018 enrollment_validated_ma_
+enrol~g_2018  1100      2   .2609091         0         1  2018 enrollment_validated_flag_
+enrollment..  1080    197   92.86853  23.54786       100  2019 enrollment_validated_all_
+enrollment..   872    155   92.66933  16.75778       100  2019 enrollment_validated_fe_
+enrollment..   876    156   92.75362  30.29106       100  2019 enrollment_validated_ma_
+enrol~g_2019  1100      2   .2609091         0         1  2019 enrollment_validated_flag_
+enrollment..  1080    197   92.86853  23.54786       100  2020 enrollment_validated_all_
+enrollment..   872    155   92.66933  16.75778       100  2020 enrollment_validated_fe_
+enrollment..   876    156   92.75362  30.29106       100  2020 enrollment_validated_ma_
+enrol~g_2020  1100      2   .2609091         0         1  2020 enrollment_validated_flag_
+enrollment..  1080    197   92.86853  23.54786       100  2021 enrollment_validated_all_
+enrollment..   872    155   92.66933  16.75778       100  2021 enrollment_validated_fe_
+enrollment..   876    156   92.75362  30.29106       100  2021 enrollment_validated_ma_
+enrol~g_2021  1100      2   .2609091         0         1  2021 enrollment_validated_flag_
+enrollment..  1080    197   85.56315  19.18834       100  1990 enrollment_interpolated_all_
+enrollment..   940    169   84.29973  15.47124       100  1990 enrollment_interpolated_fe_
+enrollment..   940    170   86.45046   22.7423       100  1990 enrollment_interpolated_ma_
+enroll~g1990  1100      2   .1281818         0         1  1990 enrollment_interpolated_flag
+enrollment..  1080    197   85.54875  19.18834       100  1991 enrollment_interpolated_all_
+enrollment..   887    158   84.98675  15.57176       100  1991 enrollment_interpolated_fe_
+enrollment..   887    158   86.81822   22.7423       100  1991 enrollment_interpolated_ma_
+enroll~g1991  1100      2   .1190909         0         1  1991 enrollment_interpolated_flag
+enrollment..  1080    197   85.46521  19.18834       100  1992 enrollment_interpolated_all_
+enrollment..   878    158   84.13499  15.57176       100  1992 enrollment_interpolated_fe_
+enrollment..   878    158   86.36814   22.7423       100  1992 enrollment_interpolated_ma_
+enroll~g1992  1100      2   .0981818         0         1  1992 enrollment_interpolated_flag
+enrollment..  1080    197   85.79307  19.18834       100  1993 enrollment_interpolated_all_
+enrollment..   811    149   85.33574  15.57176       100  1993 enrollment_interpolated_fe_
+enrollment..   811    149   87.32199   22.7423       100  1993 enrollment_interpolated_ma_
+enroll~g1993  1100      2   .1163636         0         1  1993 enrollment_interpolated_flag
+enrollment..  1080    197   86.10362  19.18834       100  1994 enrollment_interpolated_all_
+enrollment..   825    146   85.70725  15.57176       100  1994 enrollment_interpolated_fe_
+enrollment..   825    146    87.8111   22.7423       100  1994 enrollment_interpolated_ma_
+enroll~g1994  1100      2   .0981818         0         1  1994 enrollment_interpolated_flag
+enrollment..  1080    197   86.44874  21.94671       100  1995 enrollment_interpolated_all_
+enrollment..   793    137   86.26072  16.75778       100  1995 enrollment_interpolated_fe_
+enrollment..   793    138   88.24659  26.53065       100  1995 enrollment_interpolated_ma_
+enroll~g1995  1100      2   .1109091         0         1  1995 enrollment_interpolated_flag
+enrollment..  1080    197   86.89443  23.50787       100  1996 enrollment_interpolated_all_
+enrollment..   822    140   87.42609  16.75778       100  1996 enrollment_interpolated_fe_
+enrollment..   822    141    89.4218  30.29106       100  1996 enrollment_interpolated_ma_
+enroll~g1996  1100      2   .1345455         0         1  1996 enrollment_interpolated_flag
+enrollment..  1080    196   87.08987  23.54786       100  1997 enrollment_interpolated_all_
+enrollment..   762    128   87.42195  16.75778       100  1997 enrollment_interpolated_fe_
+enrollment..   762    128   89.97208    29.307       100  1997 enrollment_interpolated_ma_
+enroll~g1997  1100      2   .1809091         0         1  1997 enrollment_interpolated_flag
+enrollment..  1080    197   88.11647  23.54786       100  1998 enrollment_interpolated_all_
+enrollment..   772    131   87.56144  16.75778       100  1998 enrollment_interpolated_fe_
+enrollment..   772    132   89.44334  29.43147       100  1998 enrollment_interpolated_ma_
+enroll~g1998  1100      2   .2336364         0         1  1998 enrollment_interpolated_flag
+enrollment..  1080    197   88.50994  23.54786       100  1999 enrollment_interpolated_all_
+enrollment..   835    150    87.3373  16.75778       100  1999 enrollment_interpolated_fe_
+enrollment..   835    149   89.39544  30.29106       100  1999 enrollment_interpolated_ma_
+enroll~g1999  1100      2   .2418182         0         1  1999 enrollment_interpolated_flag
+enrollment..  1080    197    88.9932  23.54786       100  2000 enrollment_interpolated_all_
+enrollment..   814    145   88.48567  16.75778       100  2000 enrollment_interpolated_fe_
+enrollment..   814    146   89.66491  30.29106       100  2000 enrollment_interpolated_ma_
+enroll~g2000  1100      2   .2127273         0         1  2000 enrollment_interpolated_flag
+enrollment..  1080    196   89.51855  23.54786       100  2001 enrollment_interpolated_all_
+enrollment..   761    138   89.92848  16.75778       100  2001 enrollment_interpolated_fe_
+enrollment..   761    139   90.79271  30.29106       100  2001 enrollment_interpolated_ma_
+enroll~g2001  1100      2   .2645455         0         1  2001 enrollment_interpolated_flag
+enrollment..  1080    196   90.05906  23.54786       100  2002 enrollment_interpolated_all_
+enrollment..   786    141   89.90957  16.75778       100  2002 enrollment_interpolated_fe_
+enrollment..   786    140   90.74833  30.29106       100  2002 enrollment_interpolated_ma_
+enroll~g2002  1100      2   .2390909         0         1  2002 enrollment_interpolated_flag
+enrollment..  1080    197   90.36466  23.54786       100  2003 enrollment_interpolated_all_
+enrollment..   818    143   89.91369  16.75778       100  2003 enrollment_interpolated_fe_
+enrollment..   818    142   91.18747  30.29106       100  2003 enrollment_interpolated_ma_
+enroll~g2003  1100      2   .2363636         0         1  2003 enrollment_interpolated_flag
+enrollment..  1080    197   90.68539  23.54786       100  2004 enrollment_interpolated_all_
+enrollment..   807    142   90.47989  16.75778       100  2004 enrollment_interpolated_fe_
+enrollment..   807    142    91.5191  30.29106       100  2004 enrollment_interpolated_ma_
+enroll~g2004  1100      2   .2318182         0         1  2004 enrollment_interpolated_flag
+enrollment..  1080    197    90.9542  23.54786       100  2005 enrollment_interpolated_all_
+enrollment..   850    146   90.85956  16.75778       100  2005 enrollment_interpolated_fe_
+enrollment..   850    146   91.71506  30.29106       100  2005 enrollment_interpolated_ma_
+enroll~g2005  1100      2   .2763636         0         1  2005 enrollment_interpolated_flag
+enrollment..  1080    197   91.26486  23.54786       100  2006 enrollment_interpolated_all_
+enrollment..   838    143    91.1338  16.75778       100  2006 enrollment_interpolated_fe_
+enrollment..   838    143   91.94681  30.29106       100  2006 enrollment_interpolated_ma_
+enroll~g2006  1100      2   .2472727         0         1  2006 enrollment_interpolated_flag
+enrollment..  1080    198   91.85371  23.54786       100  2007 enrollment_interpolated_all_
+enrollment..   847    144   91.94289  16.75778       100  2007 enrollment_interpolated_fe_
+enrollment..   847    144   92.63713  30.29106       100  2007 enrollment_interpolated_ma_
+enroll~g2007  1100      2   .2536364         0         1  2007 enrollment_interpolated_flag
+enrollment..  1080    198   92.18765  23.54786       100  2008 enrollment_interpolated_all_
+enrollment..   808    143   92.20101  16.75778       100  2008 enrollment_interpolated_fe_
+enrollment..   808    143   92.80636  30.29106       100  2008 enrollment_interpolated_ma_
+enroll~g2008  1100      2   .2181818         0         1  2008 enrollment_interpolated_flag
+enrollment..  1080    198   92.27735  23.54786       100  2009 enrollment_interpolated_all_
+enrollment..   760    135   92.81112  16.75778       100  2009 enrollment_interpolated_fe_
+enrollment..   760    135   93.07724  30.29106       100  2009 enrollment_interpolated_ma_
+enroll~g2009  1100      2   .2263636         0         1  2009 enrollment_interpolated_flag
+enrollment..  1080    198     92.605  23.54786       100  2010 enrollment_interpolated_all_
+enrollment..   774    135   92.63797  16.75778       100  2010 enrollment_interpolated_fe_
+enrollment..   774    135    93.2859  30.29106       100  2010 enrollment_interpolated_ma_
+enroll~g2010  1100      2   .2372727         0         1  2010 enrollment_interpolated_flag
+enrollment..  1080    198   92.82894  23.54786       100  2011 enrollment_interpolated_all_
+enrollment..   852    146   92.95082  16.75778       100  2011 enrollment_interpolated_fe_
+enrollment..   852    146   93.32705  30.29106       100  2011 enrollment_interpolated_ma_
+enroll~g2011  1100      2   .2518182         0         1  2011 enrollment_interpolated_flag
+enrollment..  1080    197   92.94667  23.54786       100  2012 enrollment_interpolated_all_
+enrollment..   866    150   93.04965  16.75778       100  2012 enrollment_interpolated_fe_
+enrollment..   866    150    93.3513  30.29106       100  2012 enrollment_interpolated_ma_
+enroll~g2012  1100      2   .2572727         0         1  2012 enrollment_interpolated_flag
+enrollment..  1080    197   92.92257  23.54786       100  2013 enrollment_interpolated_all_
+enrollment..   808    141   92.80768  16.75778       100  2013 enrollment_interpolated_fe_
+enrollment..   808    141   93.14884  30.29106       100  2013 enrollment_interpolated_ma_
+enroll~g2013  1100      2   .2327273         0         1  2013 enrollment_interpolated_flag
+enrollment..  1080    198    92.8133  23.54786       100  2014 enrollment_interpolated_all_
+enrollment..   836    142   92.83922  16.75778       100  2014 enrollment_interpolated_fe_
+enrollment..   836    142   92.91201  30.29106       100  2014 enrollment_interpolated_ma_
+enroll~g2014  1100      2   .1881818         0         1  2014 enrollment_interpolated_flag
+enrollment..  1080    198   92.94086  23.54786       100  2015 enrollment_interpolated_all_
+enrollment..   804    142   92.98323  16.75778       100  2015 enrollment_interpolated_fe_
+enrollment..   804    142     93.098  30.29106       100  2015 enrollment_interpolated_ma_
+enroll~g2015  1100      2   .2318182         0         1  2015 enrollment_interpolated_flag
+enrollment..  1080    197   92.99177  23.54786       100  2016 enrollment_interpolated_all_
+enrollment..   822    145    92.9127  16.75778       100  2016 enrollment_interpolated_fe_
+enrollment..   822    145   93.22945  30.29106       100  2016 enrollment_interpolated_ma_
+enroll~g2016  1100      2        .21         0         1  2016 enrollment_interpolated_flag
+enrollment..  1080    197   92.94439  23.54786       100  2017 enrollment_interpolated_all_
+enrollment..   875    155   92.80223  16.75778       100  2017 enrollment_interpolated_fe_
+enrollment..   879    156   92.96011  30.29106       100  2017 enrollment_interpolated_ma_
+enroll~g2017  1100      2   .2554545         0         1  2017 enrollment_interpolated_flag
+enrollment..  1080    197   92.86095  23.54786       100  2018 enrollment_interpolated_all_
+enrollment..   872    155   92.66119  16.75778       100  2018 enrollment_interpolated_fe_
+enrollment..   876    156   92.74278  30.29106       100  2018 enrollment_interpolated_ma_
+enroll~g2018  1100      2   .2609091         0         1  2018 enrollment_interpolated_flag
+enrollment..  1080    197   92.86853  23.54786       100  2019 enrollment_interpolated_all_
+enrollment..   872    155   92.66933  16.75778       100  2019 enrollment_interpolated_fe_
+enrollment..   876    156   92.75362  30.29106       100  2019 enrollment_interpolated_ma_
+enroll~g2019  1100      2   .2609091         0         1  2019 enrollment_interpolated_flag
+enrollment..  1080    197   92.86853  23.54786       100  2020 enrollment_interpolated_all_
+enrollment..   872    155   92.66933  16.75778       100  2020 enrollment_interpolated_fe_
+enrollment..   876    156   92.75362  30.29106       100  2020 enrollment_interpolated_ma_
+enroll~g2020  1100      2   .2609091         0         1  2020 enrollment_interpolated_flag
+enrollment..  1080    197   92.86853  23.54786       100  2021 enrollment_interpolated_all_
+enrollment..   872    155   92.66933  16.75778       100  2021 enrollment_interpolated_fe_
+enrollment..   876    156   92.75362  30.29106       100  2021 enrollment_interpolated_ma_
+enroll~g2021  1100      2   .2609091         0         1  2021 enrollment_interpolated_flag
+year_en~1990  1080     26   1995.448      1990      2016  1990 year_enrollment_
+year_en~1991  1080     26   1995.753      1990      2016  1991 year_enrollment_
+year_en~1992  1080     26   1996.185      1990      2016  1992 year_enrollment_
+year_en~1993  1080     26   1996.608      1990      2016  1993 year_enrollment_
+year_en~1994  1080     26    1997.04      1990      2016  1994 year_enrollment_
+year_en~1995  1080     26   1997.682      1990      2016  1995 year_enrollment_
+year_en~1996  1080     25    1998.29      1990      2016  1996 year_enrollment_
+year_en~1997  1080     25    1998.91      1990      2016  1997 year_enrollment_
+year_en~1998  1080     23   1999.479      1991      2016  1998 year_enrollment_
+year_en~1999  1080     23   2000.075      1991      2016  1999 year_enrollment_
+year_en~2000  1080     22   2000.763      1993      2016  2000 year_enrollment_
+year_en~2001  1080     23   2001.631      1993      2016  2001 year_enrollment_
+year_en~2002  1080     23   2002.544      1993      2016  2002 year_enrollment_
+year_en~2003  1080     23   2003.339      1993      2016  2003 year_enrollment_
+year_en~2004  1080     23   2004.226      1993      2016  2004 year_enrollment_
+year_en~2005  1080     20   2005.575      1993      2016  2005 year_enrollment_
+year_en~2006  1080     20   2006.506      1993      2016  2006 year_enrollment_
+year_en~2007  1080     18   2007.328      1993      2016  2007 year_enrollment_
+year_en~2008  1080     19   2008.415      1993      2017  2008 year_enrollment_
+year_en~2009  1080     19   2009.204      1993      2017  2009 year_enrollment_
+year_en~2010  1080     19    2010.19      1993      2017  2010 year_enrollment_
+year_en~2011  1080     18   2011.148      1993      2018  2011 year_enrollment_
+year_en~2012  1080     18   2011.961      1993      2018  2012 year_enrollment_
+year_en~2013  1080     18   2012.723      1993      2018  2013 year_enrollment_
+year_en~2014  1080     17    2013.58      1993      2018  2014 year_enrollment_
+year_en~2015  1080     17   2014.353      1993      2018  2015 year_enrollment_
+year_en~2016  1080     17   2015.259      1993      2018  2016 year_enrollment_
+year_en~2017  1080     17   2016.013      1993      2018  2017 year_enrollment_
+year_en~2018  1080     17   2016.306      1993      2018  2018 year_enrollment_
+year_en~2019  1080     18   2016.322      1993      2019  2019 year_enrollment_
+year_en~2020  1080     18   2016.322      1993      2019  2020 year_enrollment_
+year_en~2021  1080     18   2016.322      1993      2019  2021 year_enrollment_
+population~e  1100      1          .         .         .  The source used for population variables
+po~e_10_2010  1075    194   277065.5       638  1.19e+07  2010 population_fe_10_
+~e_0516_2010  1075    194    3350344      7908  1.42e+08  2010 population_fe_0516_
+population..  1027    180    1886602      4494  7.17e+07  2010 population_fe_primary_
+population..  1065    190    1014112      1441  3.56e+07  2010 population_fe_9plus_
+po~a_10_2010  1075    194   292374.1       666  1.33e+07  2010 population_ma_10_
+~a_0516_2010  1075    194    3533239      8347  1.59e+08  2010 population_ma_0516_
+population..  1027    180    1991623      4689  8.05e+07  2010 population_ma_primary_
+population..  1065    190    1067144      1489  4.00e+07  2010 population_ma_9plus_
+po~l_10_2010  1075    194   569439.5      1304  2.52e+07  2010 population_all_10_
+~l_0516_2010  1075    194    6883583     16255  3.01e+08  2010 population_all_0516_
+population..  1027    180    3878225      9183  1.52e+08  2010 population_all_primary_
+population..  1065    190    2081256      2930  7.56e+07  2010 population_all_9plus_
+~e_1014_2010  1075    194    1380555      3214  5.86e+07  2010 population_fe_1014_
+~a_1014_2010  1075    194    1454642      3394  6.58e+07  2010 population_ma_1014_
+~l_1014_2010  1075    194    2835197      6608  1.24e+08  2010 population_all_1014_
+po~e_10_2011  1075    194   278099.9       633  1.19e+07  2011 population_fe_10_
+~e_0516_2011  1075    194    3360206      7821  1.42e+08  2011 population_fe_0516_
+population..  1027    180    1897095      4482  7.19e+07  2011 population_fe_primary_
+population..  1065    190    1016312      1418  3.57e+07  2011 population_fe_9plus_
+po~a_10_2011  1075    194   293610.5       662  1.34e+07  2011 population_ma_10_
+~a_0516_2011  1075    194    3544562      8264  1.60e+08  2011 population_ma_0516_
+population..  1027    180    2003252      4693  8.07e+07  2011 population_ma_primary_
+population..  1065    190    1069785      1471  4.02e+07  2011 population_ma_9plus_
+po~l_10_2011  1075    194   571710.4      1295  2.53e+07  2011 population_all_10_
+~l_0516_2011  1075    194    6904768     16085  3.02e+08  2011 population_all_0516_
+population..  1027    180    3900348      9175  1.53e+08  2011 population_all_primary_
+population..  1065    190    2086097      2889  7.59e+07  2011 population_all_9plus_
+~e_1014_2011  1075    194    1380652      3047  5.89e+07  2011 population_fe_1014_
+~a_1014_2011  1075    194    1455346      3216  6.62e+07  2011 population_ma_1014_
+~l_1014_2011  1075    194    2835998      6263  1.25e+08  2011 population_all_1014_
+po~e_10_2012  1074    192   279550.6       631  1.19e+07  2012 population_fe_10_
+~e_0516_2012  1074    193    3377242      7819  1.43e+08  2012 population_fe_0516_
+population..  1026    179    1911515      4521  7.21e+07  2012 population_fe_primary_
+population..  1064    189    1019378      1396  3.58e+07  2012 population_fe_9plus_
+po~a_10_2012  1074    193     295292       660  1.34e+07  2012 population_ma_10_
+~a_0516_2012  1074    193    3563405      8246  1.60e+08  2012 population_ma_0516_
+population..  1026    179    2018695      4738  8.08e+07  2012 population_ma_primary_
+population..  1064    189    1073389      1453  4.03e+07  2012 population_ma_9plus_
+po~l_10_2012  1074    193   574842.6      1291  2.54e+07  2012 population_all_10_
+~l_0516_2012  1074    193    6940647     16065  3.03e+08  2012 population_all_0516_
+population..  1026    179    3930210      9259  1.53e+08  2012 population_all_primary_
+population..  1064    189    2092767      2849  7.61e+07  2012 population_all_9plus_
+~e_1014_2012  1074    193    1384690      3021  5.91e+07  2012 population_fe_1014_
+~a_1014_2012  1074    193    1460402      3177  6.65e+07  2012 population_ma_1014_
+~l_1014_2012  1074    193    2845092      6198  1.26e+08  2012 population_all_1014_
+po~e_10_2013  1074    193   281169.1       636  1.20e+07  2013 population_fe_10_
+~e_0516_2013  1074    193    3395746      7884  1.43e+08  2013 population_fe_0516_
+population..  1026    179    1927289      4602  7.23e+07  2013 population_fe_primary_
+population..  1064    189    1000415      1381  3.60e+07  2013 population_fe_9plus_
+po~a_10_2013  1074    193   297130.2       663  1.35e+07  2013 population_ma_10_
+~a_0516_2013  1074    193    3583701      8282  1.60e+08  2013 population_ma_0516_
+population..  1026    179    2035330      4815  8.08e+07  2013 population_ma_primary_
+population..  1064    189    1054000      1441  4.04e+07  2013 population_ma_9plus_
+po~l_10_2013  1074    193   578299.3      1299  2.54e+07  2013 population_all_10_
+~l_0516_2013  1074    193    6979446     16166  3.03e+08  2013 population_all_0516_
+population..  1026    179    3962619      9417  1.53e+08  2013 population_all_primary_
+population..  1064    189    2054414      2822  7.63e+07  2013 population_all_9plus_
+~e_1014_2013  1074    193    1389598      3046  5.94e+07  2013 population_fe_1014_
+~a_1014_2013  1074    193    1466522      3187  6.68e+07  2013 population_ma_1014_
+~l_1014_2013  1074    193    2856120      6233  1.26e+08  2013 population_all_1014_
+po~e_10_2014  1074    193   283485.8       649  1.20e+07  2014 population_fe_10_
+~e_0516_2014  1074    193    3417780      7993  1.43e+08  2014 population_fe_0516_
+population..  1026    179    1945154      4666  7.24e+07  2014 population_fe_primary_
+population..  1058    187    1014764      1377  3.61e+07  2014 population_fe_9plus_
+po~a_10_2014  1074    193   299613.9       676  1.35e+07  2014 population_ma_10_
+~a_0516_2014  1074    192    3607713      8368  1.60e+08  2014 population_ma_0516_
+population..  1026    179    2053871      4850  8.07e+07  2014 population_ma_primary_
+population..  1058    188    1069194      1432  4.04e+07  2014 population_ma_9plus_
+po~l_10_2014  1074    193   583099.6      1325  2.55e+07  2014 population_all_10_
+~l_0516_2014  1074    193    7025493     16361  3.04e+08  2014 population_all_0516_
+population..  1026    179    3999025      9516  1.53e+08  2014 population_all_primary_
+population..  1058    188    2083957      2809  7.65e+07  2014 population_all_9plus_
+~e_1014_2014  1074    193    1396427      3081  5.96e+07  2014 population_fe_1014_
+~a_1014_2014  1074    193    1474643      3211  6.70e+07  2014 population_ma_1014_
+~l_1014_2014  1074    193    2871070      6292  1.27e+08  2014 population_all_1014_
+po~e_10_2015  1074    193   286484.2       671  1.21e+07  2015 population_fe_10_
+~e_0516_2015  1074    193    3441862      8120  1.43e+08  2015 population_fe_0516_
+population..  1026    179    1964086      4599  7.23e+07  2015 population_fe_primary_
+population..  1043    187    1034976      1374  3.62e+07  2015 population_fe_9plus_
+po~a_10_2015  1074    193   302710.6       696  1.35e+07  2015 population_ma_10_
+~a_0516_2015  1074    193    3633897      8487  1.60e+08  2015 population_ma_0516_
+population..  1026    179    2073504      4773  8.04e+07  2015 population_ma_primary_
+population..  1043    187    1090363      1425  4.04e+07  2015 population_ma_9plus_
+po~l_10_2015  1074    193   589194.8      1370  2.55e+07  2015 population_all_10_
+~l_0516_2015  1074    193    7075759     16607  3.04e+08  2015 population_all_0516_
+population..  1026    179    4037590      9372  1.53e+08  2015 population_all_primary_
+population..  1043    187    2125338      2799  7.65e+07  2015 population_all_9plus_
+~e_1014_2015  1074    193    1405226      3162  5.98e+07  2015 population_fe_1014_
+~a_1014_2015  1074    193    1484613      3286  6.71e+07  2015 population_ma_1014_
+~l_1014_2015  1074    193    2889839      6448  1.27e+08  2015 population_all_1014_
+po~e_10_2016  1074    193   289717.1       676  1.21e+07  2016 population_fe_10_
+~e_0516_2016  1074    193    3470770      8204  1.43e+08  2016 population_fe_0516_
+population..  1026    179    1985409      4510  7.22e+07  2016 population_fe_primary_
+population..  1043    187    1047530      1368  3.62e+07  2016 population_fe_9plus_
+po~a_10_2016  1074    193   305969.7       691  1.35e+07  2016 population_ma_10_
+~a_0516_2016  1074    193    3663942      8471  1.60e+08  2016 population_ma_0516_
+population..  1026    179    2095265      4672  8.01e+07  2016 population_ma_primary_
+population..  1043    187    1103165      1414  4.04e+07  2016 population_ma_9plus_
+po~l_10_2016  1074    193   595686.8      1367  2.55e+07  2016 population_all_10_
+~l_0516_2016  1074    193    7134712     16675  3.03e+08  2016 population_all_0516_
+population..  1026    179    4080673      9182  1.52e+08  2016 population_all_primary_
+population..  1043    187    2150695      2782  7.66e+07  2016 population_all_9plus_
+~e_1014_2016  1074    193    1417435      3233  6.00e+07  2016 population_fe_1014_
+~a_1014_2016  1074    193    1497221      3363  6.72e+07  2016 population_ma_1014_
+~l_1014_2016  1074    193    2914656      6596  1.27e+08  2016 population_all_1014_
+po~e_10_2017  1074    193   293002.4       672  1.21e+07  2017 population_fe_10_
+~e_0516_2017  1074    193    3500294      8061  1.43e+08  2017 population_fe_0516_
+population..  1026    179    2005909      4379  7.18e+07  2017 population_fe_primary_
+population..  1042    186    1062310      1356  3.63e+07  2017 population_fe_9plus_
+po~a_10_2017  1074    193   309334.2       687  1.34e+07  2017 population_ma_10_
+~a_0516_2017  1074    193    3694761      8324  1.59e+08  2017 population_ma_0516_
+population..  1026    179    2116539      4534  7.94e+07  2017 population_ma_primary_
+population..  1042    186    1118458      1400  4.03e+07  2017 population_ma_9plus_
+po~l_10_2017  1074    193   602336.5      1359  2.55e+07  2017 population_all_10_
+~l_0516_2017  1074    193    7195056     16385  3.02e+08  2017 population_all_0516_
+population..  1026    179    4122448      8913  1.51e+08  2017 population_all_primary_
+population..  1042    186    2180767      2756  7.65e+07  2017 population_all_9plus_
+~e_1014_2017  1074    193    1431525      3328  6.01e+07  2017 population_fe_1014_
+~a_1014_2017  1074    193    1511728      3467  6.72e+07  2017 population_ma_1014_
+~l_1014_2017  1074    193    2943253      6795  1.27e+08  2017 population_all_1014_
+po~e_10_2018  1074    193   296199.6       670  1.21e+07  2018 population_fe_10_
+~e_0516_2018  1074    193    3529792      7890  1.42e+08  2018 population_fe_0516_
+population..  1026    179    2024263      4223  7.10e+07  2018 population_fe_primary_
+population..  1042    186    1075569      1331  3.61e+07  2018 population_fe_9plus_
+po~a_10_2018  1074    193   312634.5       685  1.34e+07  2018 population_ma_10_
+~a_0516_2018  1074    193    3725566      8144  1.58e+08  2018 population_ma_0516_
+population..  1026    179    2135812      4371  7.85e+07  2018 population_ma_primary_
+population..  1042    186    1132279      1371  4.00e+07  2018 population_ma_9plus_
+po~l_10_2018  1074    193   608834.2      1355  2.54e+07  2018 population_all_10_
+~l_0516_2018  1074    193    7255358     16034  3.00e+08  2018 population_all_0516_
+population..  1026    179    4160074      8594  1.50e+08  2018 population_all_primary_
+population..  1042    186    2207848      2702  7.62e+07  2018 population_all_9plus_
+~e_1014_2018  1074    193    1446750      3386  6.02e+07  2018 population_fe_1014_
+~a_1014_2018  1074    193    1527391      3459  6.71e+07  2018 population_ma_1014_
+~l_1014_2018  1074    193    2974141      6845  1.27e+08  2018 population_all_1014_
+po~e_10_2019  1074    192   298960.1       656  1.19e+07  2019 population_fe_10_
+~e_0516_2019  1074    193    3558777      7710  1.41e+08  2019 population_fe_0516_
+population..  1026    179    2040934      4063  7.00e+07  2019 population_fe_primary_
+population..  1042    186    1087449      1281  3.58e+07  2019 population_fe_9plus_
+po~a_10_2019  1074    193   315497.2       675  1.32e+07  2019 population_ma_10_
+~a_0516_2019  1074    193    3755639      7957  1.56e+08  2019 population_ma_0516_
+population..  1026    179    2153296      4209  7.73e+07  2019 population_ma_primary_
+population..  1042    186    1144686      1320  3.95e+07  2019 population_ma_9plus_
+po~l_10_2019  1074    193   614457.3      1331  2.51e+07  2019 population_all_10_
+~l_0516_2019  1074    193    7314416     15667  2.98e+08  2019 population_all_0516_
+population..  1026    179    4194231      8272  1.47e+08  2019 population_all_primary_
+population..  1042    186    2232136      2601  7.53e+07  2019 population_all_9plus_
+~e_1014_2019  1074    193    1461729      3370  6.02e+07  2019 population_fe_1014_
+~a_1014_2019  1074    193    1542828      3444  6.68e+07  2019 population_ma_1014_
+~l_1014_2019  1074    193    3004557      6814  1.27e+08  2019 population_all_1014_
+po~e_10_2020  1074    193   301158.6       623  1.17e+07  2020 population_fe_10_
+~e_0516_2020  1074    193    3586387      7542  1.40e+08  2020 population_fe_0516_
+population..  1026    179    2054477      3946  6.88e+07  2020 population_fe_primary_
+population..  1033    185    1096129      1218  3.52e+07  2020 population_fe_9plus_
+po~a_10_2020  1074    193   317777.9       642  1.29e+07  2020 population_ma_10_
+~a_0516_2020  1074    193    3783965      7779  1.55e+08  2020 population_ma_0516_
+population..  1026    179    2167230      4092  7.59e+07  2020 population_ma_primary_
+population..  1033    184    1153746      1256  3.88e+07  2020 population_ma_9plus_
+po~l_10_2020  1074    193   618936.5      1265  2.47e+07  2020 population_all_10_
+~l_0516_2020  1074    193    7370352     15321  2.95e+08  2020 population_all_0516_
+population..  1026    179    4221707      8038  1.45e+08  2020 population_all_primary_
+population..  1033    185    2249874      2474  7.40e+07  2020 population_all_9plus_
+~e_1014_2020  1074    193    1475273      3353  5.99e+07  2020 population_fe_1014_
+~a_1014_2020  1074    193    1556832      3445  6.63e+07  2020 population_ma_1014_
+~l_1014_2020  1074    193    3032105      6800  1.26e+08  2020 population_all_1014_
+po~e_10_2021  1074    157   303579.9       600  1.15e+07  2021 population_fe_10_
+~e_0516_2021  1074    187    3615374      7400  1.39e+08  2021 population_fe_0516_
+population..  1026    177    2068644      3900  6.77e+07  2021 population_fe_primary_
+population..  1033    175    1107255      1200  3.45e+07  2021 population_fe_9plus_
+po~a_10_2021  1074    158   320182.1       600  1.27e+07  2021 population_ma_10_
+~a_0516_2021  1074    185    3813462      7700  1.53e+08  2021 population_ma_0516_
+population..  1026    169    2181723      4200  7.47e+07  2021 population_ma_primary_
+population..  1033    167    1165140      1200  3.81e+07  2021 population_ma_9plus_
+po~l_10_2021  1074    175     623762      1200  2.42e+07  2021 population_all_10_
+~l_0516_2021  1074    190    7428836     15100  2.92e+08  2021 population_all_0516_
+population..  1026    174    4250367      8100  1.42e+08  2021 population_all_primary_
+population..  1033    178    2272395      2400  7.27e+07  2021 population_all_9plus_
+~e_1014_2021  1074    176    1488753      3300  5.92e+07  2021 population_fe_1014_
+~a_1014_2021  1074    183    1570550      3300  6.55e+07  2021 population_ma_1014_
+~l_1014_2021  1074    189    3059303      6600  1.25e+08  2021 population_all_1014_
+po~e_10_2022  1074    153   305758.9       600  1.13e+07  2022 population_fe_10_
+~e_0516_2022  1074    191    3640485      7400  1.38e+08  2022 population_fe_0516_
+population..  1026    169    2080649      4000  6.70e+07  2022 population_fe_primary_
+population..  1033    176    1117529      1200  3.39e+07  2022 population_fe_9plus_
+po~a_10_2022  1074    152   322449.3       600  1.25e+07  2022 population_ma_10_
+~a_0516_2022  1074    192    3838518      7600  1.52e+08  2022 population_ma_0516_
+population..  1026    170    2193312      4200  7.38e+07  2022 population_ma_primary_
+population..  1033    173    1175365      1200  3.75e+07  2022 population_ma_9plus_
+po~l_10_2022  1074    170   628208.3      1200  2.38e+07  2022 population_all_10_
+~l_0516_2022  1074    192    7479003     15000  2.90e+08  2022 population_all_0516_
+population..  1026    179    4273961      8200  1.41e+08  2022 population_all_primary_
+population..  1033    180    2292893      2400  7.14e+07  2022 population_all_9plus_
+~e_1014_2022  1074    177    1501184      3100  5.84e+07  2022 population_fe_1014_
+~a_1014_2022  1074    178    1583200      3200  6.46e+07  2022 population_ma_1014_
+~l_1014_2022  1074    181    3084384      6300  1.23e+08  2022 population_all_1014_
+po~e_10_2023  1074    154   307618.4       600  1.11e+07  2023 population_fe_10_
+~e_0516_2023  1074    191    3661265      7400  1.37e+08  2023 population_fe_0516_
+population..  1026    168    2089819      4100  6.65e+07  2023 population_fe_primary_
+population..  1033    172    1126613      1100  3.35e+07  2023 population_fe_9plus_
+po~a_10_2023  1074    154   324317.9       600  1.23e+07  2023 population_ma_10_
+~a_0516_2023  1074    187    3859449      7500  1.51e+08  2023 population_ma_0516_
+population..  1026    174    2202581      4200  7.33e+07  2023 population_ma_primary_
+population..  1033    175    1184756      1200  3.71e+07  2023 population_ma_9plus_
+po~l_10_2023  1074    168   631936.3      1200  2.34e+07  2023 population_all_10_
+~l_0516_2023  1074    193    7520713     14900  2.87e+08  2023 population_all_0516_
+population..  1026    177    4292400      8300  1.40e+08  2023 population_all_primary_
+population..  1033    176    2311368      2300  7.03e+07  2023 population_all_9plus_
+~e_1014_2023  1074    178    1512147      3000  5.75e+07  2023 population_fe_1014_
+~a_1014_2023  1074    181    1594364      3100  6.35e+07  2023 population_ma_1014_
+~l_1014_2023  1074    183    3106511      6100  1.21e+08  2023 population_all_1014_
+po~e_10_2024  1074    154   308934.7       500  1.10e+07  2024 population_fe_10_
+~e_0516_2024  1074    187    3677955      7200  1.36e+08  2024 population_fe_0516_
+population..  1026    172    2096399      4100  6.63e+07  2024 population_fe_primary_
+population..  1033    172    1134024      1100  3.32e+07  2024 population_fe_9plus_
+po~a_10_2024  1074    153   325611.4       600  1.22e+07  2024 population_ma_10_
+~a_0516_2024  1074    183    3875551      7400  1.50e+08  2024 population_ma_0516_
+population..  1026    175    2208375      4300  7.30e+07  2024 population_ma_primary_
+population..  1033    173    1191922      1200  3.70e+07  2024 population_ma_9plus_
+po~l_10_2024  1074    169   634546.1      1100  2.32e+07  2024 population_all_10_
+~l_0516_2024  1074    191    7553506     14600  2.85e+08  2024 population_all_0516_
+population..  1026    177    4304775      8400  1.39e+08  2024 population_all_primary_
+population..  1033    180    2325947      2300  6.97e+07  2024 population_all_9plus_
+~e_1014_2024  1074    181    1521663      2900  5.65e+07  2024 population_fe_1014_
+~a_1014_2024  1074    179    1604073      3000  6.24e+07  2024 population_ma_1014_
+~l_1014_2024  1074    180    3125736      5900  1.19e+08  2024 population_all_1014_
+po~e_10_2025  1074    159   309630.1       600  1.10e+07  2025 population_fe_10_
+~e_0516_2025  1074    191    3691068      7200  1.35e+08  2025 population_fe_0516_
+population..  1026    175    2100333      4200  6.62e+07  2025 population_fe_primary_
+population..  1033    171    1139521      1200  3.31e+07  2025 population_fe_9plus_
+po~a_10_2025  1074    155   326219.1       600  1.22e+07  2025 population_ma_10_
+~a_0516_2025  1074    189    3888341      7300  1.48e+08  2025 population_ma_0516_
+population..  1026    172    2211556      4300  7.30e+07  2025 population_ma_primary_
+population..  1033    173    1197303      1200  3.68e+07  2025 population_ma_9plus_
+po~l_10_2025  1074    173   635849.2      1200  2.32e+07  2025 population_all_10_
+~l_0516_2025  1074    192    7579409     14500  2.83e+08  2025 population_all_0516_
+population..  1026    176    4311889      8500  1.39e+08  2025 population_all_primary_
+population..  1033    179    2336824      2400  6.96e+07  2025 population_all_9plus_
+~e_1014_2025  1074    183    1529476      2800  5.58e+07  2025 population_fe_1014_
+~a_1014_2025  1074    179    1612018      2900  6.16e+07  2025 population_ma_1014_
+~l_1014_2025  1074    186    3141494      5700  1.17e+08  2025 population_all_1014_
+po~e_10_2026  1074    155   310533.2       600  1.10e+07  2026 population_fe_10_
+~e_0516_2026  1074    190    3705061      7200  1.34e+08  2026 population_fe_0516_
+population..  1026    174    2104585      4200  6.62e+07  2026 population_fe_primary_
+population..  1033    171    1144859      1200  3.31e+07  2026 population_fe_9plus_
+po~a_10_2026  1074    152   327013.9       600  1.22e+07  2026 population_ma_10_
+~a_0516_2026  1074    187    3901861      7300  1.47e+08  2026 population_ma_0516_
+population..  1026    173    2215074      4400  7.29e+07  2026 population_ma_primary_
+population..  1033    174    1202075      1200  3.66e+07  2026 population_ma_9plus_
+po~l_10_2026  1074    171   637547.1      1200  2.32e+07  2026 population_all_10_
+~l_0516_2026  1074    193    7606922     14500  2.81e+08  2026 population_all_0516_
+population..  1026    175    4319659      8600  1.39e+08  2026 population_all_primary_
+population..  1033    181    2346934      2400  6.96e+07  2026 population_all_9plus_
+~e_1014_2026  1074    175    1537098      2800  5.54e+07  2026 population_fe_1014_
+~a_1014_2026  1074    172    1619309      2900  6.11e+07  2026 population_ma_1014_
+~l_1014_2026  1074    180    3156407      5700  1.16e+08  2026 population_all_1014_
+po~e_10_2027  1074    157   311227.1       600  1.10e+07  2027 population_fe_10_
+~e_0516_2027  1074    190    3715794      7200  1.33e+08  2027 population_fe_0516_
+population..  1026    173    2106697      4200  6.62e+07  2027 population_fe_primary_
+population..  1033    175    1148886      1200  3.31e+07  2027 population_fe_9plus_
+po~a_10_2027  1074    155     327628       600  1.21e+07  2027 population_ma_10_
+~a_0516_2027  1074    189    3911655      7400  1.47e+08  2027 population_ma_0516_
+population..  1026    172    2216303      4500  7.29e+07  2027 population_ma_primary_
+population..  1033    172    1205703      1200  3.64e+07  2027 population_ma_9plus_
+po~l_10_2027  1074    170   638855.1      1200  2.32e+07  2027 population_all_10_
+~l_0516_2027  1074    192    7627449     14600  2.80e+08  2027 population_all_0516_
+population..  1026    176    4323000      8700  1.39e+08  2027 population_all_primary_
+population..  1033    176    2354588      2400  6.95e+07  2027 population_all_9plus_
+~e_1014_2027  1074    177    1542935      2800  5.52e+07  2027 population_fe_1014_
+~a_1014_2027  1074    180    1624700      2900  6.08e+07  2027 population_ma_1014_
+~l_1014_2027  1074    185    3167635      5700  1.16e+08  2027 population_all_1014_
+po~e_10_2028  1074    158   311625.4       600  1.10e+07  2028 population_fe_10_
+~e_0516_2028  1074    188    3723205      7000  1.32e+08  2028 population_fe_0516_
+population..  1026    173    2106922      4200  6.62e+07  2028 population_fe_primary_
+population..  1033    176    1151831      1200  3.31e+07  2028 population_fe_9plus_
+po~a_10_2028  1074    155   327910.6       600  1.21e+07  2028 population_ma_10_
+~a_0516_2028  1074    191    3917768      7500  1.46e+08  2028 population_ma_0516_
+population..  1026    173    2215517      4600  7.29e+07  2028 population_ma_primary_
+population..  1033    170    1208223      1200  3.64e+07  2028 population_ma_9plus_
+po~l_10_2028  1074    167     639536      1200  2.32e+07  2028 population_all_10_
+~l_0516_2028  1074    191    7640973     14600  2.78e+08  2028 population_all_0516_
+population..  1026    175    4322439      8800  1.39e+08  2028 population_all_primary_
+population..  1033    182    2360054      2400  6.95e+07  2028 population_all_9plus_
+~e_1014_2028  1074    180    1546916      2900  5.51e+07  2028 population_fe_1014_
+~a_1014_2028  1074    179    1628332      3000  6.07e+07  2028 population_ma_1014_
+~l_1014_2028  1074    186    3175248      5900  1.16e+08  2028 population_all_1014_
+po~e_10_2029  1074    156   311673.9       600  1.10e+07  2029 population_fe_10_
+~e_0516_2029  1074    186    3726687      6700  1.32e+08  2029 population_fe_0516_
+population..  1026    175    2105240      4200  6.61e+07  2029 population_fe_primary_
+population..  1033    172    1153585      1200  3.30e+07  2029 population_fe_9plus_
+po~a_10_2029  1074    153   327876.1       600  1.21e+07  2029 population_ma_10_
+~a_0516_2029  1074    191    3920422      7500  1.46e+08  2029 population_ma_0516_
+population..  1026    171    2213144      4600  7.28e+07  2029 population_ma_primary_
+population..  1033    172    1209726      1200  3.64e+07  2029 population_ma_9plus_
+po~l_10_2029  1074    172     639550      1200  2.31e+07  2029 population_all_10_
+~l_0516_2029  1074    193    7647109     14200  2.78e+08  2029 population_all_0516_
+population..  1026    178    4318384      8800  1.39e+08  2029 population_all_primary_
+population..  1033    177    2363312      2400  6.94e+07  2029 population_all_9plus_
+~e_1014_2029  1074    174    1549541      2900  5.51e+07  2029 population_fe_1014_
+~a_1014_2029  1074    182    1630528      3100  6.06e+07  2029 population_ma_1014_
+~l_1014_2029  1074    186    3180069      6000  1.16e+08  2029 population_all_1014_
+po~e_10_2030  1074    154   311319.7       600  1.10e+07  2030 population_fe_10_
+~e_0516_2030  1074    190    3727587      6700  1.32e+08  2030 population_fe_0516_
+population..  1026    170    2102808      4200  6.59e+07  2030 population_fe_primary_
+population..  1033    175    1154733      1200  3.30e+07  2030 population_fe_9plus_
+po~a_10_2030  1074    156     327448       600  1.21e+07  2030 population_ma_10_
+~a_0516_2030  1074    188    3920227      7400  1.45e+08  2030 population_ma_0516_
+population..  1026    176    2209653      4700  7.26e+07  2030 population_ma_primary_
+population..  1033    176    1210423      1200  3.63e+07  2030 population_ma_9plus_
+po~l_10_2030  1074    169   638767.7      1200  2.31e+07  2030 population_all_10_
+~l_0516_2030  1074    190    7647814     14100  2.77e+08  2030 population_all_0516_
+population..  1026    174    4312461      8900  1.39e+08  2030 population_all_primary_
+population..  1033    184    2365156      2400  6.93e+07  2030 population_all_9plus_
+~e_1014_2030  1074    172    1550555      2900  5.50e+07  2030 population_fe_1014_
+~a_1014_2030  1074    179    1631305      3100  6.06e+07  2030 population_ma_1014_
+~l_1014_2030  1074    181    3181860      6000  1.16e+08  2030 population_all_1014_
+source_ass~t   883      6          .         .         .  Source of assessment data
+enrollment~e  1100      4          .         .         .  The source used for this enrollment value
+enrollment~n  1100      6          .         .         .  The definition used for this enrollment value
+min_profic~d   830     18          .         .         .  Minimum Proficiency Threshold (assessment-specific)
+surveyid       883    634          .         .         .  SurveyID (countrycode_year_assessment)
+countryname   1100    217          .         .         .  Country Name
+region        1100      7          .         .         .  Region Code
+regionname    1100      7          .         .         .  Region Name
+adminregion    587      6          .         .         .  Administrative Region Code
+adminregio~e   587      6          .         .         .  Administrative Region Name
+incomelevel   1100      5          .         .         .  Income Level Code
+incomeleve~e  1100      5          .         .         .  Income Level Name
+lendingtype   1100      4          .         .         .  Lending Type Code
+lendingty~me  1100      4          .         .         .  Lending Type Name
+cmu            831     48          .         .         .  WB Country Management Unit
+-----------------------------------------------------------------------------------------------------------------------------------------
+
 
 ~~~~

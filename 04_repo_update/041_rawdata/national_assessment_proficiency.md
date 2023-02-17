@@ -21,4 +21,10 @@
 |GHA_1|2016|6|72|||Minimum Competency| National Learning Assessment (NLA): National Education Assessment (NEA); Grade 6; Minimum proficiency level: Minimum Competency|  UIS (Tuesday, September 10, 2019 12:00 PM) | Accepted|
 |MDG_1|2015|5|4.2|||Level 4| PASEC 2015 - level 4 | UIS (Tuesday, September 10, 2019 12:00 PM) | Accepted|
 |MLI_1|2012|5|14.26|15.45|13.14|Level 4| PASEC 2012 - level 4 | National Report sent by Country Team | Accepted|
-|HND_1|2013|6|30.6|||Level III (SERCE scale)| LLECE 2013 - level III | GLAD from CLO | Accepted||
+|HND_1|2013|6|30.6|||Level III (SERCE scale)| LLECE 2013 - level III | GLAD from CLO | Accepted|
+|GHA|2016|6|16|||Policy Linking| Grade 6 National Learning Assessment| Report | Accepted|
+|LSO|2014|6|3.4|||Policy Linking| Grade 6 National Learning Assessment| Report | Accepted|
+|NPL|2014|6|3.4|||Policy Linking| Grade 6 National Learning Assessment| Report | Accepted|
+
+
+

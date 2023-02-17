@@ -11,7 +11,25 @@ qui {
 
   * Start with WB enrollment data
   use "${clone}/01_data/011_rawdata/enrollment_tenr_wbopendata.dta", clear
-
+  
+  // this section should be removed if we have better enrollment data!!!!!! 
+  // expand is adding room for the extrapolation of values to 2021. this is needed as we have added AMPLB/2021 results
+  * expand years to include 2021, this is imortant since TENR database has not been updated in the API
+  local maxyear = 2021
+  sum year
+  local max = r(max)
+  local maxplus = `max'+1
+  local add = `maxyear' - `max' + 1
+  gen expand = `add' if year == `max'
+  expand expand, gen(flag)
+  bysort countrycode year flag : gen seq = _n
+  local c = 1
+  forvalues y = `maxplus'(1)`maxyear' {
+    replace year = `y' if flag == 1 & seq == `c' & year == `max'
+	local c = `c'+1
+  }
+  drop flag expand seq
+  
   * Bring in UIS enrollment data (keep only the 217 countries in wbopendata)
   merge 1:1 countrycode year using "${clone}/01_data/011_rawdata/enrollment_edulit_uis.dta", keep(master match) nogen
 

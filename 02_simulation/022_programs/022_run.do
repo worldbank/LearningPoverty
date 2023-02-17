@@ -16,10 +16,13 @@ if _rc != 0 {
   exit
 }
 
-* Execution parameters
-global master_seed  17893   // Ensures reproducibility
 *-------------------------------------------------------------------------------
-
+* Execution parameters
+global master_seed  		17893   	// Ensures reproducibility
+global chosen_preference 	1205  		// Chosen preference created in 01 rawlatest
+global enrollment_def 		"validated"
+global anchoryr 			2019
+global enrollmentyr			"adjust"
 
 *-------------------------------------------------------------------------------
 * Subroutines for this task

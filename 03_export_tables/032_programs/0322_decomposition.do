@@ -38,12 +38,13 @@ quietly {
           drop if inlist(countrycode,"MNG")
         }
 
-        keep if adj_nonprof_`gender' != .
+        keep if lpv_`gender' != .
         keep if global_weight != .
 
         * More intuitive/shorter names for key variables
-        rename (adj_nonprof_`gender' enrollment_`gender' nonprof_`gender') (learningpoverty enrollment bmp)
-        gen oos = 100 - enrollment
+
+		rename (lpv_`gender' sd_`gender' ld_`gender') (learningpoverty sd bmp)
+        gen oos = sd
 
         tabstat learningpoverty [aw = region_weight], by(region)
         tabstat learningpoverty [aw = global_weight], by(region)
@@ -203,10 +204,10 @@ quietly {
 
     label var category "Group"
     label var total    "Learning Poverty"
-    label var bmp      "Below Minimum Proficiency (BMP)"
-    label var oos      "Out of School (OOS)"
-    label var shr_bmp  "Percentage of Learning Poverty Explained by BMP"
-    label var shr_oos  "Percentage of Learning Poverty Explained by OOS"
+    label var bmp      "Learning Deprivation"
+    label var oos      "Schooling Deprivation"
+    label var shr_bmp  "Percentage of Learning Poverty Explained by LD"
+    label var shr_oos  "Percentage of Learning Poverty Explained by SD"
 
     save "${clone}/03_export_tables/033_outputs/individual_tables/decomposition_lpv_`gender'.dta", replace
 

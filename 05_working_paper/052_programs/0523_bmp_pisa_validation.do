@@ -1,17 +1,13 @@
-*==============================================================================*
+*= =============================================================================*
 * 0523 SUBTASK: Relationship between Learning Poveryt BMP and PISA Level 2
 *==============================================================================*
 qui {
-
-  * Change here only if wanting to use a different preference
-  * than what is being passed in the global in 032_run
-  * But don't commit any change here (only commit in global 032_run)
-  local chosen_preference = $chosen_preference
 
   *-----------------------------------------------------------------------------
   local outputs   "${clone}/05_working_paper/053_outputs"
   local rawdata   "${clone}/05_working_paper/051_rawdata"
   local overwrite_csv = 0 // Change here to download new data even if csv already in clone
+  local chosen_preference = $chosen_preference
   *-----------------------------------------------------------------------------
 
   tempfile learningpoverty learning_poverty_bmp pisa_bmp
@@ -20,16 +16,16 @@ qui {
   * create and save Learning Poverty dataset
 
   use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
-  keep if !missing(adj_nonprof_all)
+  keep if !missing(lpv_all)
   sort region countryname
-  local  vars2keep "countrycode countryname enrollment_all nonprof_all adj_nonprof_all test year_assessment"
+  local  vars2keep "countrycode countryname sd_all ld_all lpv_all test year_assessment"
   order `vars2keep'
   keep  `vars2keep'
-  label var enrollment_all   "Enrollment"
-  label var nonprof_all      "BMP"
-  label var adj_nonprof_all  "Learning Poverty"
-  label var test             "Assessment"
-  label var year_assessment  "Assessment Year"
+  label var sd_all			"Schooling Deprivation"
+  label var ld_all      	"Learning Deprivation"
+  label var lpv_all  		"Learning Poverty"
+  label var test            "Assessment"
+  label var year_assessment "Assessment Year"
   save `learningpoverty', replace
 
 
@@ -39,7 +35,7 @@ qui {
   import delimited "${clone}/01_data/011_rawdata/hosted_in_repo/proficiency_from_GLAD.csv", encoding(ISO-8859-2) clear
   foreach var of varlist fgt* {
   	replace `var' = `var'*100
-  }
+  } 
   bysort countrycode : egen maxyear = max(year)
   gen latest_lpbmp = year == maxyear
   save `learning_poverty_bmp', replace
@@ -101,48 +97,48 @@ qui {
     ***-----------------------------------------------------------------------------
     * PISA-BMP and LP-BMP
     * average values
-    tabstat value nonprof_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"  & subject_pisa == "read", save stat(mean N)
+    tabstat value ld_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"  & subject_pisa == "read", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value nonprof_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"  & subject_pisa == "read" , save stat(mean N)
+    tabstat   value ld_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"  & subject_pisa == "read" , save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value nonprof_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read", save stat(mean N)
+    tabstat   value ld_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value nonprof_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read", save stat(mean N)
+    tabstat   value ld_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value nonprof_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read", save stat(mean N)
+    tabstat   value ld_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
     * correlation
-    corr value nonprof_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"     & subject_pisa == "read"
+    corr value ld_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"     & subject_pisa == "read"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value nonprof_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read"
+    corr value ld_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value nonprof_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read"
+    corr value ld_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value nonprof_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read"
+    corr value ld_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value nonprof_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read"
+    corr value ld_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
@@ -156,48 +152,48 @@ qui {
     ***-----------------------------------------------------------------------------
     * PISA-BMP and LP
     * average values
-    tabstat value adj_nonprof_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"   & subject_pisa == "read", save stat(mean N)
+    tabstat value lpv_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"   & subject_pisa == "read", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value adj_nonprof_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read", save stat(mean N)
+    tabstat   value lpv_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value adj_nonprof_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read", save stat(mean N)
+    tabstat   value lpv_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value adj_nonprof_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read", save stat(mean N)
+    tabstat   value lpv_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value adj_nonprof_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read", save stat(mean N)
+    tabstat   value lpv_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
     * correlation
-    corr value adj_nonprof_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"     & subject_pisa == "read"
+    corr value lpv_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"     & subject_pisa == "read"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value adj_nonprof_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read"
+    corr value lpv_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value adj_nonprof_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read"
+    corr value lpv_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value adj_nonprof_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read"
+    corr value lpv_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value adj_nonprof_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read"
+    corr value lpv_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
@@ -221,48 +217,48 @@ qui {
     ***-----------------------------------------------------------------------------
     * PISA-BMP and LP-BMP
     * average values
-    tabstat value nonprof_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"    & subject_pisa == "read" & lendingtype == "LNX", save stat(mean N)
+    tabstat value ld_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"    & subject_pisa == "read" & lendingtype == "LNX", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value nonprof_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX" , save stat(mean N)
+    tabstat   value ld_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX" , save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value nonprof_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX" , save stat(mean N)
+    tabstat   value ld_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX" , save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value nonprof_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX" , save stat(mean N)
+    tabstat   value ld_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX" , save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value nonprof_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX" , save stat(mean N)
+    tabstat   value ld_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX" , save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
     * correlation
-    corr value nonprof_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
+    corr value ld_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value nonprof_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
+    corr value ld_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value nonprof_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
+    corr value ld_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value nonprof_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
+    corr value ld_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value nonprof_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
+    corr value ld_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
@@ -276,48 +272,48 @@ qui {
     ***-----------------------------------------------------------------------------
     * PISA-BMP and LP
     * average values
-    tabstat value adj_nonprof_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX", save stat(mean N)
+    tabstat value lpv_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value adj_nonprof_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX", save stat(mean N)
+    tabstat   value lpv_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value adj_nonprof_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX", save stat(mean N)
+    tabstat   value lpv_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value adj_nonprof_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX", save stat(mean N)
+    tabstat   value lpv_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
-    tabstat   value adj_nonprof_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX", save stat(mean N)
+    tabstat   value lpv_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX", save stat(mean N)
     mat a = r(StatTotal)
     mat mean= nullmat(mean)\a
 
     * correlation
-    corr value adj_nonprof_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"   & subject_pisa == "read"  & lendingtype == "LNX"
+    corr value lpv_all [aw=wtg] if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"   & subject_pisa == "read"  & lendingtype == "LNX"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value adj_nonprof_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
+    corr value lpv_all [aw=wtg] if indicator == 1 & diff >= 0 & diff <= 4 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value adj_nonprof_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
+    corr value lpv_all [aw=wtg] if indicator == 1 & diff <= -3 & diff >= -5	 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value adj_nonprof_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
+    corr value lpv_all [aw=wtg] if indicator == 1 & diff <= -6 & diff >= -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
 
-    corr value adj_nonprof_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
+    corr value lpv_all [aw=wtg] if indicator == 1 & diff <=  -11 & subject == "read"   & subject_pisa == "read" & lendingtype == "LNX"
     mat b = r(rho)
     mat b = b\.
     mat rho = nullmat(rho)\b
@@ -367,7 +363,7 @@ qui {
 
   keep if indicator == 1 & diff >= 3 & diff <= 5 & subject == "read"   & subject_pisa == "read"
 
-  keep countrycode region incomelevel lendingtype test value nonprof_all adj_nonprof_all year_pisa year_lp diff indicator
+  keep countrycode region incomelevel lendingtype test value ld_all lpv_all year_pisa year_lp diff indicator
 
   bysort countrycode : egen maxyear = max(year_pisa)
   gen latest_pisa = year_pisa == maxyear

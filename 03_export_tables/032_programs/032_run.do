@@ -16,9 +16,10 @@ if _rc != 0 {
   exit
 }
 
-* Execution parameters
-global chosen_preference 1108  // Chosen preference created in 01 rawlatest
 *-----------------------------------------------------------------------------
+* Execution parameters
+global chosen_preference 1205  	// Chosen preference created in 01 rawlatest (0126)
+global timewindow = 2014 		/// chose the reference window
 
 *-----------------------------------------------------------------------------
 * Subroutines for this task

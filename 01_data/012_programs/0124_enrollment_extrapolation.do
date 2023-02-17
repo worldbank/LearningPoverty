@@ -35,6 +35,8 @@ qui {
   }
 
   ***********************************
+  * IMPORTANT: In preferences 1005 and 1108 
+  ***********************************
   * For each definition find the closest year with data for observations
   * with no data in that definition that year according to this rules:
   * - If that year has data, use that value.
@@ -43,7 +45,15 @@ qui {
   *	- If both those years have values, use one year before.
   *	- If neither has data, look two years before and two year after. Then
   *	  repeat the same procedure until a year with data is found.
-
+  ***********************************
+  * IMPORTANT: Starting in preference 1205 
+  ***********************************
+  * create a master validated enrollment databased with data from 1990 to 2021
+  * validated enrollment is interpolated, and subsequently a backward and forward 
+  * extrapolations are done for the early and later years with missing enrollment 
+  * data
+  ***********************************
+ 
   *Find year with data for all definitions and years
   foreach def of local enrollment_definitions {
 
@@ -145,10 +155,10 @@ qui {
   }
 
   ***********************************
-  * Copy values from the closest year within country
-
+  * Copy values from the closest end-year within country
+  * Backward and Forward extrapolations based on the earliest and latest available validated enrollement value
   *Loop over all possible year to copy the value from the year that is the closest year
-  forvalues yeardiff = 1/30 {
+  forvalues yeardiff = 1/35 {
     replace enrollment_validated = enrollment_validated[_n+`yeardiff'] if year[_n+`yeardiff'] == year_enrollment & countrycode == countrycode[_n+`yeardiff']
     replace enrollment_validated = enrollment_validated[_n-`yeardiff'] if year[_n-`yeardiff'] == year_enrollment & countrycode == countrycode[_n-`yeardiff']
   }

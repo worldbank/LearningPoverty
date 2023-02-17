@@ -114,16 +114,16 @@ program define    simulate_learning_poverty, rclass
 
     * Creates initial learning poverty level
     gen initial_poverty_level = ""
-    replace initial_poverty_level = "0-25% Learning Poverty"   if !missing(adj_nonprof_all)
-    replace initial_poverty_level = "25-50% Learning Poverty"  if adj_nonprof_all >= 25 & !missing(adj_nonprof_all)
-    replace initial_poverty_level = "50-75% Learning Poverty"  if adj_nonprof_all >= 50 & !missing(adj_nonprof_all)
-    replace initial_poverty_level = "75-100% Learning Poverty" if adj_nonprof_all >= 75 & !missing(adj_nonprof_all)
+    replace initial_poverty_level = "0-25% Learning Poverty"   if !missing(lpv_all)
+    replace initial_poverty_level = "25-50% Learning Poverty"  if lpv_all >= 25 & !missing(lpv_all)
+    replace initial_poverty_level = "50-75% Learning Poverty"  if lpv_all >= 50 & !missing(lpv_all)
+    replace initial_poverty_level = "75-100% Learning Poverty" if lpv_all >= 75 & !missing(lpv_all)
     label var initial_poverty_level "Categorical string variable on initial Learning Poverty (2015)"
 
     * Complement from learning poverty
-    gen baseline = 100 - adj_nonprof_all
+    gen baseline = 100 - lpv_all
     label var baseline "Adjusted proficiency at baseline"
-    rename adj_nonprof_all lpv_baseline
+    rename lpv_all lpv_baseline
     label var lpv_baseline "Learning poverty at baseline"
     format %3.1f *baseline
 
