@@ -2,12 +2,6 @@
 * 0322 SUBTASK: DECOMPOSITION OF LPV LEVELS AND CHANGE
 *==============================================================================*
 
-  * Change here only if wanting to use a different preference
-  * than what is being passed in the global in 032_run
-  * But don't commit any change here (only commit in global 032_run)
-  local chosen_preference = $chosen_preference
-  
-  
 quietly {
 
   tempfile tmp1 tmp2
@@ -30,21 +24,20 @@ quietly {
 
         ** prepare dataset
         if "`gender'" == "all" ///
-               population_weights, preference(`chosen_preference') timewindow(year_assessment>=2011) combine_ida_blend `filter'
+               population_weights, preference(1005) timewindow(year_assessment>=2011) combine_ida_blend `filter'
         else {
-          if "`filter'" == "" local aux_filter `"countryfilter(inlist(countrycode,"MNG")==0)"'
-          else local aux_filter `"countryfilter(lendingtype!="LNX" & inlist(countrycode,"MNG")==0)"'
-          population_weights, preference(`chosen_preference') combine_ida_blend `aux_filter'
-          drop if inlist(countrycode,"MNG")
+          if "`filter'" == "" local aux_filter `"countryfilter(inlist(countrycode,"MNG","PHL")==0)"'
+          else local aux_filter `"countryfilter(lendingtype!="LNX" & inlist(countrycode,"MNG","PHL")==0)"'
+          population_weights, preference(1005) combine_ida_blend `aux_filter'
+          drop if inlist(countrycode,"MNG","PHL")
         }
 
-        keep if lpv_`gender' != .
+        keep if adj_nonprof_`gender' != .
         keep if global_weight != .
 
         * More intuitive/shorter names for key variables
-
-		rename (lpv_`gender' sd_`gender' ld_`gender') (learningpoverty sd bmp)
-        gen oos = sd
+        rename (adj_nonprof_`gender' enrollment_`gender' nonprof_`gender') (learningpoverty enrollment bmp)
+        gen oos = 100 - enrollment
 
         tabstat learningpoverty [aw = region_weight], by(region)
         tabstat learningpoverty [aw = global_weight], by(region)
@@ -204,10 +197,10 @@ quietly {
 
     label var category "Group"
     label var total    "Learning Poverty"
-    label var bmp      "Learning Deprivation"
-    label var oos      "Schooling Deprivation"
-    label var shr_bmp  "Percentage of Learning Poverty Explained by LD"
-    label var shr_oos  "Percentage of Learning Poverty Explained by SD"
+    label var bmp      "Below Minimum Proficiency (BMP)"
+    label var oos      "Out of School (OOS)"
+    label var shr_bmp  "Percentage of Learning Poverty Explained by BMP"
+    label var shr_oos  "Percentage of Learning Poverty Explained by OOS"
 
     save "${clone}/03_export_tables/033_outputs/individual_tables/decomposition_lpv_`gender'.dta", replace
 
@@ -247,64 +240,120 @@ quietly {
   drop time
   rename t time
 
-  * turn all indicators to indexes
-  foreach var in learningpoverty bmp enrollment {
-  replace `var' = `var'/100
-  }
-
   * create complementary variable
-  gen oos = 1-enrollment
-  gen  oos_complement = 1-oos
-
+  gen oos = 100-enrollment
+  gen  oos_complement = 100-oos
+  
   bysort countrycode : gen tot = _N
   gen wtg = 1/tot
 
-  sum learningpoverty oos bmp
+  * turn all indicators to indexes
+  foreach var in learningpoverty bmp enrollment oos_complement oos {
+	gen double `var'_i = `var'/100
+  }
+
+  gen double bmp_adj = bmp*oos_complement_i
 
   sort seq countrycode year
   bysort seq countrycode : gen diff =year[2]-year[1]
 
-  foreach var in learningpoverty bmp oos_complement oos  {
-  replace `var' = `var'/diff
+  foreach var in learningpoverty bmp enrollment oos_complement oos  bmp_adj  learningpoverty_i bmp_i enrollment_i oos_complement_i oos_i {
+	bysort seq countrycode : gen double `var'_diff =`var'[2]-`var'[1]
   }
+
+  foreach var in learningpoverty bmp enrollment oos_complement oos  bmp_adj  learningpoverty_i bmp_i enrollment_i oos_complement_i oos_i {
+	bysort seq countrycode : gen double `var'_diff2 =(`var'[2]-`var'[1])/(year[2]-year[1])
+  }
+
+
+
+  foreach var in learningpoverty bmp enrollment oos_complement oos  bmp_adj  learningpoverty_i bmp_i enrollment_i oos_complement_i oos_i {
+	gen double `var'2 = `var'/diff
+  }
+
+  * summary stats for the two periods
+  tabstat learningpoverty oos oos_complement bmp enrollment [aw=wtg]  , by(time) 
+  
+  tabstat learningpoverty_i oos_i oos_complement_i bmp_i enrollment_i [aw=wtg]  , by(time) 
+
+  tabstat learningpoverty2 oos2 oos_complement2 bmp2 enrollment2 [aw=wtg]  , by(time) 
+
+  tabstat learningpoverty_diff oos_diff oos_complement_diff bmp_diff enrollment_diff [aw=wtg]  , by(time) 
+
+  tabstat learningpoverty_diff oos_diff oos_complement_diff bmp_diff enrollment_diff [aw=wtg]  if time == 1 , by(reg) stat(mean p50)
+
+  
+  tabstat learningpoverty_diff oos_diff oos_complement_diff bmp_diff enrollment_diff [aw=wtg]  if time == 1 , by(reg) stat(mean p50)
+
+  * display diff we want to decompose
+  tabstat learningpoverty_diff2  [aw=wtg]  if time == 1 , by(reg) stat(mean p50 p25 p10)
+  
+  * display diff we want to decompose
+  tabstat learningpoverty_diff2  [aw=wtg]  if time == 1 , by(reg) stat(mean p50 )
+  
+  tabstat learningpoverty_diff2  [aw=wtg]  if time == 1 , stat(mean p50 p25 p10)
+  
+  sum learningpoverty_diff2  [aw=wtg]  if time == 1 , d
+  
+  * test before
+  * global number 
+  	adecomp learningpoverty2 bmp_adj2 oos2 [aw=wtg] , ///
+	  equation(c1+c2) by(time) id(ctry)  indicator(median) 
+	  
+	  
+
+  	adecomp learningpoverty2 bmp_adj2 oos2 [aw=wtg] , ///
+	  equation(c1+c2) by(time) id(ctry)  indicator(mean median) stats() group(reg)
+
+
+  
+  * test before
+  * global number 
+  	adecomp learningpoverty2 bmp_adj2 oos2 [aw=wtg] , ///
+	  equation(c1+c2) by(time) id(ctry)  indicator(mean) stats() gic(41) method(difference)
+
+  
+  * test before
+  * global number 
+  	adecomp learningpoverty2 bmp_adj2 oos2 [aw=wtg] , ///
+	  equation(c1+c2) by(time) id(ctry)  indicator(mean) stats() gic(41) method(growth)
 
   *-----------------------------------------------------------------------------
   * prepare decomposition by category
   *-----------------------------------------------------------------------------
 
-  local type reg
-
+  local type reg  
+  
   preserve
 
-  adecomp learningpoverty bmp oos_complement oos [aw=wtg] , ///
-  equation((c1*c2)+(c3)) by(time) id(ctry)  indicator(mean) group(`type') stats()
+	adecomp learningpoverty2 bmp_adj2 oos2 [aw=wtg] , ///
+	  equation(c1+c2) by(time) id(ctry)  indicator(mean) group(`type') 
 
+	mat a = r(b)
+	mat a = a'
 
-  mat a = r(b)
-  mat a = a'
+	svmat double a, names(col)
 
-  svmat double a, names(col)
+	keep r1-r3
+	drop in 1/2
+	gen `type' = _n
+	order `type'
 
-  keep r1-r4
-  drop in 1/2
-  gen `type' = _n
-  order `type'
+	label value `type' `type'
 
-  label value `type' `type'
+	gen bmp = r1 
+	gen oos = r2
+	gen total = r3
 
-  gen bmp = r1 + r2
-  gen oos = r3
-  gen total = r4
+	drop r1 - r3
 
-  drop r1 - r4
+	keep if bmp != .
 
-  keep if bmp != .
+	decode `type' , generate(category)
+	drop `type'
+	order category
 
-  decode `type' , generate(category)
-  drop `type'
-  order category
-
-  save `tmp1', replace
+	save `tmp1', replace
 
   restore
 
@@ -317,27 +366,26 @@ quietly {
 
   preserve
 
-  adecomp learningpoverty bmp oos_complement oos [aw=wtg] , ///
-  equation((c1*c2)+(c3)) by(time) id(ctry)  indicator(mean)
-
+  adecomp learningpoverty2 bmp_adj2 oos2 [aw=wtg] , ///
+	equation(c1+c2) by(time) id(ctry)  indicator(mean) 
 
   mat a = r(b)
   mat a = a'
 
   svmat double a, names(col)
 
-  keep r1-r4
+  keep r1-r3
   drop in 1/2
   gen `type' = 0
   order `type'
 
   label value `type' `type'
 
-  gen bmp = r1 + r2
-  gen oos = r3
-  gen total = r4
+  gen bmp = r1
+  gen oos = r2
+  gen total = r3
 
-  drop r1 - r4
+  drop r1 - r3
 
   keep if bmp != .
 
@@ -364,13 +412,13 @@ quietly {
   order category total
 
   * flip sign of absolute value
-  *foreach var in total bmp oos {
-  *	replace `var' = `var'*(-1)
-  *}
+  foreach var in total bmp oos {
+  	replace `var' = `var'*(-1)
+  }
 
   * multiply all results by 100 and format output to one decimal
   foreach var in total bmp oos shr_bmp shr_oos {
-    replace `var' = `var'*100
+    replace `var' = `var'
     format `var' %16.2f
   }
 

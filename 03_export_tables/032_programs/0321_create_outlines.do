@@ -109,7 +109,7 @@ qui {
 
   * Number of countries we should expect for two pagers
   use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
-  gen byte should_have_2pgr = !missing(nonprof_all)
+  gen byte should_have_2pgr = !missing(ld_all)
   keep countrycode should_have_2pgr lp_by_gender_is_available
 
 

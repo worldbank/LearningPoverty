@@ -131,13 +131,13 @@ if $network_is_available {
   local clonefile "${clone}/04_repo_update/043_outputs/proficiency_from_GLAD.csv"
 
   * If getting the files from the network, the path is
-  local networkfile "${network}/GDB/Projects/WLD_2021_FGT-CLO/clo_fgt_learning.dta"
+  local networkfile "${network}/GDB/Projects/WLD_2022_FGT-CLO/clo_fgt_learning.dta"
 
   * Open the file
   use "`networkfile'", clear
 
   * List of needed CLO for Learning Poverty (only those for which we have microdata)
-  local lp_clos "LAC_2006_LLECE LAC_2013_LLECE SSA_2000_SACMEQ SSA_2007_SACMEQ SSA_2014_PASEC SSA_2019_PASEC WLD_2001_PIRLS WLD_2006_PIRLS WLD_2011_PIRLS WLD_2016_PIRLS WLD_2003_TIMSS WLD_2007_TIMSS WLD_2011_TIMSS WLD_2015_TIMSS WLD_2019_TIMSS EAP_2019_SEA-PLM "
+  local lp_clos "LAC_2006_LLECE LAC_2013_LLECE SSA_2000_SACMEQ SSA_2007_SACMEQ SSA_2014_PASEC SSA_2019_PASEC WLD_2001_PIRLS WLD_2006_PIRLS WLD_2011_PIRLS WLD_2016_PIRLS WLD_2003_TIMSS WLD_2007_TIMSS WLD_2011_TIMSS WLD_2015_TIMSS WLD_2019_TIMSS EAP_2019_SEA-PLM SSA_2021_AMPLB "
 
   * Check that it contains all the CLO of all surveys required for LP
   levelsof survey, local(clos_in_networkfile)
@@ -188,6 +188,8 @@ if $network_is_available {
   * drop MATH results from SEA-PLM and PASEC
   drop if subject == "math" & test == "SEA-PLM"
   drop if subject == "math" & test == "PASEC"
+  drop if subject == "math" & test == "AMPLB"
+  drop if subject == "math" & test == "LLECE"
   
   * Beautify: format, order and label
   order countrycode year test idgrade subject *nonprof_all *nonprof_ma *nonprof_fe fgt1* fgt2*
