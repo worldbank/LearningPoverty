@@ -3,6 +3,10 @@
 *==============================================================================*
 qui {
 
+  * Ensure that the do-file is run as Stata 16
+  * This is required if running the code in Stata 17 or later.
+  version 16
+
   /* This do file manipulates all the CSV and MD files hosted in the repo,
      importing each one into an equivalent dta:
      - country_metadata.csv
@@ -44,10 +48,15 @@ version 15
   foreach thisvar of varlist _all {
     label var `thisvar' "`= `thisvar'[_N]'"
   }
+  
+  replace countrycode = trim(countrycode)
 
   * Drop last observation, which only had the var labels
   drop if _n == _N
 
+  * Make sure that there are only one obs per country
+  isid countrycode
+  
   * Compress and save in rawdata
   compress
   noi save "`output_dir'/`clonefile'.dta", replace
@@ -85,6 +94,9 @@ version 15
   gen source_assessment = "CLO (Country Level Outcomes from GLAD)"
   label var source_assessment "Source of assessment data"
 
+  * Make sure that there are only one obs per country and year
+  isid countrycode idgrade test year subject
+  
   * Compress and save in rawdata
   compress
   noi save "`output_dir'/`clonefile'.dta", replace
@@ -106,6 +118,9 @@ version 15
   gen source_assessment = "National Learning Assessment (from UIS)"
   label var nla_code "Reference code for NLA in markdown documentation"
 
+  * Make sure that there are only one obs per country and year
+  isid countrycode idgrade test year subject nla_code nla_code
+  
   * Compress and save in rawdata
   compress
   noi save "`output_dir'/`clonefile'.dta", replace
@@ -120,6 +135,9 @@ version 15
   * Open the raw csv with data
   import delimited using "`input_dir'/`clonefile'.csv", varnames(1) case(lower) clear
 
+  * Make sure that there are only one obs per country and year
+  isid countrycode idgrade test year subject
+  
   * Compress and save in rawdata
   compress
   noi save "`output_dir'/`clonefile'.dta", replace
@@ -145,6 +163,9 @@ version 15
   rename pop1014_all  population_all_1014
   label var population_all_1014 "Total population between ages 10 to 14 (WB API)"
 
+  * Make sure that there are only one obs per country and year
+  isid countrycode year
+  
   * Compress and save in rawdata
   compress
   noi save "`output_dir'/`clonefile'.dta", replace
@@ -170,6 +191,9 @@ version 15
   rename pop_* population_*
   rename population_*, lower
 
+  * Make sure that there are only one obs per country and year
+  isid countrycode year age
+  
   * Compress and save in rawdata
   compress
   noi save "`output_dir'/`clonefile'.dta", replace
@@ -195,11 +219,12 @@ version 15
   label var primary_start_age "Age primary school start (Compulsory starting age)"
   label var primary_end_age   "Age primary school end (Compulsory starting age + duration of primary)"
 
+  * Make sure that there are only one obs per country and year
+  isid countrycode year
+  
   * Compress and save in rawdata
   compress
   noi save "`output_dir'/`clonefile'.dta", replace
-
-
 
   /***********************************
    Enrollment (TENR) from WB opendata
@@ -219,11 +244,12 @@ version 15
   rename se_prm_tenr_ma enrollment_ANER_MA
   label var enrollment_ANER_MA  "Adjusted Net Enrollment Rate (ANER), Primary, Male"
 
+  * Make sure that there are only one obs per country and year
+  isid countrycode year
+  
   * Compress and save in rawdata
   compress
   noi save "`output_dir'/`clonefile'.dta", replace
-
-
 
   /*******************************
       Enrollment from UIS csv
@@ -274,6 +300,9 @@ version 15
   * Keep only relevant variables
   keep countrycode year enrollment_*
 
+  * Make sure that there are only one obs per country and year
+  isid countrycode year
+  
   * Compress and save in rawdata
   compress
   noi save "`output_dir'/`clonefile'.dta", replace
@@ -282,8 +311,7 @@ version 15
   /*******************************
       Enrollment validated md
   *******************************/
-  
-  
+    
   * Directory where to find the CSVs or MDs (from the repo)
   local input_dir  "${clone}/01_data/011_rawdata/hosted_in_repo"
   * Directory where to save the newly created DTAs
@@ -319,6 +347,9 @@ version 15
   * need to clarify the difference between accepted and use
   keep if decision == "use"
   drop decision
+
+  * Make sure that there are only one obs per country and year
+  isid countrycode year
 
   * Standardize variable name
   rename    suggested_enrollment enrollment_VALID_ALL
@@ -374,6 +405,9 @@ version 15
 
   * Restore the sort order
   sort countrycode year
+  
+  * Make sure that there are only one obs per country and year
+  isid countrycode year
 
   * TODO DOUBLE CHECK IF THIS IS NEEDED HERE OR THIS ADJUSTMENT COULD SIT AT TWO PAGER TASK ONLY
   * Replace regional codes for prefered codes from a communication purpose
@@ -441,11 +475,12 @@ version 15
   *Restore the sort order
   sort countrycode year
 
+  * Make sure that there are only one obs per country and year
+  isid countrycode year
+
   * Compress and save in rawdata
   compress
   noi save "`output_dir'/`clonefile'.dta", replace
-
-
 
   * Display message to end this do file
   noi di as res "{phang}Concluded importing rawdata.{p_end}"

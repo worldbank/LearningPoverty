@@ -2,9 +2,20 @@
 * 0220 SUBTASK: CREATE ALL LEARNING POVERTY SPELLS (PLUS DUMMIES OF USE)
 *==============================================================================*
 
-local chosen_preference = 1108
-local enrollment_def "validated"
+	local chosen_preference = ${chosen_preference}
+	local enrollment_def 	"${enrollment_def}"
+	local anchoryear 		= ${anchor_year}
+	local enrollmentyr 		"${enrollmentyr}"
 
+	*-----------------
+	* Population year. Use global if anchor year is not specified
+	*-----------------
+
+	if ("`populationyr'" == "") {
+		local populationyr = `anchoryear'
+		noi dis in y "Population Year is the same as Anchor Year: `anchoryear'"
+	}  
+  
 *quietly {
 
   * Ensure comparability file is up to date
@@ -32,8 +43,117 @@ local enrollment_def "validated"
   replace nla_code = "N.A." if inlist(countrycode,"MLI","MDG","COD") & test == "NLA"
   replace test = "PASEC"    if inlist(countrycode,"MLI","MDG","COD") & test == "NLA"
 
+
+  *-----------------------------------------------------------------------------*
+  * Check ENROLLMENT() option
+  * drop all enrollment years except `anchoryear'
+  * select if enrollment data will be matched using a fixed year for all countries, or the closet enrollment to 
+  * year_assessment (adjust option)
+  *-----------------------------------------------------------------------------*
+  
+  if ("`enrollmentyr'" != "adjust") & ("`enrolvltype'" == "num") {
+	  * Must be one of enrollment methods supported
+	  * Assume "validated" as default if not specified    
+	  if ("`enrollment'" == "validated" | "`enrollment'" == "") {
+		drop enrollment_interpolated*
+		rename enrollment_validated_* enrollment_*
+	  }
+	  else if ("`enrollment'" == "interpolated") {
+		drop enrollment_validated*
+		rename enrollment_interpolated_* enrollment_*
+	  }
+	  else {
+		noi dis as error `"ENROLLMENT must be either "interpolated" or "validated". Try again."'
+		break
+	  }
+      * keep only enrollment variables from selected year
+	  foreach var of varlist enrollment_*  {
+		if strmatch("`var'","*`enrollmentyr'*") == 0 & strmatch("`var'","*source*") == 0 & strmatch("`var'","*definition*") == 0 {
+			drop `var'
+		}
+		else {
+			local newname = subinstr("`var'","_`enrollmentyr'","",.)
+			rename `var' `newname'
+		}
+	  }
+  }
+  if ("`enrollmentyr'" == "adjust") {
+  	  * Must be one of enrollment methods supported
+	  * Assume "validated" as default if not specified    
+	  if "`enrollment'" == "validated" | "`enrollment'" == "" {
+		drop enrollment_interpolated*
+		rename enrollment_validated_* enrollment_*
+	  }
+	  else if "`enrollment'" == "interpolated" {
+		drop enrollment_validated*
+		rename enrollment_interpolated_* enrollment_*
+	  }
+	  else {
+		noi dis as error `"ENROLLMENT must be either "interpolated" or "validated". Try again."'
+		break
+	  }
+     * keep only enrollment variables from selected year
+	 gen enrollment_all		= .
+	 gen enrollment_ma		= .
+	 gen enrollment_fe		= .
+	 gen enrollment_flag	= .
+	 gen enrollment_year	= .
+	 levelsof year_assessment if year_assessment != -9999
+	 foreach yr in `r(levels)'   {
+		* loop through all countries
+		replace enrollment_all	= enrollment_all_`yr'	if enrollment_all == .	& year_assessment == `yr'
+		replace enrollment_ma	= enrollment_ma_`yr'	if enrollment_ma == .	& year_assessment == `yr'
+		replace enrollment_fe	= enrollment_fe_`yr'	if enrollment_fe == .	& year_assessment == `yr'
+		replace enrollment_flag	= enrollment_flag_`yr'	if enrollment_flag == .	& year_assessment == `yr'
+		replace enrollment_year	= `yr'					if enrollment_year == .	& year_assessment == `yr'
+	 	drop enrollment_*_`yr'
+	  }
+	  // drop all remaining enrollment variables
+	  drop enrollment_*_*
+  }
+  
+ 
+  *-----------------------------------------------------------------------------*
+  * Check POPULATION() option
+  * Assume "1014" as default if not specified
+  *-----------------------------------------------------------------------------*
+
+  if ("`population'"=="") {
+	local population = "1014"
+  }
+  * Give error if option specified does not exist
+  if inlist("`population'","10","1014","0516","primary","9plus") == 0 {
+    noi dis as error `"POPULATION method not supported. Try again (use: "10", "1014", "0516", "primary" or "9plus")."'
+    break
+  }
+  else {
+    foreach method in 10 0516 1014 primary 9plus {
+      * Drop population variables that were not specified
+      if ("`population'" != "`method'") {
+		drop population*_`method'_*
+	  }
+    }
+  }
+  
+ 
+  * drop all population years except `anchoryear'
+    foreach var of varlist population_* {
+	if strmatch("`var'","*`populationyr'*") == 0 & strmatch("`var'","*source*") == 0 & strmatch("`var'","*definition*") == 0 {
+		drop `var'
+	}
+	else {
+	    local newname = subinstr("`var'","_`populationyr'","",.)
+		rename `var' `newname'
+	}
+  }
+
+  * Rename the population variable
+  rename population_*_`population' population_`anchoryear'_*
+
+  *-----------------------------------------------------------------------------*
   * More intuitive/shorter names for key variables
-  rename (enrollment_`enrollment_def'_all nonprof_all) (enrollment bmp)
+  *-----------------------------------------------------------------------------*
+  rename (enrollment_all nonprof_all) (enrollment bmp)
 
   * Calculates learning poverty
   gen learningpoverty = 100 * ( 1 - (enrollment/100) * (1 - bmp/100))
@@ -45,6 +165,9 @@ local enrollment_def "validated"
   local traits  "region incomelevel lendingtype countryname"
   keep `idvars' `values' `traits'
 
+  * Rawfull used to produce spell data
+  save "${clone}/01_data/013_outputs/rawfull_spell.dta", replace
+  
   * Will save two almost identical copies of the file, with year sufix in variables
   tempfile rawfull_y1 rawfull_y2
 

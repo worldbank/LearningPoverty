@@ -16,18 +16,23 @@ qui {
   * Append proficiency from NLAs/UIS
   append using "${clone}/01_data/011_rawdata/proficiency_from_NLA_md.dta"
 
-  * Append proficiency from L4A rawlatest
+  * Append proficiency from L4A rawlatest + Assessments with no microdata
   append using "${clone}/01_data/011_rawdata/proficiency_no_microdata.dta"
 
   order countrycode year idgrade test nla_code subject nonprof_all
 
   replace nla_code = "N.A." if missing(nla_code)
+  
+  * Rename LLECE in the SERCE scale to LLECES, available for 2006, 2013 and 2019, this 
+  * is important to clearly differentiate between LLECET, which is LLECE in the TERCE 
+  * scale available for 2013 and 2019
+  replace test = "LLECES" if test == "LLECE"
 
   * Variable to make it easier to add exceptions in rawlatest
   tostring year, gen(year_str)
   gen str surveyid = countrycode + "_" + year_str + "_" + test
   label var surveyid "SurveyID (countrycode_year_assessment)"
-
+  
   * Add metadata on used MPL (minimum proficiency threshold)
   * COULD BE IN GLAD REPO SO CSV COMES WITH NAMES AND METADATA already (TODO!)
   replace min_proficiency_threshold = "III (SERCE scale)" if test=="LLECE"

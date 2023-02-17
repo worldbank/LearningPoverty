@@ -3,21 +3,11 @@
 *==============================================================================*
 qui {
 
-  * Change here only if wanting to use a different preference
-  * than what is being passed in the global in 032_run
-  * But don't commit any change here (only commit in global 032_run)
-  local chosen_preference = $chosen_preference
-  
-  * Change here only if wanting to use a different anchor year
-  * than what is being passed in the global in 012_run
-  * But don't commit any change here (only commit in global 012_run)
-  local anchor_year = $anchor_year
-
   * File that will be updated, one worksheet at a time from the template
   global template_file "${clone}/05_working_paper/051_rawdata/LPV_Tables_Figures_Template.xlsx"
   global excel_file "${clone}/05_working_paper/053_outputs/LPV_Tables_Figures.xlsx"
   copy "${template_file}" "${excel_file}", replace
-
+  local chosen_preference = $chosen_preference
   /* List of input files manipulated to export to Excel
   - "${clone}/01_data/013_outputs/preference1005.dta" (T2,T19,T20,T21,F3)
   - "${clone}/01_data/013_outputs/rawfull.dta" (T2,F2)
@@ -137,7 +127,7 @@ qui {
   * Those 3 PASEC are "desguised" as NLAs because they belong to an earlier round
   replace test = "PASEC" if inlist(countrycode,"MLI","MDG","COD")
   gen byte included = (year_assessment >= 2011 & lendingtype != "LNX")
-  keep if !missing(adj_nonprof_all) & included == 1
+  keep if !missing(lpv_all) & included == 1
   collapse (sum) included anchor_population, by(test)
   save `in_global_number', replace
 
@@ -224,7 +214,7 @@ qui {
   *-----------------------------------------------------------------------------
   * Table 4 Share of children who are learning-poor by late primary by country groups
   *-----------------------------------------------------------------------------
-  use "${clone}/03_export_tables/033_outputs/individual_tables/outline_all_current_lp.dta", clear
+  use "${clone}/05_working_paper/053_outputs/individual_tables/outline_all_current_lp.dta", clear
   keep if inlist(aggregated_by, "global", "region", "incomelevel", "lendingtype") & old == 0
   keep   group mean_lp se_lp min_lp max_lp part2_only aggregated_by
   reshape wide mean_lp se_lp min_lp max_lp, i(group) j(part2_only)
@@ -254,7 +244,7 @@ qui {
   *-----------------------------------------------------------------------------
   * Table 5 Results sensitivity in respect to choice of reporting window
   *-----------------------------------------------------------------------------
-  use "${clone}/03_export_tables/033_outputs/individual_tables/outline_all_SA_lp.dta", clear
+  use "${clone}/05_working_paper/053_outputs/individual_tables/outline_all_SA_lp.dta", clear
   keep if aggregated_by == "global"
   gen auxfile = substr(file, 15, .)
   keep if inlist(auxfile, "2001_part2", "2001_world", "2011_part2", "2011_world", "2013_part2", "2013_world", "2015_part2", "2015_world")
@@ -287,7 +277,7 @@ qui {
   *-----------------------------------------------------------------------------
   * Table 6 Results sensitivity in respect to choice of population of reference
   *-----------------------------------------------------------------------------
-  use "${clone}/03_export_tables/033_outputs/individual_tables/outline_all_SA_lp.dta", clear
+  use "${clone}/05_working_paper/053_outputs/individual_tables/outline_all_SA_lp.dta", clear
   keep if aggregated_by == "global"
   gen auxfile = substr(file, 20, .)
   keep if inlist(auxfile, "1014_part2", "1014_world", "0516_part2", "0516_world") | inlist(auxfile, "10_part2", "10_world", "9plus_part2", "9plus_world", "primary_part2", "primary_world")
@@ -319,7 +309,7 @@ qui {
   * Table 7  Decomposition of learning poverty by learning and schooling
   *-----------------------------------------------------------------------------
   * Pooled genders, All countries and Part 2
-  use "${clone}/03_export_tables/033_outputs/individual_tables/decomposition_lpv_all.dta", clear
+  use "${clone}/05_working_paper/053_outputs/individual_tables/decomposition_lpv_all.dta", clear
   gen byte part2_only = (filter != "all ctrys")
   drop filter
   reshape wide total bmp oos shr_bmp shr_oos, i(category panel) j(part2_only)
@@ -351,7 +341,7 @@ qui {
   *-----------------------------------------------------------------------------
   * Table 8 Learning poverty by boys and girls, and country groups, for a subsample of countries
   *-----------------------------------------------------------------------------
-  use "${clone}/03_export_tables/033_outputs/individual_tables/outline_all_gender_lp.dta", clear
+  use "${clone}/05_working_paper/053_outputs/individual_tables/outline_all_gender_lp.dta", clear
   keep if inlist(aggregated_by, "global", "region", "incomelevel", "lendingtype")
   drop concatenated agg_file file *allcomp*
   reshape wide n_countries mean_lp_ma se_lp_ma mean_lp_fe se_lp_fe, i(group aggregated_by) j(part2_only)
@@ -386,17 +376,16 @@ qui {
 
   * - share of population with gender disaggregated data
   use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
-  collapse (sum) population_`anchor_year'_all, by(lp_by_gender_is_available)
-  sum population_`anchor_year'_all
-  gen share = population_`anchor_year'_all / `r(sum)'
+  collapse (sum) population_${anchoryear}_all, by(lp_by_gender_is_available)
+  sum population_${anchoryear}_all
+  gen share = population_${anchoryear}_all / `r(sum)'
   gen group = "all countries"
   export excel using "${excel_file}", sheet("T8", modify) cell(J29) firstrow(variables) nolabel keepcellfmt
-
   use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
   keep if lendingtype != "LNX"
-  collapse (sum) population_`anchor_year'_all, by(lp_by_gender_is_available)
-  sum population_`anchor_year'_all
-  gen share = population_`anchor_year'_all / `r(sum)'
+  collapse (sum) population_${anchoryear}_all, by(lp_by_gender_is_available)
+  sum population_${anchoryear}_all
+  gen share = population_${anchoryear}_all / `r(sum)'
   gen group = "low and middle income countries"
   export excel using "${excel_file}", sheet("T8", modify) cell(J34) firstrow(variables) nolabel keepcellfmt
 
@@ -407,9 +396,9 @@ qui {
   * Table 9  Decomposition of learning poverty by learning and schooling, for boys and girls
   *-----------------------------------------------------------------------------
   * Gender disaggregated, All countries only
-  use "${clone}/03_export_tables/033_outputs/individual_tables/decomposition_lpv_ma.dta", clear
+  use "${clone}/05_working_paper/053_outputs/individual_tables/decomposition_lpv_ma.dta", clear
   gen gender = 0
-  append using "${clone}/03_export_tables/033_outputs/individual_tables/decomposition_lpv_fe.dta"
+  append using "${clone}/05_working_paper/053_outputs/individual_tables/decomposition_lpv_fe.dta"
   replace gender = 1 if missing(gender)
   keep if filter == "all ctrys"
   reshape wide total bmp oos shr_bmp shr_oos, i(category panel filter) j(gender)
@@ -436,7 +425,7 @@ qui {
   *-----------------------------------------------------------------------------
   * Table 10 Decomposition of the change in learning poverty by learning and schooling
   *-----------------------------------------------------------------------------
-  use "${clone}/03_export_tables/033_outputs/individual_tables/decomposition_spells.dta", clear
+  use "${clone}/05_working_paper/053_outputs/individual_tables/decomposition_spells.dta", clear
   drop if category == "SAS"
   rename_regions, regionvar(category) namevar(category)
   replace category = "Overall" if category == "WLD"
@@ -496,13 +485,11 @@ qui {
   *-----------------------------------------------------------------------------
   * Table 12 Learning poverty rates in 2030 under two scenarios (simulation using spells by region)
   *-----------------------------------------------------------------------------
-
-  local table_12_A_file "simfile_preference_`chosen_preference'_regional_growth_summarytable.dta"
-  local table_12_B_file "simfile_preference_`chosen_preference'_income_level_summarytable.dta"
-  local table_12_C_file "simfile_preference_`chosen_preference'_initial_poverty_level_summarytable.dta"
-  local table_12_D_file "simfile_preference_`chosen_preference'_regional_growth_glossy_summarytable.dta"
-  local table_12_E_file "simfile_preference_`chosen_preference'_regional_growth_min2_summarytable.dta"
-
+  local table_12_A_file "simfile_preference_${chosen_preference}_regional_growth_summarytable.dta"
+  local table_12_B_file "simfile_preference_${chosen_preference}_income_level_summarytable.dta"
+  local table_12_C_file "simfile_preference_${chosen_preference}_initial_poverty_level_summarytable.dta"
+  local table_12_D_file "simfile_preference_${chosen_preference}_regional_growth_glossy_summarytable.dta"
+  local table_12_E_file "simfile_preference_${chosen_preference}_regional_growth_min2_summarytable.dta"
   local table_12_A_place "B9"
   local table_12_B_place "B25"
   local table_12_C_place "B37"
@@ -573,9 +560,9 @@ qui {
   * Table 16  Source of enrollment data
   *-----------------------------------------------------------------------------
   use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
-  keep if !missing(adj_nonprof_all)
+  keep if !missing(lpv_all)
   preserve
-    collapse (count) freq=adj_nonprof_all, by(enrollment_definition)
+    collapse (count) freq=lpv_all, by(enrollment_definition)
     qui sum freq
     gen percent = freq/`r(sum)'
     label var freq "Freq."
@@ -597,14 +584,14 @@ qui {
   * Table 17 Population ages 10-14 years old by region and income classifications (Year = 2015)
   *-----------------------------------------------------------------------------
   use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
-  keep regionname incomelevel population_`anchor_year'_all
-  separate population_`anchor_year'_all , by(incomelevel)
-  collapse (sum) population_`anchor_year'_all?, by(regionname)
-  label var population_`anchor_year'_all1 "High income Countries"
-  label var population_`anchor_year'_all2 "Low income Countries"
-  label var population_`anchor_year'_all3 "Low-middle income"
-  label var population_`anchor_year'_all4 "Upper-middle income"
-  order regionname population_`anchor_year'_all1 population_`anchor_year'_all4 population_`anchor_year'_all3 population_`anchor_year'_all2
+  keep regionname incomelevel population_${anchoryear}_all
+  separate population_${anchoryear}_all , by(incomelevel)
+  collapse (sum) population_${anchoryear}_all?, by(regionname)
+  label var population_${anchoryear}_all1 "High income Countries"
+  label var population_${anchoryear}_all2 "Low income Countries"
+  label var population_${anchoryear}_all3 "Low-middle income"
+  label var population_${anchoryear}_all4 "Upper-middle income"
+  order regionname population_${anchoryear}_all1 population_${anchoryear}_all4 population_${anchoryear}_all3 population_${anchoryear}_all2
   preserve
     collapse (sum) population*
     gen regionname = "Global"
@@ -612,10 +599,8 @@ qui {
     save `globalpop', replace
   restore
   append using `globalpop'
-
-  egen population_`anchor_year'_alltotal = rowtotal(population_`anchor_year'_all?)
-  label var population_`anchor_year'_alltotal "Total"
-
+  egen population_${anchoryear}_alltotal = rowtotal(population_${anchoryear}_all?)
+  label var population_${anchoryear}_alltotal "Total"
   export excel using "${excel_file}", sheet("T17", modify) cell(B6) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Table 17 exported"
@@ -680,20 +665,20 @@ qui {
   * Table 20 Country Numbers
   *-----------------------------------------------------------------------------
   use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
-  keep if year_assessment >= 2011 & !missing(adj_nonprof_all)
-  gen oos_all = 100 - enrollment_all
+  keep if year_assessment >= 2011 & !missing(lpv_all)
+  gen oos_all = sd_all
   sort region countryname
   rename_regions
   * Those 3 PASEC are "desguised" as NLAs because they belong to an earlier round
   * and COD also had the actual year of 2010 disguised as 2011
   replace year_assessment = 2010 if countrycode == "COD"
   replace test = "PASEC"         if inlist(countrycode,"MLI","MDG","COD")
-  local  vars2keep "region countryname oos_all nonprof_all adj_nonprof_all test year_assessment"
+  local  vars2keep "region countryname oos_all ld_all lpv_all test year_assessment"
   order `vars2keep'
   keep  `vars2keep'
   label var oos_all          "Out of School (OOS, %)"
-  label var nonprof_all      "Below Minimum Proficiency (BMP, %)"
-  label var adj_nonprof_all  "Learning Poverty (%)"
+  label var ld_all      "Below Minimum Proficiency (BMP, %)"
+  label var lpv_all  "Learning Poverty (%)"
   label var test             "Assessment"
   label var year_assessment  "Assessment Year"
   export excel using "${excel_file}", sheet("T20", modify) cell(B6) firstrow(varlabels) nolabel keepcellfmt
@@ -777,11 +762,9 @@ qui {
   gen client_countries = (comparable == 1 & excess_timss == 0 & lendingtype != "LNX")
   collapse (max) *_countries, by(countrycode idgrade)
   keep if rich_countries == 1 | client_countries == 1
-  merge m:1 countrycode using "${clone}/01_data/013_outputs/rawlatest.dta", keepusing(population_2017_all) assert(match using) keep(match) nogen
-
-  gen population_rich   = population_`anchor_year'_all * rich_countries
-  gen population_client = population_`anchor_year'_all * client_countries
-
+  merge m:1 countrycode using "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", keepusing(population_${anchoryear}_all) assert(match using) keep(match) nogen
+  gen population_rich   = population_${anchoryear}_all * rich_countries
+  gen population_client = population_${anchoryear}_all * client_countries
   collapse (sum) population_rich population_client, by(idgrade)
   egen population_all = rowtotal(population_rich population_client)
   assert _N == 3
@@ -843,11 +826,11 @@ qui {
   *-----------------------------------------------------------------------------
   use "${clone}/05_working_paper/053_outputs/pisa-lp-by-country.dta", clear
   keep if latest_pisa == 1
-  foreach var in nonprof_all adj_nonprof_all value {
+  foreach var in ld_all lpv_all value {
       replace `var' = `var'/100
   }
   drop indicator diff maxyear latest_pisa
-  order countrycode region incomelevel lendingtype test nonprof_all year_lp adj_nonprof_all value year_pisa
+  order countrycode region incomelevel lendingtype test ld_all year_lp lpv_all value year_pisa
   export excel using "${excel_file}", sheet("F1", modify) cell(O6) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Figure 1 exported"
@@ -863,15 +846,23 @@ qui {
 
 
   *-----------------------------------------------------------------------------
-  * Figure 3 Learning poverty and the average learning gap by country
+  * Figure 3 Learning deprivation and the average learning deprivation gap by country
   *-----------------------------------------------------------------------------
   use "${clone}/01_data/013_outputs/rawfull.dta", clear
-  keep if !missing(nonprof_all) & !missing(fgt1_all) & !missing(fgt2_all)
+
+  *-----------------------------------------------------------------------------
+  * temporary solution until the rawfull naming convention gets fixed earlier in the workflow
+  rename nonprof_all	ld_all
+  rename fgt1_all		ldgap_all
+  rename fgt2_all		ldsev_all
+  *-----------------------------------------------------------------------------
+
+  keep if !missing(ld_all) & !missing(ldgap_all) & !missing(ldsev_all)
   drop if test == "TIMSS" & subject == "math"
-  order countrycode test idgrade subject year_assessment nonprof_all fgt1_all fgt2_all region incomelevel lendingtype
+  order countrycode test idgrade subject year_assessment ld_all ldgap_all ldsev_all region incomelevel lendingtype
   keep  countrycode - lendingtype
   sort test
-  replace nonprof_all = nonprof_all/100
+  replace ld_all = ld_all/100
   export excel using "${excel_file}", sheet("F3", modify) cell(O5) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Figure 3 exported"
@@ -881,14 +872,13 @@ qui {
   * Figure 4 Learning poverty gender gap, by country
   * Figure 5 Learning poverty gender gap by the level of Learning Poverty
   *-----------------------------------------------------------------------------
-
   use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
   replace lp_by_gender_is_available = 0 if inlist(countrycode,"MNG","PHL")
   keep if lp_by_gender_is_available
-  keep countrycode adj_*
-  gen gap = adj_nonprof_ma - adj_nonprof_fe
+  keep countrycode lpv_*
+  gen gap = lpv_ma - lpv_fe
   gen abs_gap = abs(gap)
-  order countrycode adj_nonprof_all adj_nonprof_fe adj_nonprof_ma gap abs_gap
+  order countrycode lpv_all lpv_fe lpv_ma gap abs_gap
   sort gap
   export excel using "${excel_file}", sheet("F4", modify) cell(J6) firstrow(varlabels) nolabel keepcellfmt
 
@@ -920,7 +910,7 @@ qui {
   *-----------------------------------------------------------------------------
   * Figure 8  Learning poverty under two scenarios, 2015-30 (simulation)
   *-----------------------------------------------------------------------------
-  use "${clone}/02_simulation/023_outputs/simfile_preference_`chosen_preference'_regional_growth_fulltable.dta", clear
+  use "${clone}/02_simulation/023_outputs/simfile_preference_1005_regional_growth_fulltable.dta", clear
   keep if year>=2015 & year<=2030
   keep if region == "_Overall"
   keep if inlist(benchmark,"_own_","_r80_")

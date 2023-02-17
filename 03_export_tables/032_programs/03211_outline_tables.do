@@ -50,8 +50,8 @@ program define   outline_current_lp, rclass
         bys `aggregation': egen total_countries =  sum(include_country)
 
         * Collapse the measures in tables being generated
-        collapse (mean) mean_lp = adj_nonprof_all (min) min_lp = adj_nonprof_all (max) max_lp = adj_nonprof_all ///
-                 (mean) mean_fgt1 = fgt1_all mean_fgt2 = fgt1_all ///
+        collapse (mean) mean_lp = lpv_all (min) min_lp = lpv_all (max) max_lp = lpv_all ///
+                 (mean) mean_ldgap = ldgap_all mean_ldsev = ldsev_all ///
                  (mean) n_countries = `aggregation'_n_countries (mean) coverage = `aggregation'_coverage ///
                  (mean) population_w_data = `aggregation'_population_w_data  ///
                  (mean) total_population = `aggregation'_total_population    ///
@@ -74,15 +74,15 @@ program define   outline_current_lp, rclass
       if "`repetitions'"!="" {
 
         * Replaces the SE with median value for assessments without this information
-        replace se_nonprof_all = 1.2 if missing(se_nonprof_all) & !missing(nonprof_all)
+        replace se_ld_all = 1.2 if missing(se_ld_all) & !missing(ld_all)
 
         forvalues i = 1/`repetitions' {
           preserve
 
             * Bootstrap value for learning poverty
-            gen adj_nonprof_bs_all = 100 * ( 1 - (enrollment_all/100) * (1 - rnormal(nonprof_all, se_nonprof_all)/100))
+            gen lpv_bs_all = 100*((sd_all/100)*(1-rnormal(ld_all, se_ld_all)/100))
 
-            collapse (mean) adj_nonprof_all adj_nonprof_bs_all  [fw = `aggregation'_weight], by(`aggregation')
+            collapse (mean) lpv_all lpv_bs_all  [fw = `aggregation'_weight], by(`aggregation')
 
             * Makes all the files compatible for appending later
             rename `aggregation'  group
@@ -107,7 +107,7 @@ program define   outline_current_lp, rclass
       * Open the bootstrap SE with all appended repetitions
       use "`filename_bs_dta'", clear
 
-      collapse (sd) se_lp = adj_nonprof_bs_all, by(group aggregated_by)
+      collapse (sd) se_lp = lpv_bs_all, by(group aggregated_by)
 
       tempfile se
       save    `se'
@@ -141,8 +141,8 @@ program define   outline_current_lp, rclass
     label var mean_lp           "Learning Poverty (%)"
     label var min_lp            "Minimum Learning Poverty"
     label var max_lp            "Maximum Learning Poverty"
-    label var mean_fgt1         "Average Learning Gap (%, FGT1)"
-    label var mean_fgt2         "Average Learning Gap Squared (%, FGT2)"
+    label var mean_ldgap        "Average Learning Deprivation Gap (%)"
+    label var mean_ldsev        "Average Learning Deprivation Severity (%)"
     label var coverage          "Population Coverage (%)"
     label var population_w_data "Population w/ Assessment (in millions)"
     label var total_population  "Regional Population (in millions)"
@@ -154,7 +154,7 @@ program define   outline_current_lp, rclass
     label var max_assess_year   "Max Year"
     label var file              "File marker (table creation)"
 
-    order aggregated_by group *lp* *fgt* learning_poor *population* coverage *countries* *year file
+    order aggregated_by group *lp* *ld* learning_poor *population* coverage *countries* *year file
     sort  aggregated_by group
 
     save "`filename_dta'", replace
@@ -204,8 +204,8 @@ program define   outline_gender_lp, rclass
     gen str global = "TOTAL"
 
     * Given that we'll print out gender split, only keep LP data if have the gender split
-    clonevar adj_nonprof_all_compatible = adj_nonprof_all
-    replace  adj_nonprof_all_compatible = . if lp_by_gender_is_available == 0
+    clonevar lpv_all_compatible = lpv_all
+    replace  lpv_all_compatible = . if lp_by_gender_is_available == 0
 
     * Loop through each aggregation
     foreach aggregation of local possible_aggregations {
@@ -213,8 +213,8 @@ program define   outline_gender_lp, rclass
       preserve
 
         * Collapse the measures in tables being generated
-        collapse (mean) mean_lp_allcomp = adj_nonprof_all_compatible ///
-                 (mean) mean_lp_ma = adj_nonprof_ma (mean) mean_lp_fe = adj_nonprof_fe ///
+        collapse (mean) mean_lp_allcomp = lpv_all_compatible ///
+                 (mean) mean_lp_ma = lpv_ma (mean) mean_lp_fe = lpv_fe ///
                  (rawsum) n_countries = lp_by_gender_is_available ///
                  [fw = `aggregation'_weight], by(`aggregation')
 
@@ -234,7 +234,7 @@ program define   outline_gender_lp, rclass
 
         * Replaces the SE with median value for assessments without this information
         foreach subgroup in all ma fe {
-          replace se_nonprof_`subgroup' = 1.2 if missing(se_nonprof_`subgroup') & !missing(nonprof_`subgroup')
+          replace se_ld_`subgroup' = 1.2 if missing(se_ld_`subgroup') & !missing(ld_`subgroup')
         }
 
         forvalues i = 1/`repetitions' {
@@ -242,10 +242,10 @@ program define   outline_gender_lp, rclass
 
             * Bootstrap value for learning poverty
             foreach subgroup in all ma fe {
-              gen adj_nonprof_bs_`subgroup' =100 * ( 1 - (enrollment_`subgroup'/100) * (1 - rnormal(nonprof_`subgroup', se_nonprof_`subgroup')/100))
+              gen lpv_bs_`subgroup' =100 * ((sd_`subgroup'/100)*(1-rnormal(ld_`subgroup', se_ld_`subgroup')/100))
             }
 
-            collapse (mean) adj_nonprof_all_compatible adj_nonprof_ma adj_nonprof_fe adj_nonprof_bs_*  ///
+            collapse (mean) lpv_all_compatible lpv_ma lpv_fe lpv_bs_*  ///
                      [fw = `aggregation'_weight], by(`aggregation')
 
             * Makes all the files compatible for appending later
@@ -270,8 +270,8 @@ program define   outline_gender_lp, rclass
       * Open the bootstrap SE with all appended repetitions
       use "`filename_bs_dta'", clear
 
-      collapse (sd) adj_nonprof_bs*, by(group aggregated_by)
-      rename (adj_nonprof_bs_all adj_nonprof_bs_ma adj_nonprof_bs_fe) ///
+      collapse (sd) lpv_bs*, by(group aggregated_by)
+      rename (lpv_bs_all lpv_bs_ma lpv_bs_fe) ///
              (se_lp_allcomp      se_lp_ma          se_lp_fe)
 
       tempfile se
