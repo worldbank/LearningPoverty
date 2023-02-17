@@ -118,7 +118,7 @@ quietly {
   *-----------------------------------------------------------------------------
   * Fill this list will all user-written commands this project requires
   * that can be installed automatically from ssc
-  local user_commands wbopendata carryforward _gwtmean mdensity estout grqreg missings adecomp repest
+  local user_commands wbopendata carryforward _gwtmean mdensity estout grqreg missings adecomp repest tablemat xsvmat
 
   * Loop over all the commands to test if they are already installed, if not, then install
   foreach command of local user_commands {
@@ -156,6 +156,9 @@ quietly {
 
   * Population weights creates frequency weights for aggregations of global numbers
   do "${clone}/01_data/012_programs/01262_population_weights.do"
+
+  * and trims the dataset on the wide sense (keep 1 enrollment, 1 population only)
+  do "${clone}/01_data/012_programs/01263_preferred_list_rawlatest.do"
 
   * Make sure the ado for running the simulations is loaded
   do "${clone}/02_simulation/022_programs/simulate_learning_poverty.ado"
