@@ -115,3 +115,48 @@ ZAF,6,SACMEQ,N.A.,read,24.699997,Drop,2013,HAD (Harmonized Assessment Database)
 ZMB,3,EGRA,N.A.,read,99.026001,51.4,2011,HAD (Harmonized Assessment Database)
 ZMB,6,SACMEQ,N.A.,read,58.199997,Drop,2013,HAD (Harmonized Assessment Database)
 ZWE,6,SACMEQ,N.A.,read,31.099998,Drop,2013,HAD (Harmonized Assessment Database)
+ARG,6,LLECE,N.A.,read,58.93386,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+BRA,6,LLECE,N.A.,read,45.56484,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+COL,6,LLECE,N.A.,read,50.24139,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+CRI,6,LLECE,N.A.,read,33.29026,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+DOM,6,LLECE,N.A.,read,76.26211,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+ECU,6,LLECE,N.A.,read,65.09251,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+GTM,6,LLECE,N.A.,read,75.91865,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+HND,6,LLECE,N.A.,read,74.26588,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+MEX,6,LLECE,N.A.,read,47.19565,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+NIC,6,LLECE,N.A.,read,78.09742,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+PAN,6,LLECE,N.A.,read,75.23973,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+PER,6,LLECE,N.A.,read,43.597,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+PRY,6,LLECE,N.A.,read,74.66283,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+SLV,6,LLECE,N.A.,read,62.10017651,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+URY,6,LLECE,N.A.,read,43.41498,Level 3 and Above,2019,WB distributional sensitive adjustment based on ERCE 2013 and 2019 results
+ARG,6,LLECET,N.A.,read,68.1,Level 3 and Above,2019,ERCE 2019 Publication.
+BRA,6,LLECET,N.A.,read,56.5,Level 3 and Above,2019,ERCE 2019 Publication.
+COL,6,LLECET,N.A.,read,62.5,Level 3 and Above,2019,ERCE 2019 Publication.
+CRI,6,LLECET,N.A.,read,46,Level 3 and Above,2019,ERCE 2019 Publication.
+CUB,6,LLECET,N.A.,read,55.43178,Level 3 and Above,2019,ERCE 2019 Publication.
+DOM,6,LLECET,N.A.,read,83.7,Level 3 and Above,2019,ERCE 2019 Publication.
+ECU,6,LLECET,N.A.,read,73.9,Level 3 and Above,2019,ERCE 2019 Publication.
+GTM,6,LLECET,N.A.,read,84.1,Level 3 and Above,2019,ERCE 2019 Publication.
+HND,6,LLECET,N.A.,read,83.8,Level 3 and Above,2019,ERCE 2019 Publication.
+MEX,6,LLECET,N.A.,read,58.4,Level 3 and Above,2019,ERCE 2019 Publication.
+NIC,6,LLECET,N.A.,read,87,Level 3 and Above,2019,ERCE 2019 Publication.
+PAN,6,LLECET,N.A.,read,82.5,Level 3 and Above,2019,ERCE 2019 Publication.
+PER,6,LLECET,N.A.,read,51,Level 3 and Above,2019,ERCE 2019 Publication.
+PRY,6,LLECET,N.A.,read,81.2,Level 3 and Above,2019,ERCE 2019 Publication.
+SLV,6,LLECET,N.A.,read,70.66525,Level 3 and Above,2019,ERCE 2019 Publication.
+URY,6,LLECET,N.A.,read,56.2,Level 3 and Above,2019,ERCE 2019 Publication.
+ARG,6,LLECET,N.A.,read,68.2335,Level 3 and Above,2013,ERCE 2013 Publication.
+BRA,6,LLECET,N.A.,read,63.1475,Level 3 and Above,2013,ERCE 2013 Publication.
+COL,6,LLECET,N.A.,read,62.1335,Level 3 and Above,2013,ERCE 2013 Publication.
+CRI,6,LLECET,N.A.,read,49.6619,Level 3 and Above,2013,ERCE 2013 Publication.
+DOM,6,LLECET,N.A.,read,94.0303,Level 3 and Above,2013,ERCE 2013 Publication.
+ECU,6,LLECET,N.A.,read,77.26,Level 3 and Above,2013,ERCE 2013 Publication.
+GTM,6,LLECET,N.A.,read,81.9949,Level 3 and Above,2013,ERCE 2013 Publication.
+HND,6,LLECET,N.A.,read,86.8683,Level 3 and Above,2013,ERCE 2013 Publication.
+MEX,6,LLECET,N.A.,read,57.4575,Level 3 and Above,2013,ERCE 2013 Publication.
+NIC,6,LLECET,N.A.,read,87.5722,Level 3 and Above,2013,ERCE 2013 Publication.
+PAN,6,LLECET,N.A.,read,80.9192,Level 3 and Above,2013,ERCE 2013 Publication.
+PER,6,LLECET,N.A.,read,69.1719,Level 3 and Above,2013,ERCE 2013 Publication.
+PRY,6,LLECET,N.A.,read,85.3079,Level 3 and Above,2013,ERCE 2013 Publication.
+URY,6,LLECET,N.A.,read,57.1312,Level 3 and Above,2013,ERCE 2013 Publication.

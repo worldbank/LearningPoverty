@@ -13,7 +13,7 @@ qui {
   local generate_documentation = ( c(version)>=15  &  $use_edukit_save )
 
   * List of files for which edukit_save_metadata is implemented
-  local files_saved_with_metadata "population proficiency enrollment rawfull rawlatest"
+  local files_saved_with_metadata "population proficiency enrollment rawfull rawlatest rawlatest_aggregate"
 
   * Location of those files in the clone
   local file_path "${clone}/01_data/013_outputs/"
@@ -35,6 +35,12 @@ qui {
       use "`file_path'/`filename'.dta", clear
       noi dyntext "dyntext_LP.txt", saving("`doc_path'/`filename'.md") replace
     }
+
+    * Learning Poverty Aggregates
+	noi dyntext "dyntext_LP_AGG.txt", saving("`doc_path'/LPV_aggregates.md") replace
+
+    * Learning Poverty Aggregates
+	noi dyntext "dyntext_LP_CTRY.txt", saving("`doc_path'/LPV_country.md") replace
 
     noi disp as res "{phang}Create documentation for datasets: `files_saved_with_metadata'.{p_end}"
   }

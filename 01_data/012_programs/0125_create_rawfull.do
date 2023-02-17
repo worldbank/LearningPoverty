@@ -3,11 +3,43 @@
 *==============================================================================*
 qui {
 
-  noi di _newline "{phang}Creating rawfull with $anchor_year as anchor year...{p_end}"
+  noi di _newline "{phang}Creating rawfull...{p_end}"
 
   /* The anchor year is set as a global in the 012_run.do, for it affects
      several files. When Learning Poverty numbers were first released
      in Sep 2019, the chosen anchor year was 2015. */
+
+  *-----------------------------*
+  * Create Enrollment Wide      *
+  *-----------------------------*
+  
+  use "${clone}/01_data/013_outputs/enrollment.dta", clear
+  keep if year >= 1990 
+  foreach var of varlist enrollment_validated_all - enrollment_interpolated_ma year_enrollment  {
+	rename `var' `var'_
+  }
+  order countrycode enrollment_source enrollment_definition year
+  reshape wide enrollment_validated_all_ - year_enrollment_ , i(countrycode enrollment_source enrollment_definition) j(year)
+  local check = _N 
+  if (`check' != 217) { 
+	collapse (mean) enrollment_inte* enrollment_val*  (first) enrollment_definition , by(countrycode enrollment_source)
+	noi di in y "Enrollment database had more than 1 observation per country. Collapse applied."
+  }
+  save "${clone}/01_data/013_outputs/enrollment_wide.dta", replace 
+
+  *-----------------------------*
+  * Create Population Wide      *
+  *-----------------------------*
+
+  * Open population for anchor year only
+  * Note that population.dta is LONG on year, WIDE on population definitions and gender
+  use "${clone}/01_data/013_outputs/population.dta" , clear
+  keep if year_population >= 2010 & year_population <= 2030
+  foreach var of varlist population_fe_10 - population_all_1014 {
+	rename `var' `var'_
+  }
+  reshape wide population_fe_10_ - population_all_1014_ , i(countrycode population_source) j(year_population)
+  save "${clone}/01_data/013_outputs/population_wide.dta", replace 
 
   *-----------------------------*
   * Dataset WITHOUT proficiency *
@@ -15,14 +47,11 @@ qui {
 
   * Open population for anchor year only
   * Note that population.dta is LONG on year, WIDE on population definitions and gender
-  use "${clone}/01_data/013_outputs/population.dta" if year_population == $anchor_year, clear
-
-  * To be able to merge with enrollment
-  clonevar year = year_population
-
+  use "${clone}/01_data/013_outputs/population_wide.dta" , clear
+  
   * Brings in Enrollment
   * Note that enrollment.dta is LONG on year, WIDE on enrollment definiions and gender
-  merge m:1 countrycode year using "${clone}/01_data/013_outputs/enrollment.dta", keep(master match) nogen
+  merge 1:1 countrycode using "${clone}/01_data/013_outputs/enrollment_wide.dta", keep(master match) nogen
 
   * This dataset purposefully will be saved without proficiency data
   gen str test     = "None"
@@ -33,23 +62,20 @@ qui {
   * Save the dataset with only population and enrollment, which still has 1 obs = 1 cty, all for 2015
   save "${clone}/01_data/013_outputs/population_enrollment.dta", replace
 
-
   *-------------------------------*
   * Dataset WITH proficiency data *
   *-------------------------------*
-  * Open population for anchor year only
+  * Open population for multiple years default 2010 to 2030
   * Note that population.dta is LONG on year, WIDE on population definitions and gender
-  use "${clone}/01_data/013_outputs/population.dta" if year_population==$anchor_year, clear
-
-
+  * Population year is now a sufix and can be changed in 0126
+  use "${clone}/01_data/013_outputs/population_wide.dta" , clear
+  
   *** Brings in Proficiency (LONG)
   merge 1:m countrycode using "${clone}/01_data/013_outputs/proficiency.dta", keep(match) nogen
   //* TODO Investigate two cases (CHI and BIH)
 
   * Brings in Enrollment (WIDE)
-  merge m:1 countrycode year using "${clone}/01_data/013_outputs/enrollment.dta", keep(master match) nogen
-
-
+  merge m:1 countrycode using "${clone}/01_data/013_outputs/enrollment_wide.dta", keep(master match) nogen
 
   *---------------------------------*
   * Appends both, bring in metadata *
@@ -64,7 +90,9 @@ qui {
   * Brings in country metadata. Assert all match (metadata has chosen 217 countries)
   merge m:1 countrycode using "${clone}/01_data/011_rawdata/country_metadata.dta", assert(match) nogen
 
-
+  replace year_assessment = -9999 if year_assessment == .
+  
+ 
   *-------------------------------*
   * Unit of Observation Explainer *
   *-------------------------------*
@@ -86,7 +114,7 @@ qui {
     local sources "All population, enrollment and proficiency sources combined."
     edukit_save, filename(rawfull) path("${clone}/01_data/013_outputs/")   ///
                  idvars(countrycode year_assessment idgrade test nla_code subject) ///
-                 varc("value *nonprof* fgt* enrollment_val* enrollment_inte* population_*; trait year_enrollment year_population *source* *definition* *threshold* surveyid countryname region* adminregion* incomelevel* lendingtype* cmu") ///
+                 varc("value *nonprof* fgt* enrollment_val* enrollment_inte* year_enrollment*  population_*; trait *source* *definition* *threshold* surveyid countryname region* adminregion* incomelevel* lendingtype* cmu") ///
                  metadata("description `description'; sources `sources'; filename Rawfull")
   }
   else save "${clone}/01_data/013_outputs/rawfull.dta", replace
