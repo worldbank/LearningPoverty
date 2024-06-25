@@ -21,6 +21,7 @@ qui {
   destring year, replace
   destring idgrade, replace
   destring pct_reading_low_target_wb_v pct_read_low_fe pct_read_low_ma, replace
+  drop if status != "Accepted"
 
   * Parsing out countrycode from NLA table (ie: BGD_1 or BGD_2 into BGD)
   gen nla_code = wbcode
@@ -131,13 +132,13 @@ if $network_is_available {
   local clonefile "${clone}/04_repo_update/043_outputs/proficiency_from_GLAD.csv"
 
   * If getting the files from the network, the path is
-  local networkfile "${network}/GDB/Projects/WLD_2022_FGT-CLO/clo_fgt_learning.dta"
+  local networkfile "${network}/Projects/WLD_2023_FGT-CLO/clo_fgt_learning.dta"
 
   * Open the file
   use "`networkfile'", clear
 
   * List of needed CLO for Learning Poverty (only those for which we have microdata)
-  local lp_clos "LAC_2006_LLECE LAC_2013_LLECE SSA_2000_SACMEQ SSA_2007_SACMEQ SSA_2014_PASEC SSA_2019_PASEC WLD_2001_PIRLS WLD_2006_PIRLS WLD_2011_PIRLS WLD_2016_PIRLS WLD_2003_TIMSS WLD_2007_TIMSS WLD_2011_TIMSS WLD_2015_TIMSS WLD_2019_TIMSS EAP_2019_SEA-PLM SSA_2021_AMPLB "
+  local lp_clos "LAC_2006_LLECE LAC_2013_LLECE SSA_2000_SACMEQ SSA_2007_SACMEQ SSA_2014_PASEC SSA_2019_PASEC WLD_2001_PIRLS WLD_2006_PIRLS WLD_2011_PIRLS WLD_2016_PIRLS WLD_2003_TIMSS WLD_2007_TIMSS WLD_2011_TIMSS WLD_2015_TIMSS WLD_2019_TIMSS EAP_2019_SEA-PLM SSA_2021_AMPLB  WLD_2021_PIRLS"
 
   * Check that it contains all the CLO of all surveys required for LP
   levelsof survey, local(clos_in_networkfile)
@@ -148,7 +149,8 @@ if $network_is_available {
   *-----------------------------------------------------------------------------
 
   * Name that is worse but we had used already
-  rename assessment test
+	gen str test = assessment
+	drop assessment
 
   * Only valuevar needed in L4A is harmonized proficiency (hpro)
   local idvars  "countrycode year test idgrade subgroup"
