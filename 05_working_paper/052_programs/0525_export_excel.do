@@ -1,6 +1,9 @@
 *==============================================================================*
 * 0525 SUBTASK: EXPORT TO EXCEL WORKING PAPER TABLES AND FIGURES
 *==============================================================================*
+
+* Set a 0.7 second lag between table saves
+global sleeptime 700
 qui {
 
   * File that will be updated, one worksheet at a time from the template
@@ -154,6 +157,9 @@ qui {
   replace included = 0 if missing(included)
   replace anchor_population = 0 if missing(anchor_population)
   drop aux_order test
+  
+ sleep ${sleeptime}
+
   export excel using "${excel_file}", sheet("T2", modify) cell(F7) nolabel keepcellfmt
 
   * Annex with NLA info
@@ -170,6 +176,8 @@ qui {
   merge 1:1 year wbcode using `cutoff_nla', assert(match using) keep(match) nogen
   drop wbcode
   order countryname year
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T2", modify) cell(B21) nolabel keepcellfmt
 
   noi disp as txt "Table 2 exported"
@@ -181,9 +189,10 @@ qui {
   *-----------------------------------------------------------------------------
   local cell_old_0 "C8"
   local cell_old_1 "C29"
-  foreach i in 0 1 {
+  foreach i in 0  { //1
     use "${clone}/03_export_tables/033_outputs/individual_tables/outline_all_current_lp.dta", clear
     keep if inlist(aggregated_by, "incomelevel", "global", "lendingtype", "region") & old == `i'
+	keep if file == "outline_current_lp_world" //| file == "outline_current_lp_part2"
     keep   group coverage n_countries total_countries part2_only aggregated_by population_w_data
     reshape wide coverage n_countries total_countries population_w_data, i(group) j(part2_only)
     rename_regions,    regionvar(group)      namevar(group)
@@ -196,8 +205,8 @@ qui {
     replace order_groups = 4 if aggregated_by == "lendingtype"
     sort  order_groups order_incomelevel order_lendingtype group
     gen blank = .
-    order group n_countries0 total_countries0 population_w_data0 coverage0 blank n_countries1 total_countries1 population_w_data1 coverage1
-    keep  group - coverage1
+    order group n_countries0 total_countries0 population_w_data0 coverage0 //blank n_countries1 total_countries1 population_w_data1 coverage1
+    keep  group - coverage0
     replace group = "Overall" if group == "TOTAL"
     export excel using "${excel_file}", sheet("T3", modify) cell(`cell_old_`i'') nolabel keepcellfmt
   }
@@ -205,6 +214,7 @@ qui {
   * N/A trick for NAC and Part1 in "Low and Middle Contries" panel
   fill_na, ncol(4)
   foreach cell in I13 I20 I34 I41 {
+	sleep ${sleeptime}
     export excel using "${excel_file}", sheet("T3", modify) cell(`cell') nolabel keepcellfmt
   }
 
@@ -231,11 +241,14 @@ qui {
   order group mean_lp0 se_lp0 min_lp0 max_lp0 blank mean_lp1 se_lp1 min_lp1 max_lp1
   keep  group - max_lp1
   replace group = "Overall" if group == "TOTAL"
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T4", modify) cell(C8) nolabel keepcellfmt
 
   * N/A trick for NAC and Part1 in "Low and Middle Contries" panel
   fill_na, ncol(4)
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T4", modify) cell(I13) nolabel keepcellfmt
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T4", modify) cell(I20) nolabel keepcellfmt
 
   noi disp as txt "Table 4 exported"
@@ -269,6 +282,8 @@ qui {
   label var timewindow "Window"
   order timewindow mean_lpworld se_lpworld coverageworld n_countriesworld avg_assess_yearworld ///
         blank      mean_lppart2 se_lppart2 coveragepart2 n_countriespart2 avg_assess_yearpart2
+		
+ sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T5", modify) cell(B7) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Table 5 exported"
@@ -309,7 +324,7 @@ qui {
   * Table 7  Decomposition of learning poverty by learning and schooling
   *-----------------------------------------------------------------------------
   * Pooled genders, All countries and Part 2
-  use "${clone}/05_working_paper/053_outputs/individual_tables/decomposition_lpv_all.dta", clear
+  use "${clone}/03_export_tables/033_outputs/individual_tables/decomposition_lpv_all.dta", clear
   gen byte part2_only = (filter != "all ctrys")
   drop filter
   reshape wide total bmp oos shr_bmp shr_oos, i(category panel) j(part2_only)
@@ -328,6 +343,8 @@ qui {
   sort order_groups order_incomelevel order_lendingtype category
   order category total0 bmp0 oos0 shr_bmp0 shr_oos0 blank total1 bmp1 oos1 shr_bmp1 shr_oos1
   keep  category - shr_oos1
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T7", modify) cell(C9) nolabel keepcellfmt
 
   * N/A trick for NAC and Part1 in "Low and Middle Contries" panel
@@ -363,7 +380,11 @@ qui {
 
   * N/A trick for NAC and Part1 in "Low and Middle Contries" panel
   fill_na, ncol(5)
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T8", modify) cell(J14) nolabel keepcellfmt
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T8", modify) cell(J21) nolabel keepcellfmt
 
   * Corresponding notes below the table:
@@ -372,6 +393,8 @@ qui {
   use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
   keep if enrollment_flag & lp_by_gender_is_available
   keep countrycode countryname
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T8", modify) cell(B29) nolabel keepcellfmt
 
   * - share of population with gender disaggregated data
@@ -380,6 +403,8 @@ qui {
   sum population_${anchoryear}_all
   gen share = population_${anchoryear}_all / `r(sum)'
   gen group = "all countries"
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T8", modify) cell(J29) firstrow(variables) nolabel keepcellfmt
   use "${clone}/01_data/013_outputs/preference`chosen_preference'.dta", clear
   keep if lendingtype != "LNX"
@@ -387,6 +412,8 @@ qui {
   sum population_${anchoryear}_all
   gen share = population_${anchoryear}_all / `r(sum)'
   gen group = "low and middle income countries"
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T8", modify) cell(J34) firstrow(variables) nolabel keepcellfmt
 
   noi disp as txt "Table 8 exported"
@@ -396,9 +423,9 @@ qui {
   * Table 9  Decomposition of learning poverty by learning and schooling, for boys and girls
   *-----------------------------------------------------------------------------
   * Gender disaggregated, All countries only
-  use "${clone}/05_working_paper/053_outputs/individual_tables/decomposition_lpv_ma.dta", clear
+  use "${clone}/03_export_tables/033_outputs/individual_tables/decomposition_lpv_ma.dta", clear
   gen gender = 0
-  append using "${clone}/05_working_paper/053_outputs/individual_tables/decomposition_lpv_fe.dta"
+  append using "${clone}/03_export_tables/033_outputs/individual_tables/decomposition_lpv_fe.dta"
   replace gender = 1 if missing(gender)
   keep if filter == "all ctrys"
   reshape wide total bmp oos shr_bmp shr_oos, i(category panel filter) j(gender)
@@ -417,6 +444,8 @@ qui {
   sort order_groups order_incomelevel order_lendingtype category
   order category total0 bmp0 oos0 shr_bmp0 shr_oos0 blank total1 bmp1 oos1 shr_bmp1 shr_oos1
   keep  category - shr_oos1
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T9", modify) cell(C9) nolabel keepcellfmt
 
   noi disp as txt "Table 9 exported"
@@ -425,10 +454,12 @@ qui {
   *-----------------------------------------------------------------------------
   * Table 10 Decomposition of the change in learning poverty by learning and schooling
   *-----------------------------------------------------------------------------
-  use "${clone}/05_working_paper/053_outputs/individual_tables/decomposition_spells.dta", clear
+  use "${clone}/03_export_tables/033_outputs/individual_tables/decomposition_spells.dta", clear
   drop if category == "SAS"
   rename_regions, regionvar(category) namevar(category)
   replace category = "Overall" if category == "WLD"
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T10", modify) cell(B6) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Table 10 exported"
@@ -452,6 +483,8 @@ qui {
   replace sortaux = 0 if region == "Overall"
   sort sortaux
   drop sortaux
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T11", modify) cell(C7) nolabel keepcellfmt
 
   **** By Income Level ****
@@ -466,6 +499,8 @@ qui {
   sort order_incomelevel
   drop order_incomelevel
   drop if incomelevel == "Overall"
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T11", modify) cell(C14) nolabel keepcellfmt
 
   **** By Initial Learning Poverty ****
@@ -477,6 +512,8 @@ qui {
   }
   keep initial* *50 *60 *70 *80 *90
   drop if initial_poverty_level == "Overall"
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T11", modify) cell(C18) nolabel keepcellfmt
 
   noi disp as txt "Table 11 exported"
@@ -507,6 +544,8 @@ qui {
           lpv_r80_2030 blank3 lps_own_2015 blank4 lps_own_2030 lps_r80_2030
     rename_regions, namevar(region)
     replace region = "Overall" if region == "_Overall"
+	
+	sleep ${sleeptime}
     export excel using "${excel_file}", sheet("T12", modify) cell(``table'_place') nolabel keepcellfmt
   }
 
@@ -533,6 +572,8 @@ qui {
 
   order v2 v3 v4 v5 blank1 v6 v7 v8 v9
   drop if _n == _N
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T13", modify) cell(C8) nolabel keepcellfmt
 
   noi disp as txt "Table 13 exported"
@@ -546,6 +587,8 @@ qui {
   keep if comparable == 0
   keep countrycode country spell test idgrade
   sort test countrycode
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T14", modify) cell(G6) firstrow(variables) nolabel keepcellfmt
 
   noi disp as txt "Table 14 exported"
@@ -554,7 +597,6 @@ qui {
   *-----------------------------------------------------------------------------
   * [Table 15 is with Table 3]
   *-----------------------------------------------------------------------------
-
 
   *-----------------------------------------------------------------------------
   * Table 16  Source of enrollment data
@@ -575,6 +617,8 @@ qui {
   keep countrycode countryname enrollment_definition
   order countrycode countryname enrollment_definition
   keep if enrollment_definition != "ANER"
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T16", modify) cell(F6) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Table 16 exported"
@@ -601,6 +645,8 @@ qui {
   append using `globalpop'
   egen population_${anchoryear}_alltotal = rowtotal(population_${anchoryear}_all?)
   label var population_${anchoryear}_alltotal "Total"
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T17", modify) cell(B6) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Table 17 exported"
@@ -626,6 +672,8 @@ qui {
   set obs `=_N +1'
   replace obs_n = 5.5 if missing(obs_n)
   sort obs_n
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T18", modify) cell(E8) nolabel keepcellfmt
 
   noi disp as txt "Table 18 exported"
@@ -656,6 +704,8 @@ qui {
   sort obs_n
   order Early_Grade End_Primary blank1 rho blank2 N
   keep  Early_Grade-N
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T19", modify) cell(D7) nolabel keepcellfmt
 
   noi disp as txt "Table 19 exported"
@@ -681,6 +731,8 @@ qui {
   label var lpv_all  "Learning Poverty (%)"
   label var test             "Assessment"
   label var year_assessment  "Assessment Year"
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T20", modify) cell(B6) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Table 20 exported"
@@ -701,6 +753,8 @@ qui {
   set obs `=_N +1'
   replace obs_n = 6.5 if missing(obs_n)
   sort obs_n
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T21", modify) cell(C8) nolabel keepcellfmt
 
   noi disp as txt "Table 21 exported"
@@ -722,6 +776,8 @@ qui {
   replace obs_n = 7.5 if missing(obs_n)
   sort obs_n
   rename_regions, namevar(region)
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T22", modify) cell(C8) nolabel keepcellfmt
 
   noi disp as txt "Table 22 exported"
@@ -780,6 +836,8 @@ qui {
   label var population_rich   "High-Income Countries"
   label var population_client "Low- and Middle-Income Countries"
   label var population_all "Total"
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T25", modify) cell(G7) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Table 25 exported"
@@ -815,6 +873,8 @@ qui {
   keep if part2_rangeok == 0 & part2_anyrange == 1
   keep countrycode-delta_lp
   sort test delta_lp
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("T26", modify) cell(B19) firstrow(variables) nolabel keepcellfmt
 
   noi disp as txt "Table 26 exported"
@@ -831,6 +891,8 @@ qui {
   }
   drop indicator diff maxyear latest_pisa
   order countrycode region incomelevel lendingtype test ld_all year_lp lpv_all value year_pisa
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("F1", modify) cell(O6) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Figure 1 exported"
@@ -840,6 +902,8 @@ qui {
   * Figure 2 Proficiency in reading: Early Grade vs End of Primary
   *-----------------------------------------------------------------------------
   use "${clone}/05_working_paper/053_outputs/earlygrade-lp-by-country.dta", clear
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("F2", modify) cell(W6) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Figure 2 exported"
@@ -863,6 +927,8 @@ qui {
   keep  countrycode - lendingtype
   sort test
   replace ld_all = ld_all/100
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("F3", modify) cell(O5) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Figure 3 exported"
@@ -880,6 +946,8 @@ qui {
   gen abs_gap = abs(gap)
   order countrycode lpv_all lpv_fe lpv_ma gap abs_gap
   sort gap
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("F4", modify) cell(J6) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Figures 4 & 5 exported"
@@ -902,6 +970,8 @@ qui {
   order spell_id used_sim delta_lp
   sort delta_lp
   replace delta_lp = delta_lp * -1
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("F7", modify) cell(J6) firstrow(varlabels) nolabel keepcellfmt
 
   noi disp as txt "Figure 7 exported"
@@ -910,12 +980,14 @@ qui {
   *-----------------------------------------------------------------------------
   * Figure 8  Learning poverty under two scenarios, 2015-30 (simulation)
   *-----------------------------------------------------------------------------
-  use "${clone}/02_simulation/023_outputs/simfile_preference_1005_regional_growth_fulltable.dta", clear
+  use "${clone}/02_simulation/023_outputs/simfile_preference_`chosen_preference'_regional_growth_fulltable.dta", clear
   keep if year>=2015 & year<=2030
   keep if region == "_Overall"
   keep if inlist(benchmark,"_own_","_r80_")
   keep year lpv benchmark
   reshape wide lpv, i(benchmark) j(year)
+  
+  sleep ${sleeptime}
   export excel using "${excel_file}", sheet("F8", modify) cell(C28) nolabel keepcellfmt
 
   noi disp as txt "Figure 8 exported"
