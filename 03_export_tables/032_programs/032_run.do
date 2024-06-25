@@ -18,7 +18,7 @@ if _rc != 0 {
 
 *-----------------------------------------------------------------------------
 * Execution parameters
-global chosen_preference 1205  	// Chosen preference created in 01 rawlatest (0126)
+global chosen_preference 1303  	// Chosen preference created in 01 rawlatest (0126)
 global timewindow = 2014 		/// chose the reference window
 
 *-----------------------------------------------------------------------------
@@ -38,4 +38,8 @@ do "${clone}/03_export_tables/032_programs/0323_country_annex.do"
 
 * Export indicators to WDI
 do "${clone}/03_export_tables/032_programs/0324_export_WDI.do"
+
+* Export indicators to DCS
+do "${clone}/03_export_tables/032_programs/0325_export_DCS.do"
+
 *-----------------------------------------------------------------------------
