@@ -1,0 +1,139 @@
+
+<<dd_version: 1>>
+<<dd_do:quietly>>
+
+* This is the documentation generator companion from edukit_save.
+* It's a do file section that create locals to display dynamically
+* Author: Diana Goldemberg
+
+* Dataset observations and variables
+describe
+local nobs  = r(N)
+local nvars = r(k)
+
+
+    local i = 1
+    local metadata_chars:   char _dta[metadata_chars]
+    while "`metadata_chars'" != "" {
+      gettoken thischar metadata_chars : metadata_chars, parse(" ")
+      local char_i`i' = 	    "`thischar'"
+      local char_value_i`i':  char _dta[`thischar']
+      local ++i
+    }
+
+/*  We also want to read varclasses_used to read each of the chars it defines.
+    By reading each of those chars, we find which variables are in those classes. */
+
+    local j = 1
+    local varclasses_used:	char _dta[varclasses_used]
+    while "`varclasses_used'" != "" {
+      gettoken thischar varclasses_used : varclasses_used, parse(" ")
+      local char_j`j' = 	    "`thischar'"
+      local char_value_j`j':  char _dta[`thischar']
+      local ++j
+    }
+
+
+<</dd_do>>
+
+Documentation of <<dd_display:"`char_value_i5'">>
+=====================================================================
+
+<sup>back to the [Repo Structure](https://github.com/worldbank/LearningPoverty/blob/master/00_documentation/002_repo_structure/Repo_Structure.md) :leftwards_arrow_with_hook:</sup>
+
+
+
+About the **<<dd_display:`nvars'>> variables** in this dataset:
+
+~~~~
+Comparison of OOS using GEM and Chosen Preference:
+
+All (Based on Same Enrollment Year in the Chosen Preference)
+<<dd_do>>
+/* All */
+tabdisp countrycode if toinclude == 1, cellvar(enrollment_year sd_gem_lb_all sd_gem_all sd_gem_ub_all sd_pref_all )
+
+tabdisp countrycode if toinclude == 1, cellvar(enrollment_year lp_gem_lb_all lp_gem_all lp_gem_ub_all lp_pref_all )
+
+<</dd_do>>
+
+ OOS Aggregates, GEM and Pref
+<<dd_do>>
+tabstat sd_gem_lb_all sd_gem_all sd_gem_ub_all sd_pref_all [w=pop_2019_wgt ], by(region) 
+tabstat sd_gem_lb_all sd_gem_all sd_gem_ub_all sd_pref_all [w=pop_2019_wgt] if lendingtype != "LNX", by(region)
+<</dd_do>>
+
+ LP Aggregates, GEM and Pref
+<<dd_do>>
+tabstat lp_gem_lb_all lp_gem_all lp_gem_ub_all lp_pref_all [w=pop_2019_wgt ], by(region) 
+tabstat lp_gem_lb_all lp_gem_all lp_gem_ub_all lp_pref_all [w=pop_2019_wgt] if lendingtype != "LNX", by(region)
+<</dd_do>>
+
+
+All (Based on Same Enrollment Year as the **Asessment Year** in the Chosen Preference)
+<<dd_do>>
+
+tabdisp countrycode if toinclude == 1, cellvar(year_assessment sd_gem_lb_all1 sd_gem_all1 sd_gem_ub_all1 sd_pref_all )
+
+tabdisp countrycode if toinclude == 1, cellvar(year_assessment lp_gem_lb_all1 lp_gem_all1 lp_gem_ub_all1 lp_pref_all )
+
+<</dd_do>>
+
+ OOS Aggregates, GEM and Pref
+<<dd_do>>
+tabstat sd_gem_lb_all1 sd_gem_all1 sd_gem_ub_all1 sd_pref_all [w=pop_2019_wgt ], by(region) 
+tabstat sd_gem_lb_all1 sd_gem_all1 sd_gem_ub_all1 sd_pref_all [w=pop_2019_wgt] if lendingtype != "LNX", by(region)
+<</dd_do>>
+
+ LP Aggregates, GEM and Pref
+<<dd_do>>
+tabstat lp_gem_lb_all1 lp_gem_all1 lp_gem_ub_all1 lp_pref_all [w=pop_2019_wgt ], by(region) 
+tabstat lp_gem_lb_all1 lp_gem_all1 lp_gem_ub_all1 lp_pref_all [w=pop_2019_wgt] if lendingtype != "LNX", by(region)
+<</dd_do>>
+
+~~~~
+
+~~~~
+
+Female (Based on Same Enrollment Year in the Chosen Preference)
+<<dd_do>>
+/* Female */
+tabdisp countrycode if toinclude == 1, cellvar(enrollment_year sd_gem_lb_fe sd_gem_fe sd_gem_ub_fe sd_pref_fe )
+
+tabdisp countrycode if toinclude == 1, cellvar(enrollment_year lp_gem_lb_fe lp_gem_fe lp_gem_ub_fe lp_pref_fe )
+<</dd_do>>
+
+Female (Based on Same Enrollment Year as the **Asessment Year** in the Chosen Preference)
+<<dd_do>>
+
+tabdisp countrycode if toinclude == 1, cellvar(year_assessment sd_gem_lb_fe1 sd_gem_fe1 sd_gem_ub_fe1 sd_pref_fe )
+
+tabdisp countrycode if toinclude == 1, cellvar(year_assessment lp_gem_lb_fe1 lp_gem_fe1 lp_gem_ub_fe1 lp_pref_fe )
+
+<</dd_do>>
+
+
+
+~~~~
+~~~~
+
+Male (Based on Same Enrollment Year in the Chosen Preference)
+<<dd_do>>
+/* Male */
+tabdisp countrycode if toinclude == 1, cellvar(enrollment_year sd_gem_lb_ma sd_gem_ma sd_gem_ub_ma sd_pref_ma )
+
+tabdisp countrycode if toinclude == 1, cellvar(enrollment_year lp_gem_lb_ma lp_gem_ma lp_gem_ub_ma lp_pref_ma )
+<</dd_do>>
+
+Male (Based on Same Enrollment Year as the **Asessment Year** in the Chosen Preference)
+<<dd_do>>
+
+tabdisp countrycode if toinclude == 1, cellvar(enrollment_year sd_gem_lb_ma1 sd_gem_ma1 sd_gem_ub_ma1 sd_pref_ma )
+
+tabdisp countrycode if toinclude == 1, cellvar(enrollment_year lp_gem_lb_ma1 lp_gem_ma1 lp_gem_ub_ma1 lp_pref_ma )
+
+<</dd_do>>
+
+
+~~~~
+

@@ -35,29 +35,51 @@ qui {
   
   * Add metadata on used MPL (minimum proficiency threshold)
   * COULD BE IN GLAD REPO SO CSV COMES WITH NAMES AND METADATA already (TODO!)
-  replace min_proficiency_threshold = "III (SERCE scale)" if test=="LLECE"
+  * ILSAs
+  replace min_proficiency_threshold = "6" if test == "SEA-PLM"
+  replace min_proficiency_threshold = "III (SERCE scale)" if test=="LLECE" | test == "LLECES" | nla_code == "HND_1"
+  replace min_proficiency_threshold = "III (TERCE scale)" if test=="LLECET" | nla_code=="BOL_1" 
   replace min_proficiency_threshold = "4"                 if test=="PASEC"
   replace min_proficiency_threshold = "Low (400 points)"  if test=="PIRLS"
   replace min_proficiency_threshold = "Low (400 points)"  if test=="TIMSS"
   replace min_proficiency_threshold = "Not in use"        if test=="SACMEQ"
+  
+  * Policy Linking
+  replace min_proficiency_threshold = "Minimum Proficiency"   if test=="AMPLB" 
+  replace min_proficiency_threshold = "Minimum Proficiency"   if nla_code=="KEN_1" // Kenya participated in AMPLAB, but it is coded in the NLA file because raw data not available for GLAD harmonization 
+  replace min_proficiency_threshold = "Minimum Proficiency"   if nla_code=="LSO" | nla_code=="PAK_4" // lpolicy linking
+  
+  ** NLAs
+  * EAP
+  replace min_proficiency_threshold = "Moderate"          if test=="NLA" & nla_code=="CHN_1" | nla_code == "CHN"
+  replace min_proficiency_threshold = "Acceptable"        if test=="NLA" & nla_code=="VNM_1"
+  replace min_proficiency_threshold = "Proficient (level 3)" if test=="NLA" & nla_code=="KHM_1"
+  replace min_proficiency_threshold = "D"                 if test=="NLA" & nla_code=="MYS_1"
+  
+  * ECA 
+  replace min_proficiency_threshold = "1 (6-11 points)"   if test=="NLA" & nla_code=="ALB_1"
+  replace min_proficiency_threshold = "Basic"             if test=="NLA" & nla_code=="KGZ_1"
+  
+  * SAR
   replace min_proficiency_threshold = "10"                if test=="NLA" & nla_code=="AFG_2"
-  replace min_proficiency_threshold = "Moderate"          if test=="NLA" & nla_code=="CHN"
-  replace min_proficiency_threshold = "Proficient"        if test=="NLA" & nla_code=="BGD_3"
-  replace min_proficiency_threshold = "Intermediate"      if test=="NLA" & nla_code=="IND_4"
+  replace min_proficiency_threshold = "Proficient"        if test=="NLA" & nla_code=="BGD_3" | nla_code == "BGD_4"
+  replace min_proficiency_threshold = "Intermediate"      if test=="NLA" & nla_code=="IND_4" | nla_code == "IND_5"
+  replace min_proficiency_threshold = "Proficient"        if test=="NLA" & nla_code=="PAK_3"
+  replace min_proficiency_threshold = "Score above 40 mark"  if test=="NLA" & nla_code=="LKA_3"  
+  
+  * SSA
   replace min_proficiency_threshold = "Score"             if test=="NLA" & nla_code=="UGA_1"
   replace min_proficiency_threshold = "Advanced"          if test=="NLA" & nla_code=="UGA_2"
-  replace min_proficiency_threshold = "Proficient"        if test=="NLA" & nla_code=="PAK_3"
-  replace min_proficiency_threshold = "Score above 40 mark"  if test=="NLA" & nla_code=="LKA_3"
-  replace min_proficiency_threshold = "Acceptable"        if test=="NLA" & nla_code=="VNM_1"
+ 
   replace min_proficiency_threshold = "Basic"             if test=="NLA" & nla_code=="ETH_1"
   replace min_proficiency_threshold = "Score"             if test=="NLA" & nla_code=="ETH_2"
   replace min_proficiency_threshold = "Proficient"        if test=="NLA" & nla_code=="ETH_3"
   replace min_proficiency_threshold = "4"                 if test=="NLA" & nla_code=="COD"
-  replace min_proficiency_threshold = "Proficient (level 3)" if test=="NLA" & nla_code=="KHM_1"
-  replace min_proficiency_threshold = "D"                 if test=="NLA" & nla_code=="MYS_1"
-  replace min_proficiency_threshold = "1 (6-11 points)"   if test=="NLA" & nla_code=="ALB_1"
-  replace min_proficiency_threshold = "Basic"             if test=="NLA" & nla_code=="KGZ_1"
-  replace min_proficiency_threshold = "Minimum Competency"   if test=="NLA" & nla_code=="GHA_1"
+  replace min_proficiency_threshold = "Minimum Competency"   if test=="NLA" & nla_code=="GHA_1" | nla_code == "GHA"
+  replace min_proficiency_threshold = "4"   if test=="NLA" & nla_code=="MLI_1" | nla_code == "MDG_1"
+
+  
+
   label var min_proficiency_threshold "Minimum Proficiency Threshold (assessment-specific)"
 
   * Compress and save

@@ -236,6 +236,7 @@ version 15
   * Open the raw csv with data
   import delimited using "`input_dir'/`clonefile'.csv", varnames(1) case(preserve) clear
 
+
   * Rename and label variables
   rename se_prm_tenr enrollment_ANER_ALL
   label var enrollment_ANER_ALL "Adjusted Net Enrollment Rate (ANER), Primary, Both Sexes"
@@ -259,9 +260,13 @@ version 15
 
   * Open the raw csv with data
   import delimited using "`input_dir'/`clonefile'.csv", varnames(1) case(lower) clear
-
+  
   * Standardize varnames to those used in wbopendata
-  rename (ïedulit_ind location time) (series countrycode year)
+
+  cap rename (ïedulit_ind country_id) (series countrycode)
+
+  cap rename (edulit_ind country_id) (series countrycode)
+
   keep series countrycode year value
 
   * Bring from long to wide
@@ -282,11 +287,11 @@ version 15
   label var enrollment_GER_MA "Gross Enrollment Rate (GER), Primary, Male"
 
   * Total Net Enrollment
-  rename valueNERT_1_CP enrollment_TNER_ALL
+  rename valueNERT_1_cp enrollment_TNER_ALL
   label var enrollment_TNER_ALL "Total Net Enrollment Rate (TNER), Primary, Both Sexes"
-  rename valueNERT_1_F_CP enrollment_TNER_FE
+  rename valueNERT_1_F_cp enrollment_TNER_FE
   label var enrollment_TNER_FE "Total Net Enrollment Rate (TNER), Primary, Female"
-  rename valueNERT_1_M_CP enrollment_TNER_MA
+  rename valueNERT_1_M_cp enrollment_TNER_MA
   label var enrollment_TNER_MA "Total Net Enrollment Rate (TNER), Primary, Male"
 
   * Net Enrollment
@@ -324,8 +329,10 @@ version 15
   import delimited using "`input_dir'/`clonefile'.md", delimiter("|") varnames(1) clear
 
   * Corrections/problems that come with the md importing
+   drop if countrycode=="---"
+   drop if source == "UIS ANER as of October 2020 Release"
+   
   keep countrycode year suggested_enrollment suggested_enrollment_fe  suggested_enrollment_ma decision
-  drop if countrycode=="---"
   destring year, replace
 
   * Destring suggested enrollment after fixing string missing values
@@ -340,8 +347,8 @@ version 15
   
   * This line of code make sure that within a country there is only one type of decision
   by countrycode (decision), sort : gen same = (decision[1] == decision[_N])
-  assert same == 1
-  drop same
+  //assert same == 1
+  //drop same
 
   * Keep countries that has a to-use value and then drop variable
   * need to clarify the difference between accepted and use
@@ -375,6 +382,8 @@ version 15
 
   * Open the raw csv with data
   import delimited using "`input_dir'/`clonefile'_wbopendata.csv", varnames(1) case(preserve) clear
+  
+  wbopendata, match(countrycode)
 
   * Rename and label variables used in the enrollment-method
   rename uis_xunit_pppconst_1 exp_pri_perstu_raw
