@@ -25,27 +25,27 @@ traitvars: population_source
 
 . codebook, compact
 
-Variable        Obs Unique      Mean    Min       Max  Label
------------------------------------------------------------------------------------------------------------------------------------------
-countrycode   13237    217         .      .         .  WB country code (3 letters)
-year_popul~n  13237     61      2020   1990      2050  Year of population
-populat~e_10  11795   7002  320676.4    479  1.33e+07  Female population aged 10 (WB API)
-popul~e_0516  11795   9561   3837089   5500  1.43e+08  Female population aged 05-16 (WB API)
-po~e_primary  10941   8376   2211156   3477  7.53e+07  Female population primary age, country specific (WB API)
-popu~e_9plus  11413   8142   1198701    967  5.14e+07  Female population aged 9 to end of primary, country specific (WB API)
-populat~a_10  11795   7006  339959.2    492  1.42e+07  Male population aged 10 (WB API)
-popul~a_0516  11795   9629   4067006   5800  1.60e+08  Male population aged 05-16 (WB API)
-po~a_primary  10941   8393   2344046   3858  8.08e+07  Male population primary age, country specific (WB API)
-popu~a_9plus  11413   8138   1266440   1007  5.52e+07  Male population aged 9 to end of primary, country specific (WB API)
-populat~l_10  11795   7632  660635.6    971  2.75e+07  Total population aged 10 (WB API)
-popul~l_0516  11795  10355   7904095  11300  3.04e+08  Total population aged 05-16 (WB API)
-po~l_primary  10941   9128   4555202   7335  1.56e+08  Total population primary age, country specific (WB API)
-popu~l_9plus  11413   8828   2465141   1974  1.07e+08  Total population aged 9 to end of primary, country specific (WB API)
-popul~e_1014  11792   8297   1582232   2300  6.21e+07  Female population between ages 10 to 14 (WB API)
-popul~a_1014  11792   8329   1676844   2300  6.72e+07  Male population between ages 10 to 14 (WB API)
-popul~l_1014  11792   9012   3259076   4600  1.29e+08  Total population between ages 10 to 14 (WB API)
-population~e  13237      1         .      .         .  The source used for population variables
------------------------------------------------------------------------------------------------------------------------------------------
+Variable        Obs Unique      Mean     Min       Max  Label
+---------------------------------------------------------------------------------------------------------------------------------------
+countrycode   13237    217         .       .         .  WB country code (3 letters)
+year_popul~n  13237     61      2020    1990      2050  Year of population
+populat~e_10  13237  12217  285210.6      21  1.24e+07  Female population aged 10 (WB API)
+popul~e_0516  13237  13084   3411101   909.5  1.46e+08  Female population aged 05-16 (WB API)
+po~e_primary  12078  11906   1994438   349.5  7.40e+07  Female population primary age, country specific (WB API)
+popu~e_9plus  12855  12468   1058900      52  4.84e+07  Female population aged 9 to end of primary, country specific (WB API)
+populat~a_10  13237  12219  301266.4      86  1.37e+07  Male population aged 10 (WB API)
+popul~a_0516  13237  13104   3602373  1106.5  1.61e+08  Male population aged 05-16 (WB API)
+po~a_primary  12078  11927   2106306   638.5  8.17e+07  Male population primary age, country specific (WB API)
+popu~a_9plus  12855  12467   1116159   217.5  5.32e+07  Male population aged 9 to end of primary, country specific (WB API)
+populat~l_10  13237  12626  586477.1     168  2.62e+07  Total population aged 10 (WB API)
+popul~l_0516  13237  13158   7013474  2166.5  3.07e+08  Total population aged 05-16 (WB API)
+po~l_primary  12078  11980   4100744  1244.5  1.56e+08  Total population primary age, country specific (WB API)
+popu~l_9plus  12855  12617   2175059   336.5  1.02e+08  Total population aged 9 to end of primary, country specific (WB API)
+popul~e_1014  13125  12653   1422726     365  6.16e+07  Female population between ages 10 to 14 (WB API)
+popul~a_1014  13125  12628   1502714     366  6.80e+07  Male population between ages 10 to 14 (WB API)
+popul~l_1014  13125  12829   2925440     731  1.30e+08  Total population between ages 10 to 14 (WB API)
+population~e  13237      1         .       .         .  The source used for population variables
+---------------------------------------------------------------------------------------------------------------------------------------
 
 
 ~~~~
