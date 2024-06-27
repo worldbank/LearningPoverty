@@ -258,7 +258,11 @@
   *----------------------------------------------------------------------------*
   * Manual corrections that need to be done to rawlatest wrt "exceptions"
   * that were disguised as NLAs (Mali)
+  * that were disguised as NLA instead of AMPLB for Kenya - to be fixed in 01
+  
   replace test = "PASEC"         if inlist(countrycode,"MLI")
+  replace test = "AMPLB"         if inlist(countrycode,"KEN")
+
   *----------------------------------------------------------------------------*
  
  ** keep only required variables
