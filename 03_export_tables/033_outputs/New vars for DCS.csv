@@ -1,0 +1,37 @@
+indicator,value_metadata
+SE.LPV.POP.0516,Population Age 0516 for Reference Year 2019; 
+SE.LPV.POP.10,Population Age 10 for Reference Year 2019; 
+SE.LPV.POP.1014,Population Age 1014 for Reference Year 2019; 
+SE.LPV.POP.9PLUS,Population Age 9plus for Reference Year 2019; 
+SE.LPV.POP.PRIM,Population Age primary for Reference Year 2019; 
+SE.LPV.PRIM,LP = SD: Country Team Validation; LD: NLA 2013 for grade 6 using MPL 10 for reading; 
+SE.LPV.PRIM.LD,LD = NLA 2013 for grade 6 using MPL 10 for reading; 
+SE.LPV.PRIM.SD,SD = Country Team Validation; 
+SE.LPV.PRIM.LDGAP,LDGAP: PIRLS 2021 for grade 4 using MPL Low (400 points) for reading; 
+SE.LPV.PRIM.LDSEV,LDSEV: PIRLS 2021 for grade 4 using MPL Low (400 points) for reading; 
+SE.LPV.PRIM.LPGAP,LPGAP = SD: ANER; LD: PIRLS 2021 for grade 4 using MPL Low (400 points) for reading; 
+SE.LPV.PRIM.LPSEV,LPSEV = SD: ANER; LD: PIRLS 2021 for grade 4 using MPL Low (400 points) for reading; 
+SE.LPV.POP.0516.FE,Population Age 0516 for Reference Year 2019; Female
+SE.LPV.POP.0516.MA,Population Age 0516 for Reference Year 2019; Male
+SE.LPV.POP.10.FE,Population Age 10 for Reference Year 2019; Female
+SE.LPV.POP.10.MA,Population Age 10 for Reference Year 2019; Male
+SE.LPV.POP.1014.FE,Population Age 1014 for Reference Year 2019; Female
+SE.LPV.POP.1014.MA,Population Age 1014 for Reference Year 2019; Male
+SE.LPV.POP.9PLUS.FE,Population Age 9plus for Reference Year 2019; Female
+SE.LPV.POP.9PLUS.MA,Population Age 9plus for Reference Year 2019; Male
+SE.LPV.POP.PRIM.FE,Population Age primary for Reference Year 2019; Female
+SE.LPV.POP.PRIM.MA,Population Age primary for Reference Year 2019; Male
+SE.LPV.PRIM.FE,LP = SD: ANER; LD: PIRLS 2011 for grade 4 using MPL Low (400 points) for reading; Female
+SE.LPV.PRIM.LD.FE,LD = PIRLS 2011 for grade 4 using MPL Low (400 points) for reading; Female
+SE.LPV.PRIM.LD.MA,LD = PIRLS 2011 for grade 4 using MPL Low (400 points) for reading; Male
+SE.LPV.PRIM.LDGAP.FE,LDGAP: PIRLS 2011 for grade 4 using MPL Low (400 points) for reading; Female
+SE.LPV.PRIM.LDGAP.MA,LDGAP: PIRLS 2011 for grade 4 using MPL Low (400 points) for reading; Male
+SE.LPV.PRIM.LDSEV.FE,LDSEV: PIRLS 2011 for grade 4 using MPL Low (400 points) for reading; Female
+SE.LPV.PRIM.LDSEV.MA,LDSEV: PIRLS 2011 for grade 4 using MPL Low (400 points) for reading; Male
+SE.LPV.PRIM.LPGAP.FE,LPGAP = SD: ANER; LD: PIRLS 2011 for grade 4 using MPL Low (400 points) for reading; Female
+SE.LPV.PRIM.LPGAP.MA,LPGAP = SD: ANER; LD: PIRLS 2011 for grade 4 using MPL Low (400 points) for reading; Male
+SE.LPV.PRIM.LPSEV.FE,LPSEV = SD: ANER; LD: PIRLS 2011 for grade 4 using MPL Low (400 points) for reading; Female
+SE.LPV.PRIM.LPSEV.MA,LPSEV = SD: ANER; LD: PIRLS 2011 for grade 4 using MPL Low (400 points) for reading; Male
+SE.LPV.PRIM.MA,LP = SD: ANER; LD: PIRLS 2011 for grade 4 using MPL Low (400 points) for reading; Male
+SE.LPV.PRIM.SD.FE,SD = ANER; Female
+SE.LPV.PRIM.SD.MA,SD = ANER; Male
