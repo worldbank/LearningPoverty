@@ -27,6 +27,7 @@ program define   preferred_list, rclass
            ENROLLment(string)      ///
            POPulation(string)      ///
            EXCEPTION(string)       ///
+		   OLDREPORT(string)		///
            TIMEwindow(string)      ///
            COUNTRYfilter(string)   ///
            WORLDalso               ///
@@ -40,6 +41,7 @@ program define   preferred_list, rclass
 		   POPULATIONYR(string)	   ///
 		   toinclude 			   ///
 		   coverage				   ///
+		   RAWLATEST(string)		///
 		   * 					   ///
            ]
 
@@ -61,6 +63,8 @@ program define   preferred_list, rclass
 (14) FULL             - Reports pop weighted results for LD and SD
 (15) ENROLLMENTYR()   - Select which enrolllment year should be used (default value, adjust) 
 (16) POPULATIONYR()   - Select which population year should be used (default value, is anchoryear) 
+
+New as of 2024: Add "rawlatest" option to save a copy with the rawlatest, rather than having two ado files.
 
   noi disp as err _newline "Chosen preference (representation of Learning Poverty in 2015)"
   noi preferred_list, runname("1005") timss_subject(science) drop_assessment(SACMEQ EGRA LLECET AMPLB SEA-PLM) ///
@@ -97,7 +101,9 @@ qui {
   *-----------------
 
   use "${clone}/01_data/013_outputs/rawfull.dta", clear
-  
+    
+
+
   *-----------------
   * default values
   * Anchor year. Use global if anchor year is not specified
@@ -157,7 +163,7 @@ qui {
 			local enrolvltype "num"
 		}	
 		else {
-			noi dis as error "ENROLLMENTYR option only accepts adjust or interger years."
+			noi dis as error "ENROLLMENTYR option only accepts adjust or integer years."
 			break
 		}
 	}
@@ -183,13 +189,14 @@ qui {
   else if "`timss_subject'" == "math" {
     * Math is kept and science is dropped for TIMSS
 	* drop if subject=="science" & test=="TIMSS"
-	replace toinclude = 0 if toinclude == 1 & subject=="scie" & test=="TIMSS"
+	replace toinclude = 0 if subject=="scie" & test=="TIMSS" // toinclude == 1 &
   }
   else if "`timss_subject'" == "science" {
     * Jordan is one exeption: always keep math, even if science is specified
     * because it has no science data
     * drop if subject=="math" & test=="TIMSS" & countrycode!="JOR"
-	replace toinclude = 0 if toinclude == 1 & subject=="math" & test=="TIMSS" & countrycode!="JOR"
+	replace toinclude = 0 if subject=="math" & test=="TIMSS" & countrycode!="JOR" // toinclude == 1
+	
   }
 
 
@@ -218,11 +225,13 @@ qui {
       * Drop observations with this_test if it belongs to drop list
       if strmatch("`drop_assessment'", "*`this_test'*") == 1 {
         * drop if test == "`this_test'"
-		replace toinclude = 0 if toinclude == 1 & test == "`this_test'"
+		replace toinclude = 0 if test == "`this_test'"
+		
       }
     }
   }
 
+  
 /*   * Drop surveys listed in DROP_ROUND option
   * First, check if the option was used
   if "`drop_round'" != "" {
@@ -250,6 +259,7 @@ qui {
       if strmatch("`this_round'", "*`drop_round'*") == 1 {
         * drop if surveyid == "`this_round'"
  	    replace toinclude = 0 if toinclude == 1 & surveyid == "`this_round'"
+		
      }
     }
   }
@@ -260,7 +270,7 @@ qui {
   * For as long as it's not empty, will read each surveyid in it and only
   * keep that observation for that country
   *-----------------
-
+gen exception = .
   while "`exception'" != "" {
     * Parsing out multiple surveyid passed as exceptions
     gettoken this_surveyid exception : exception, parse(" ")
@@ -271,7 +281,9 @@ qui {
  	replace toinclude = 1 if toinclude == 1 & countrycode == "`this_countrycode'" & surveyid != "`this_surveyid'"
     * Remove trailing characters after the parsing
     local exception   = trim("`exception'")
+	replace exception = 1 if countrycode == "`this_countrycode'" & surveyid != "`this_surveyid'"
   }
+
 
 
 
@@ -281,30 +293,89 @@ qui {
   * keep that observation for that country
   *-----------------
 
+  gen dum = .
   while "`dropctryyr'" != "" {
     * Parsing out multiple surveyid passed as exceptions
     gettoken this_surveyid dropctryyr : dropctryyr, parse(" ")
+	
     * Splitting countrycode from surveyid (first 3 letters)
     local this_countrycode = substr("`this_surveyid'",1,3)
+	
 	* Drop observations from this country that are not the given exception
     * drop if countrycode == "`this_countrycode'" & surveyid == "`this_surveyid'"
- 	replace toinclude = 0 if toinclude == 1 & countrycode == "`this_countrycode'" & surveyid == "`this_surveyid'"
+ 	replace toinclude = 0 if surveyid == "`this_surveyid'"
+		
+	* If the dropped year is otherwise first in the preference, make it -9.
+
     * Remove trailing characters after the parsing
     local dropctryyr   = trim("`dropctryyr'")
+	
+	replace dum = 1 if surveyid == "`this_surveyid'"
+	
   }
 
 
+    *-----------------
+  * Check oldreport() option
+  * For as long as it's not empty, will read each surveyid in it and only
+  * keep that observation for that country
   *-----------------
+  
+  while "`oldreport'" != "" {
+    * Parsing out multiple surveyid passed as exceptions
+    gettoken this_surveyid2 oldreport : oldreport, parse(" ")
+    * Splitting countrycode from surveyid (first 3 letters)
+    local this_countrycode = substr("`this_surveyid2'",1,3)
+
+    * Drop observations from this country that are not the given exception
+    * drop if countrycode == "`this_countrycode'" & surveyid != "`this_surveyid'"
+ 	replace toinclude = -9 if toinclude ==0 & countrycode == "`this_countrycode'" & surveyid == "`this_surveyid2'"  
+	replace toinclude = 0 if toinclude == -9 & countrycode == "`this_countrycode'" & surveyid == "`this_surveyid2'" & test == "TIMSS" & subject == "math"
+    * Remove trailing characters after the parsing
+    local oldreport   = trim("`oldreport'")  	
+	
+	replace dum = 5 if toinclude == -9 & countrycode == "`this_countrycode'" & surveyid == "`this_surveyid2'"  
+	
+	//drop if dum == 1 if & countrycode == "`this_countrycode'" & surveyid == "`this_surveyid2'"  
+  }
+  drop if dum == 1
+  drop dum
+  
+  
+   *-----------------
   * Splitting assessment year from surveyid (second stup, 4 numbers)
   * local this_year = substr("`this_surveyid'",5,4)    
   * Drop observations from this country that are not the given exception
   *-----------------	
   
+  * drop assessments that we've labeled so far 
+  bysort countrycode: gen n = _n 
+
+  drop if toinclude == 0 & n > 1 // only for countries that have more than 1 assessment
+  bysort countrycode (year_assessment): gen dummy = _N
+
+
+  * Get rid of countries outside the assessment window 
   replace toinclude = 0 if toinclude == . & (year_assessment > `yrmax' | year_assessment < `yrmin') 
-  replace toinclude = -9 if year_assessment == -9999 
+  
+  * For countries that were never in the reporting window but have LP data 
+  bysort countrycode (year_assessment): gen dummy2 = _n if dummy > 1 & toinclude == 0
+  
+  
+  
+  * Get rid of "none" assessment countries for that otherwise have data, even if it is older
+  replace toinclude = 0 if dummy2 == . & year_assessment == -9999
+  replace toinclude = -9 if dummy2 !=. 
+  
+
+  replace toinclude = -9 if year_assessment == -9999 & n == 1
+  replace toinclude = 0 if year_assessment > `yrmax' & exception != 1
+
+
 
   * drop observations which should not be included
   drop if toinclude == 0
+
 
   *-----------------
   * Check ENROLLMENT() option
@@ -328,6 +399,8 @@ qui {
 		noi dis as error `"ENROLLMENT must be either "interpolated" or "validated". Try again."'
 		break
 	  }
+	  
+	  
       * keep only enrollment variables from selected year
 	  foreach var of varlist enrollment_*  {
 		if strmatch("`var'","*`enrollmentyr'*") == 0 & strmatch("`var'","*source*") == 0 & strmatch("`var'","*definition*") == 0 {
@@ -364,13 +437,18 @@ qui {
 		noi dis as error `"ENROLLMENT must be either "interpolated" or "validated". Try again."'
 		break
 	  }
+	  
+	  
      * keep only enrollment variables from selected year
 	 gen enrollment_all		= .
 	 gen enrollment_ma		= .
 	 gen enrollment_fe		= .
 	 gen enrollment_flag	= .
 	 gen enrollment_year	= .
+	 
+	
 	 levelsof year_assessment if year_assessment != -9999
+	 
 	 foreach yr in `r(levels)'   {
 		* loop through all countries
 		replace enrollment_all	= enrollment_all_`yr'	if enrollment_all == .	& year_assessment == `yr'
@@ -382,8 +460,13 @@ qui {
 	  }
   }
   
+  
   * drop remaining year of enrollment variables (for years that do not have learning assessment as defined in line 373)
   drop year_enrollment_*
+  
+   * For Exception Countries Where we are keeping the old enrollment variable 
+  * Remove this line and remove these countries from 04_repo_update if better data is available, or protocol has changed.
+//	replace enrollment_definition = "Exception (Freeze 1205 Enrollment)" if (countrycode == "COD" | countrycode == "KWT" | countrycode == "SAU" | countrycode == "SLV") & enrollment_definition == "Country Team Validation"
   
   *-----------------
   * Check POPULATION() option
@@ -424,7 +507,7 @@ qui {
   * replace year_assessment -9999 for anchoryear
   *-----------------
 
-  replace year_assessment = `anchoryear'  if year_assessment == -9999
+  replace year_assessment = `anchoryear'  if test == "None" & n > 1
 
   *-----------------
   * Grade Window
@@ -465,7 +548,9 @@ qui {
   *local year_limit = `anchoryear' - 5
 
   * Preferred ranking of assessments:
-  gen int assessment_ranking = .
+  gen int assessment_ranking = .  
+  
+
   * 0. Countries without assessment data should be kept, as well as NLA observations
   replace assessment_ranking = 0 if  is_NLA
   * 1. PIRLS within the prefered reporting window
@@ -580,6 +665,12 @@ qui {
   * store Enrollment type
   gen enrollmentyr = "`enrollmentyr'"
   
+  * temp : change enr to TENR 
+//  replace enrollment_definition="TNER" if enrollment_definition == "ANER"
+  replace year_assessment = . if year_assessment == -9999 
+  replace enrollment_definition = "" if enrollment_definition == "ANER" & enrollment_year == .
+  replace enrollment_definition = "" if enrollment_definition == "TNER" & enrollment_year == .
+  
   * Save
   compress
 
@@ -593,6 +684,20 @@ qui {
                  metadata("description `description'; sources `sources'; filename Rawlatest")
   }
   else save "${clone}/01_data/013_outputs/preference`runname'.dta", replace
+  
+  
+  *-----------------
+  * Save as rawlatest if indicated yes
+  *-----------------
+
+  if ("`rawlatest'" == "yes") {
+	save "${clone}/01_data/013_outputs/preference`runname'_rawlatest.dta", replace
+  }
+	else {
+			noi di "Preference `runname' is not rawlatest, not saved"
+		}
+  
+
 
  
   *--------------------------------

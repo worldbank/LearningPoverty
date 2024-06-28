@@ -50,6 +50,9 @@ do "${clone}/01_data/012_programs/0126_create_rawlatest.do"
 
 * Auto-generate documentation from metadata in edukit_save
 do "${clone}/01_data/012_programs/0127_generate_documentation.do"
+
+* Freeze final preference per release
+do "${clone}/01_data/012_programs/0128_freeze_preference.do"
 *-----------------------------------------------------------------------------
 
 

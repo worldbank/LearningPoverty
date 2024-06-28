@@ -15,6 +15,16 @@ if _rc != 0 {
   noi disp as error "Please execute the profile_LearningPoverty initialization do in the root of this project and try again."
   exit
 }
+
+* Path to the network 
+global network "\\wbgfscifs01\GEDEDU\GDB"
+
+
+*---- USER CHANGES PER UPDATE ---- *
+* Change here to run the data
+global uis "October 2020"
+
+* Change the file name of the latest UIS download
 *-------------------------------------------------------------------------------
 
 
@@ -22,19 +32,19 @@ if _rc != 0 {
 * Subroutines for this task
 *-------------------------------------------------------------------------------
 * Update COUNTRY METADATA to store as csv in 011_rawdata
-do "${clone}/04_repo_update/042_programs/0421_country_metadata_csv.do"
+*do "${clone}/04_repo_update/042_programs/0421_country_metadata_csv.do"
 
 * Update POPULATION DATA from APIs to store as csv in 011_rawdata
-do "${clone}/04_repo_update/042_programs/0422_population_data_from_api.do"
+*do "${clone}/04_repo_update/042_programs/0422_population_data_from_api.do"
 
 * Update ENROLLMENT DATA from APIs to store as csv in 011_rawdata
 do "${clone}/04_repo_update/042_programs/0423_enrollment_data_from_api.do"
 
 * Update PROFICIENCY DATA from multiple sources to store as csv in 011_rawdata
-do "${clone}/04_repo_update/042_programs/0424_proficiency_data.do"
+*do "${clone}/04_repo_update/042_programs/0424_proficiency_data.do"
 
 * Update Other WB API data to store as csv in 011_rawdata
-do "${clone}/04_repo_update/042_programs/0425_otherdata_from_api.do"
+*do "${clone}/04_repo_update/042_programs/0425_otherdata_from_api.do"
 *-------------------------------------------------------------------------------
 
 
@@ -65,5 +75,9 @@ quietly {
       copy "`043_csvfile'" "`011_csvfile'", replace
       noi di as text "{pstd}Exported `011_csvfile'.{p_end}"
     }
+	* add national enr md
+	local 043_csvfile "${clone}/04_repo_update/041_rawdata/enrollment_validated.md"
+    local 011_csvfile "${clone}/01_data/011_rawdata/hosted_in_repo/enrollment_validated.md"
+    copy "`043_csvfile'" "`011_csvfile'", replace
   }
 }
