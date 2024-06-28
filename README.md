@@ -1,6 +1,6 @@
 # Learning Poverty
 
-This repository contains the analysis presented in the paper _“Will Every Child Be Able to Read by 2030? Why Eliminating Learning Poverty Will Be Harder Than You Think, and What to Do About It.”_ [1].
+This repository contains the latest analysis of national Learning Poverty levels, as of Spring 2024. It also ontains the analysis presented in the paper _“Will Every Child Be Able to Read by 2030? Why Eliminating Learning Poverty Will Be Harder Than You Think, and What to Do About It.”_ [1].
 
 As a significant contributor to human capital deficits, the learning crisis undermines sustainable growth and poverty reduction. The paper introduces the new concept of _learning poverty_ and provides a synthetic indicator with global coverage to spotlight this crisis. _Learning poverty_ means being unable to read and understand a short, age-appropriate text by age 10. This indicator brings together schooling and learning by adjusting the proportion of kids in school below a proficiency threshold by the out-of-school population.
 
