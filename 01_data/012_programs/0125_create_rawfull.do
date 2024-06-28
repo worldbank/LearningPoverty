@@ -15,11 +15,16 @@ qui {
   
   use "${clone}/01_data/013_outputs/enrollment.dta", clear
   keep if year >= 1990 
+  
+  sum year_enrollment
+  local max_enr = r(max)
+	
   foreach var of varlist enrollment_validated_all - enrollment_interpolated_ma year_enrollment  {
 	rename `var' `var'_
   }
   order countrycode enrollment_source enrollment_definition year
   reshape wide enrollment_validated_all_ - year_enrollment_ , i(countrycode enrollment_source enrollment_definition) j(year)
+  
   local check = _N 
   if (`check' != 217) { 
 	collapse (mean) enrollment_inte* enrollment_val*  (first) enrollment_definition , by(countrycode enrollment_source)
@@ -72,7 +77,6 @@ qui {
   
   *** Brings in Proficiency (LONG)
   merge 1:m countrycode using "${clone}/01_data/013_outputs/proficiency.dta", keep(match) nogen
-  //* TODO Investigate two cases (CHI and BIH)
 
   * Brings in Enrollment (WIDE)
   merge m:1 countrycode using "${clone}/01_data/013_outputs/enrollment_wide.dta", keep(master match) nogen
@@ -100,11 +104,64 @@ qui {
   isid  countrycode test nla_code subject idgrade year_assessment
 
   * Organizing the dataset
-  local assessment_vars "test nla_code subject idgrade year_assessment *nonprof* min_proficiency_threshold source_assessment"
+  local assessment_vars "test nla_code subject idgrade year_assessment nonprof** min_proficiency_threshold source_assessment"
   unab enrollment_vars : *enrollment*
   unab population_vars : *population*
   order countrycode `assessment_vars' `enrollment_vars' `population_vars'
+ 
+ 	* Before beginning the rawlatest exercise, there are some cases where
+	* assessment data is available before the latest enrollment year is available 
+	* For example, AMPLB 2023 was released before UIS released 2023 enrolment estimates 
+	* In this case, we'll implement a short fix to make sure the code doesn't break
+	
+	* First, check the maximum year of the database and save it 
+	sum year_assessment
+	local max = r(max)
+	local latestenryear = `max'-1
+	local latestenryear2 = `max'-2
+	local latestenryear3 = `max'-3
 
+
+	* Then check if the variable for this year exists
+	cap tab year_enrollment_`max'
+	
+	* If it does not exist, create a variable for the year, denoting no values available.
+	if _rc != 0 {
+			
+		gen year_enrollment_`max' = year_enrollment_`max_enr'
+		cap gen year_enrollment_`latestenryear' = year_enrollment_`max_enr'
+		cap gen year_enrollment_`latestenryear2' = year_enrollment_`max_enr'
+		cap gen year_enrollment_`latestenryear3' = year_enrollment_`max_enr'
+		
+		foreach g in all fe ma {
+		foreach var in validated interpolated {
+			gen enrollment_`var'_`g'_`max' = enrollment_`var'_`g'_`max_enr'
+			cap gen enrollment_`var'_`g'_`latestenryear' = enrollment_`var'_`g'_`max_enr'
+			cap gen enrollment_`var'_`g'_`latestenryear2' = enrollment_`var'_`g'_`max_enr'
+			cap gen enrollment_`var'_`g'_`latestenryear3' = enrollment_`var'_`g'_`max_enr'
+
+		}
+		}
+		
+		* for flags 
+		gen enrollment_validated_flag_`max' = enrollment_validated_flag_`max_enr'
+		gen enrollment_interpolated_flag`max' = enrollment_interpolated_flag`max_enr'
+		
+		cap gen enrollment_validated_flag_`latestenryear' = enrollment_validated_flag_`max_enr'
+		cap gen enrollment_interpolated_flag`latestenryear' = enrollment_interpolated_flag`latestenryear'
+		
+		cap gen enrollment_validated_flag_`latestenryear2' = enrollment_validated_flag_`max_enr'
+		cap gen enrollment_interpolated_flag`latestenryear2' = enrollment_interpolated_flag`max_enr'
+		
+		cap gen enrollment_validated_flag_`latestenryear3' = enrollment_validated_flag_`max_enr'
+		cap gen enrollment_interpolated_flag`latestenryear3' = enrollment_interpolated_flag`max_enr'
+	} 
+	else {
+		* Otherwise, don't worry about it
+		noi di "Most recent year of assessment database matches most recent year of UIS enrollment data. Continuing."
+	}
+	
+ 
   * Compress and save
   compress
   noi di "{phang}Saving file: ${clone}/01_data/013_outputs/rawfull.dta{p_end}"

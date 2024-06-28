@@ -21,7 +21,7 @@ if _rc != 0 {
 *global timewindow = 2009 		// chose the reference window (if different from master run)
 *global anchoryear = 2015		// chose anchor year (if different from master run)
 
-global chosen_preference 1205  	// Chosen preference created in 01 rawlatest (0126) (if different from master run)
+global chosen_preference 1303  	// Chosen preference created in 01 rawlatest (0126) (if different from master run)
 global timewindow = 2011 		// chose the reference window (if different from master run)
 global anchoryear = 2019		// chose anchor year (if different from master run)
 

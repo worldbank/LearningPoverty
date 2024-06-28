@@ -43,18 +43,10 @@ region |             adj_no~l             region~a             region~n
       nla_keep(AFG_2 CHN BGD_3 IND_4 PAK_3 LKA_3 VNM_1 UGA_2 ETH_3 COD KHM_1 MYS_1 KGZ_1 MDG_1 MLI_1) ///
       enrollment(validated) population(1014) exception("HND_2013_LLECES CHL_2013_LLECES COL_2013_LLECES") ///
       timewindow(year_assessment>=2011) countryfilter(lendingtype!="LNX") dropctryyr("CUB_2019_LLECET" CHL_2011_TIMSS CHL_2015_TIMSS HND_2011_TIMSS COL_2011_PIRLS  CHL_2016_PIRLS HND_2011_PIRLS ) yrmax(2018) ///
-	  anchoryear(2015) enrollmentyr(adjust) full world coverage
+	  anchoryear(2015) enrollmentyr(adjust) yrmax(2019) full world coverage rawlatest(yes)
 	  
-	  
-  *******************************
-  * rawlatest
-  noi disp as err _newline "Chosen preference (representation of Learning Poverty in 2015)"
-  noi preferred_list_rawlatest, runname("1005") timss_subject(science) drop_assessment(SACMEQ EGRA LLECET AMPLB SEA-PLM) ///
-      nla_keep(AFG_2 CHN BGD_3 IND_4 PAK_3 LKA_3 VNM_1 UGA_2 ETH_3 COD KHM_1 MYS_1 KGZ_1 MDG_1 MLI_1) ///
-      enrollment(validated) population(1014) exception("HND_2013_LLECES CHL_2013_LLECES COL_2013_LLECES") ///
-      timewindow(year_assessment>=2006) countryfilter(lendingtype!="LNX") dropctryyr(CUB_2019_LLECET CUB_2006_LLECES CHL_2011_TIMSS CHL_2015_TIMSS HND_2011_TIMSS COL_2011_PIRLS  CHL_2016_PIRLS HND_2011_PIRLS ) yrmax(2019) ///
-	  anchoryear(2015) enrollmentyr(adjust) full world coverage
-	  
+
+
   *******************************
   noi disp as err _newline "Sensitivity analysis: change population definitions (1014, 10, 0516, primary, 9plus)"
  
@@ -118,11 +110,11 @@ region |             adj_no~l             region~a             region~n
       nla_keep(AFG_2 CHN BGD_3 IND_4 LKA_3 UGA_2 ETH_3 KGZ_1 MLI_1 PAK_3) drop_round(2019_LLECES)   ///
       enrollment(validated) population(1014) exception("HND_2013_LLECE CHL_2013_LLECE COL_2013_LLECE PHL_2019_SEA-PLM PAK_2014_NLA") ///
       countryfilter(lendingtype!="LNX") dropctryyr("CUB_2019_LLECET"  CHL_2019_TIMSS   CHL_2015_TIMSS HND_2011_TIMSS COL_2011_PIRLS  CHL_2016_PIRLS)  ///
-	  anchoryear(2018) enrollmentyr(adjust) yrmin(2012) world
+	  anchoryear(2018) enrollmentyr(adjust) yrmin(2012) world rawlatest(yes)
 
 tab surveyid if lendingtype!="LNX" & region == "LCN"	
 
-*/
+
   *-----------------------------------------------------------------------------
   * Preference = 1201 = Using NLA 2014 for Pakistan instead of TIMSS 2019
   *-----------------------------------------------------------------------------
@@ -150,13 +142,6 @@ tab surveyid if lendingtype!="LNX" & region == "LCN"
       enrollment(validated) population(1014) exception("CHL_2013_LLECES PHL_2019_SEA-PLM PAK_2014_NLA ZMB_2021_AMPLB  ") ///
       countryfilter(lendingtype!="LNX") dropctryyr("CUB_2006_LLECES" "BDI_2021_AMPLB" "BFA_2021_AMPLB" "SEN_2021_AMPLB" "CIV_2021_AMPLB" "PHL_2019_TIMSS" "CHL_2016_PIRLS"  "CHL_2015_TIMSS"   CHL_2019_TIMSS  HND_2011_PIRLS  COL_2011_PIRLS  HND_2011_TIMSS  IDN_2011_PIRLS  THA_2011_TIMSS HRV_2011_PIRLS ROU_2011_PIRLS BWA_2011_PIRLS  BWA_2011_TIMSS  MLI_2012_NLA  ROU_2011_TIMSS  BIH_2019_TIMSS   XKX_2019_TIMSS BDI_2019_AMPLB BFA_2019_AMPLB CIV_2019_AMPLB SEN_2019_AMPLB) anchoryear(2019) enrollmentyr(adjust) yrmin(2012) yrmax(2021) world
 
-
-
-tab surveyid if lendingtype!="LNX" & region == "MEA"	  
-	  
-	  
-tab surveyid if lendingtype!="LNX" & region == "LCN"	  
-
 * replace CHL_2013_LLECES by CHL_2019_TIMSS and include TUN_2011_TIMSS and YEM_2011_TIMSS
 	  
   local pref1203 "Preference 1203 = Adds PASEC 2019, TIMSS 2019, SEA-PLM 2019, LLECE 2019 (replacing NLAs from KHM, MYS, VNM) & centered in 2019 (start 2014) & AMPLB for ZWB"
@@ -165,25 +150,6 @@ tab surveyid if lendingtype!="LNX" & region == "LCN"
       enrollment(validated) population(1014) exception("CHL_2013_LLECES PHL_2019_SEA-PLM PAK_2014_NLA ZMB_2021_AMPLB ") ///
       countryfilter(lendingtype!="LNX") dropctryyr("CUB_2006_LLECES" "BDI_2021_AMPLB" "BFA_2021_AMPLB" "SEN_2021_AMPLB" "CIV_2021_AMPLB" "PHL_2019_TIMSS" "CHL_2016_PIRLS"  "CHL_2015_TIMSS"  HND_2011_PIRLS  COL_2011_PIRLS  HND_2011_TIMSS  IDN_2011_PIRLS  THA_2011_TIMSS HRV_2011_PIRLS ROU_2011_PIRLS BWA_2011_PIRLS  BWA_2011_TIMSS  MLI_2012_NLA  ROU_2011_TIMSS  BIH_2019_TIMSS   XKX_2019_TIMSS BDI_2019_AMPLB BFA_2019_AMPLB CIV_2019_AMPLB SEN_2019_AMPLB) anchoryear(2019) enrollmentyr(adjust) yrmin(2011) yrmax(2021) full world coverage
 
-
-tab surveyid if lendingtype!="LNX" & region == "MEA"	  
-	  
-	  
-tab surveyid if lendingtype!="LNX" & region == "LCN"	  
-
-
-tab surveyid if lendingtype!="LNX" & region == "EAS"	  
-
-
-tab surveyid if lendingtype!="LNX" & region == "ECS"	  
-	  
-	  
-tab surveyid if lendingtype!="LNX" & region == "SAS"	  
-	  
-	  
-tab surveyid if lendingtype!="LNX" & region == "SSF"	  
-	  
-	  
 * local pref1204 "Preference 1204 = Adds PASEC 2019, TIMSS 2019, SEA-PLM 2019, LLECE 2019 (replacing NLAs from KHM, MYS, VNM) & centered in 2019 (start 2014) & AMPLB for ZWB"
   * noi preferred_list, runname("1204") timss_subject(science) drop_assessment(SACMEQ EGRA LLECET)  ///
       * nla_keep(AFG_2 CHN BGD_3 IND_4 LKA_3 UGA_2 ETH_3 KGZ_1 MLI_1 PAK_3 LSO NPL ) ///
@@ -232,34 +198,61 @@ tab surveyid if lendingtype!="LNX" & region == "SSF"
 */
 *******************************
 * rawlatest_aggregate 
-
 local pref1205 "Preference 1205 = Adds PASEC 2019, TIMSS 2019, SEA-PLM 2019, LLECE 2019 (replacing NLAs from KHM, MYS, VNM) & centered in 2019 (start 2014) & AMPLB for ZWB"
   noi preferred_list, runname("1205") timss_subject(science) drop_assessment(SACMEQ EGRA LLECET)  ///
       nla_keep(AFG_2 CHN BGD_3 IND_4 LKA_3 UGA_2 ETH_3 KGZ_1 MLI_1 PAK_3 LSO ) ///
-      enrollment(validated) population(1014) exception("CHL_2013_LLECES PHL_2019_SEA-PLM PAK_2014_NLA ZMB_2021_AMPLB ") ///
-      countryfilter(lendingtype!="LNX") dropctryyr("CUB_2006_LLECES" "BDI_2021_AMPLB" "BFA_2021_AMPLB" "SEN_2021_AMPLB" "CIV_2021_AMPLB" "PHL_2019_TIMSS" "CHL_2016_PIRLS"  "CHL_2015_TIMSS"  HND_2011_PIRLS  COL_2011_PIRLS  HND_2011_TIMSS  IDN_2011_PIRLS  THA_2011_TIMSS HRV_2011_PIRLS ROU_2011_PIRLS BWA_2011_PIRLS  BWA_2011_TIMSS  MLI_2012_NLA  ROU_2011_TIMSS  BIH_2019_TIMSS   XKX_2019_TIMSS BDI_2019_AMPLB BFA_2019_AMPLB CIV_2019_AMPLB SEN_2019_AMPLB) ///
-	  anchoryear(2019) enrollmentyr(adjust) yrmin(2011) yrmax(2021) full world coverage
+      enrollment(validated) population(1014) exception("CHL_2013_LLECES PHL_2019_SEA-PLM PAK_2014_NLA ZMB_2021_AMPLB WLD_2021_PIRLS") ///
+      countryfilter(lendingtype!="LNX") dropctryyr("CUB_2006_LLECES" "BDI_2021_AMPLB" "BFA_2021_AMPLB" "SEN_2021_AMPLB" "CIV_2021_AMPLB" "PHL_2019_TIMSS" "CHL_2016_PIRLS"  "CHL_2015_TIMSS" "HND_2011_PIRLS" "COL_2011_PIRLS" "HND_2011_TIMSS" "IDN_2011_PIRLS" "THA_2011_TIMSS" "HRV_2011_PIRLS" "ROU_2011_PIRLS" "BWA_2011_PIRLS" "BWA_2011_TIMSS" "MLI_2012_NLA" "ROU_2011_TIMSS" "BIH_2019_TIMSS" "XKX_2019_TIMSS" "BDI_2019_AMPLB" "BFA_2019_AMPLB" "CIV_2019_AMPLB" "SEN_2019_AMPLB") ///
+	  oldreport("THA_2011_TIMSS" "ROU_2011_PIRLS" "BWA_2011_PIRLS" "MLI_2012_NLA") ///
+	  anchoryear(2019) enrollmentyr(adjust) yrmin(2011) yrmax(2019) full world coverage rawlatest(yes)
+
+ *-----------------------------------------------------------------------------
+* Preference = 1301 Update with PIRLS 2021 Data
+*-----------------------------------------------------------------------------
 
 *******************************
-* rawlatest
 * Thailand (TIMSS - 2011) and Botsowana (PIRLS -2011) is included in rawlatest:
 * ROU_2011_PIRLS - exception - Removed
 * MLI_2012_NLA - exception - Removed
-	  
-local pref1205 "Preference 1205 = Adds PASEC 2019, TIMSS 2019, SEA-PLM 2019, LLECE 2019 (replacing NLAs from KHM, MYS, VNM) & centered in 2019 (start 2014) & AMPLB for ZWB"
-  noi preferred_list_rawlatest, runname("1205") timss_subject(science) drop_assessment(SACMEQ EGRA LLECET)  ///
+* Preference 1301: Identical parameters as 1205, with addition of PIRLS 2021 countries for all participants	  
+local pref1301 "Preference 1301 = Adds PIRLS 2021 & centered in 2019 (start 2014) & AMPLB for ZWB, Enrollment year is updated to latest available"
+  noi preferred_list, runname("1301") timss_subject(science) drop_assessment(SACMEQ EGRA LLECET)  ///
       nla_keep(AFG_2 CHN BGD_3 IND_4 LKA_3 UGA_2 ETH_3 KGZ_1 MLI_1 PAK_3 LSO ) ///
       enrollment(validated) population(1014) exception("CHL_2013_LLECES PHL_2019_SEA-PLM PAK_2014_NLA ZMB_2021_AMPLB ") ///
-      countryfilter(lendingtype!="LNX") dropctryyr("CUB_2006_LLECES" "BDI_2021_AMPLB" "BFA_2021_AMPLB" "SEN_2021_AMPLB" "CIV_2021_AMPLB" "PHL_2019_TIMSS" "CHL_2016_PIRLS"  "CHL_2015_TIMSS"  HND_2011_PIRLS  COL_2011_PIRLS  HND_2011_TIMSS  IDN_2011_PIRLS   HRV_2011_PIRLS   BWA_2011_TIMSS     ROU_2011_TIMSS BIH_2019_TIMSS   XKX_2019_TIMSS BDI_2019_AMPLB BFA_2019_AMPLB CIV_2019_AMPLB SEN_2019_AMPLB) ///
+      countryfilter(lendingtype!="LNX") dropctryyr("CUB_2006_LLECES" "BDI_2021_AMPLB" "BFA_2021_AMPLB" "SEN_2021_AMPLB" "CIV_2021_AMPLB" "PHL_2019_TIMSS" "CHL_2016_PIRLS"  "CHL_2015_TIMSS"  HND_2011_PIRLS  COL_2011_PIRLS  HND_2011_TIMSS  IDN_2011_PIRLS  THA_2011_TIMSS HRV_2011_PIRLS ROU_2011_PIRLS BWA_2011_PIRLS  BWA_2011_TIMSS  MLI_2012_NLA  ROU_2011_TIMSS  BIH_2019_TIMSS  BDI_2019_AMPLB BFA_2019_AMPLB CIV_2019_AMPLB SEN_2019_AMPLB) ///
 	  anchoryear(2019) enrollmentyr(adjust) yrmin(2011) yrmax(2021) full world coverage
+	 
+*------------------------------------------------------------------------------
+* Preference = 1302 Update with PIRLS 2021 Data, Brazil using LLECE 2019
+*-----------------------------------------------------------------------------
+local pref1302 "Preference 1302 = Adds PIRLS 2021 except Brazil & centered in 2019 (start 2014) & AMPLB for ZMB, Enrollment year is updated to latest available"
+  noi preferred_list, runname("1302") timss_subject(science) drop_assessment(SACMEQ EGRA LLECET)  ///
+      nla_keep(AFG_2 CHN BGD_3 IND_4 LKA_3 UGA_2 ETH_3 KGZ_1 MLI_1 PAK_3 LSO ) ///
+      enrollment(validated) population(1014) exception("CHL_2013_LLECES PAK_2014_NLA ZMB_2021_AMPLB ") ///
+      countryfilter(lendingtype!="LNX") dropctryyr("BRA_2021_PIRLS" "CUB_2006_LLECES" "BDI_2021_AMPLB" "BFA_2021_AMPLB" "SEN_2021_AMPLB" "CIV_2021_AMPLB" "CHL_2016_PIRLS"  "CHL_2015_TIMSS"  HND_2011_PIRLS  COL_2011_PIRLS  HND_2011_TIMSS  IDN_2011_PIRLS  THA_2011_TIMSS HRV_2011_PIRLS BWA_2011_PIRLS  BWA_2011_TIMSS BIH_2019_TIMSS ROU_2011_TIMSS BDI_2019_AMPLB BFA_2019_AMPLB CIV_2019_AMPLB SEN_2019_AMPLB) ///
+	  	  oldreport("THA_2011_TIMSS" "ROU_2011_PIRLS" "BWA_2011_PIRLS" "MLI_2012_NLA") ///
+	  anchoryear(2019) enrollmentyr(adjust) yrmin(2011) yrmax(2021) full world coverage
+	  
+	  
+*-----------------------------------------------------------------------------
+* Preference = 1303 Update with PIRLS 2021 Data, Brazil using LLECE 2019 + China 2019 NLA, PAK 2019 PL. Also includes Bolivia 2017, Include BIH (TIMSS) and XKX (PIRLS) which now has enr data
+* Added an option here that saves rawlatest if rawlatest(yes) is specified
+*-----------------------------------------------------------------------------
+local pref1303 "Preference 1303 = Adds PIRLS 2021 except Brazil & centered in 2019 (start 2014) & AMPLB for ZMB, Enrollment year is updated to latest available"
+  noi preferred_list, runname("1303") timss_subject(science) drop_assessment(SACMEQ EGRA LLECET)  ///
+      nla_keep(AFG_2 CHN_1 BGD_4 IND_4 LKA_3 UGA_2 ETH_3 KGZ_1 MLI_1 PAK_4 KEN_1 LSO) ///
+      enrollment(validated) population(1014) exception("CHL_2013_LLECES PAK_2014_NLA ZMB_2021_AMPLB ") ///
+      countryfilter(lendingtype!="LNX") dropctryyr("BRA_2021_PIRLS" "CUB_2006_LLECES" "BDI_2021_AMPLB" "BFA_2021_AMPLB" "SEN_2021_AMPLB" "CIV_2021_AMPLB" "CHL_2016_PIRLS"  "CHL_2015_TIMSS"  HND_2011_PIRLS  COL_2011_PIRLS  HND_2011_TIMSS  IDN_2011_PIRLS  THA_2011_TIMSS HRV_2011_PIRLS BWA_2011_PIRLS  BWA_2011_TIMSS ROU_2011_TIMSS BDI_2019_AMPLB BFA_2019_AMPLB CIV_2019_AMPLB SEN_2019_AMPLB PHL_2019_TIMSS) ///
+	  oldreport("THA_2011_TIMSS" "ROU_2011_PIRLS" "BWA_2011_PIRLS" "MLI_2012_NLA") ///
+	  anchoryear(2019) enrollmentyr(adjust) yrmin(2011) full world coverage rawlatest(yes)
+	  
 
 
- */
   /*-----------------------------------------------------------------------------
   * Create RAWLATEST AGGREGATE
   *-----------------------------------------------------------------------------*/
   * Chosen preference will be copied as rawlatest (must be generated above)
-  global chosen_preference 	1205
+  global chosen_preference 	1303
   global year_assessment	2014
   copy "${clone}/01_data/013_outputs/preference${chosen_preference}.dta" ///
        "${clone}/01_data/013_outputs/rawlatest_aggregate.dta", replace
@@ -268,9 +261,9 @@ local pref1205 "Preference 1205 = Adds PASEC 2019, TIMSS 2019, SEA-PLM 2019, LLE
   * Create RAWLATEST
   *-----------------------------------------------------------------------------*/
   * Chosen preference will be copied as rawlatest (must be generated above)
-  global chosen_preference 	1205
+  global chosen_preference 	1303
   global year_assessment	2014
-  copy "${clone}/01_data/013_outputs/preference${chosen_preference}_rawlatest.dta" ///
+  copy "${clone}/01_data/013_outputs/preference${chosen_preference}.dta" ///
        "${clone}/01_data/013_outputs/rawlatest.dta", replace
 
 
@@ -298,16 +291,18 @@ local pref1205 "Preference 1205 = Adds PASEC 2019, TIMSS 2019, SEA-PLM 2019, LLE
  
   foreach pop in "1014" "10" "0516" "primary" "9plus" {
 
-	local pref1205 "Preference 1205 = Adds PASEC 2019, TIMSS 2019, SEA-PLM 2019, LLECE 2019 (replacing NLAs from KHM, MYS, VNM) & centered in 2019 (start 2014) & AMPLB for ZWB"
-	  noi preferred_list, runname("1205_`pop'") timss_subject(science) drop_assessment(SACMEQ EGRA LLECET)  ///
-		  nla_keep(AFG_2 CHN BGD_3 IND_4 LKA_3 UGA_2 ETH_3 KGZ_1 MLI_1 PAK_3 LSO NPL ) ///
-		  enrollment(validated) population(`pop') exception("CHL_2013_LLECES PHL_2019_SEA-PLM PAK_2014_NLA ZMB_2021_AMPLB ") ///
-		  countryfilter(lendingtype!="LNX") dropctryyr("CUB_2006_LLECES" "BDI_2021_AMPLB" "BFA_2021_AMPLB" "SEN_2021_AMPLB" "CIV_2021_AMPLB" "PHL_2019_TIMSS" "CHL_2016_PIRLS"  "CHL_2015_TIMSS"  HND_2011_PIRLS  COL_2011_PIRLS  HND_2011_TIMSS  IDN_2011_PIRLS  THA_2011_TIMSS HRV_2011_PIRLS ROU_2011_PIRLS BWA_2011_PIRLS  BWA_2011_TIMSS  MLI_2012_NLA  ROU_2011_TIMSS  BIH_2019_TIMSS   XKX_2019_TIMSS BDI_2019_AMPLB BFA_2019_AMPLB CIV_2019_AMPLB SEN_2019_AMPLB) ///
-		  anchoryear(2019) enrollmentyr(adjust) yrmin(2011) yrmax(2021) full world coverage
+	  local pref1303 "Preference 1303 = Adds PIRLS 2021 except Brazil & centered in 2019 (start 2014) & AMPLB for ZMB, Enrollment year is updated to latest available"
+  noi preferred_list, runname("1303_`pop'") timss_subject(science) drop_assessment(SACMEQ EGRA LLECET)  ///
+      nla_keep(AFG_2 CHN_1 BGD_4 IND_4 LKA_3 UGA_2 ETH_3 KGZ_1 MLI_1 PAK_4 KEN_1) ///
+      enrollment(validated) population(1014) exception("CHL_2013_LLECES PAK_2014_NLA ZMB_2021_AMPLB ") ///
+      countryfilter(lendingtype!="LNX") dropctryyr("BRA_2021_PIRLS" "CUB_2006_LLECES" "BDI_2021_AMPLB" "BFA_2021_AMPLB" "SEN_2021_AMPLB" "CIV_2021_AMPLB" "CHL_2016_PIRLS"  "CHL_2015_TIMSS"  HND_2011_PIRLS  COL_2011_PIRLS  HND_2011_TIMSS  IDN_2011_PIRLS  THA_2011_TIMSS HRV_2011_PIRLS BWA_2011_PIRLS  BWA_2011_TIMSS ROU_2011_TIMSS BDI_2019_AMPLB BFA_2019_AMPLB CIV_2019_AMPLB SEN_2019_AMPLB PHL_2019_TIMSS) ///
+	  oldreport("THA_2011_TIMSS" "ROU_2011_PIRLS" "BWA_2011_PIRLS" "MLI_2012_NLA") ///
+	  anchoryear(2019) enrollmentyr(adjust) yrmin(2011) full world coverage 
+	  
 
   }
-
-	  
+  
+  
 
   *-----------------------------------------------------------------------------
 
@@ -316,11 +311,11 @@ local pref1205 "Preference 1205 = Adds PASEC 2019, TIMSS 2019, SEA-PLM 2019, LLE
   foreach year in 2001 2011 2013 2015 2016 2017 {
 
     * Displays output for chosen preferences for PART2 countries (`year')
-    noi population_weights, preference(1205) timewindow(year_assessment>=`year') countryfilter(lendingtype!="LNX")
+    noi population_weights, preference(${chosen_preference}) timewindow(year_assessment>=`year') countryfilter(lendingtype!="LNX")
     noi sum year_assessment if year_assessment >= `year' & lpv_all != . & lendingtype!="LNX"
 
     * Displays output for chosen preferences for WORLD (`year')
-    noi population_weights, preference(1205) timewindow(year_assessment>=`year')
+    noi population_weights, preference(${chosen_preference}) timewindow(year_assessment>=`year')
     noi sum year_assessment if year_assessment >= `year' & lpv_all != .
   }
 }

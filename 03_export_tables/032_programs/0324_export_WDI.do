@@ -180,7 +180,8 @@
  rename countryname country
  rename regionname region_
  drop merge1
-   merge m:1 countrycode test nla_code subject idgrade using "${clone}/01_data/013_outputs/rawlatest.dta", gen(merge2) keepusing(year_assessment countryname regionname enrollment_flag sd_all sd_ma sd_fe ld_all ld_ma ld_fe ldgap_all ldsev_all ldgap_fe ldgap_ma ldsev_fe ldsev_ma)
+ 
+   merge m:1 countrycode test nla_code subject idgrade using "${clone}/01_data/013_outputs/rawlatest.dta", gen(merge2) keepusing(year_assessment countryname regionname enrollment_flag sd_all sd_ma sd_fe ld_all ld_ma ld_fe ldgap_all ldsev_all ldgap_fe ldgap_ma ldsev_fe ldsev_ma enrollment_definition)
    drop population_*
    
    * Rename gap and severity 
@@ -241,7 +242,7 @@
  
   * Adjusts non-proficiency by out-of school (only rawlatest has LPov, not in rawfull)
   foreach subgroup in all fe ma {
-    gen lpv_`subgroup' = 100 * ((sd_`subgroup'/100)*(1-ld_`subgroup'/100))
+    gen lpv_`subgroup' = 100 * (((1-sd_`subgroup'/100)*(ld_`subgroup'/100))+(sd_`subgroup'/100))
   }
   rename population_source source_population
  
@@ -257,7 +258,11 @@
   *----------------------------------------------------------------------------*
   * Manual corrections that need to be done to rawlatest wrt "exceptions"
   * that were disguised as NLAs (Mali)
+  * that were disguised as NLA instead of AMPLB for Kenya - to be fixed in 01
+  
   replace test = "PASEC"         if inlist(countrycode,"MLI")
+  replace test = "AMPLB"         if inlist(countrycode,"KEN")
+
   *----------------------------------------------------------------------------*
  
  ** keep only required variables
@@ -293,8 +298,6 @@ restore
   
   drop if value == .
   
-  
-
   * Creates fields that will be exported to WDI
   * Indicator follows grammar in: https://datahelpdesk.worldbank.org/knowledgebase/articles/201175-how-does-the-world-bank-code-its-indicators
   * with topic = SE (social: education); general subject = LPV (learning poverty); specific subject (primary)
@@ -302,8 +305,8 @@ restore
   gen str indicatorcode = "SE.LPV"
   
   replace indicatorcode = indicatorcode + ".PRIM"      	if indicator == "lpv"
-  replace indicatorcode = indicatorcode + ".PRIM.LD" 	if indicator == "sd"
-  replace indicatorcode = indicatorcode + ".PRIM.SD" 	if indicator == "ld"
+  replace indicatorcode = indicatorcode + ".PRIM.SD" 	if indicator == "sd"
+  replace indicatorcode = indicatorcode + ".PRIM.LD" 	if indicator == "ld"
   replace indicatorcode = indicatorcode + ".PRIM.LDGAP" if indicator == "ldgap"
   replace indicatorcode = indicatorcode + ".PRIM.LDSEV" if indicator == "ldsev"
   replace indicatorcode = indicatorcode + ".PRIM.LPGAP" if indicator == "lpgap"
@@ -325,37 +328,36 @@ restore
 
   * variables for metadata (cannot concatenate numeric variables)
   gen str value_metadata = ""
-
+  gen str subgroup_str = ""
+  replace subgroup_str = "Female" if subgroup == "_fe"
+  replace subgroup_str = "Male" if subgroup == "_ma"  
+  replace subgroup_str = "" if subgroup == "_all"
+  
   * Auxiliary variables for metadata (cannot concatenate numeric variables)
   gen str_grade = string(int(idgrade),"%01.0f")
   gen str_year  = string(int(year_assessment),"%04.0f")
   replace subject = "reading" if subject == "read"
   * - Learning Poverty
-  replace value_metadata = "SD: " + definition_enrollment + "; LD: " + test + " " + str_year + " for grade " + str_grade + " using MPL " + min_proficiency_threshold + " for " + subject if indicator == "lpv"
+  replace value_metadata = "LP = SD: " + definition_enrollment + "; LD: " + test + " " + str_year + " for grade " + str_grade + " using MPL " + min_proficiency_threshold + " for " + subject + "; " + subgroup_str if indicator == "lpv"
   * - Out-of-School
-  replace value_metadata  = definition_enrollment if indicator == "sd"
+  replace value_metadata  = "SD = " + definition_enrollment + "; " + subgroup_str if indicator == "sd"
   * - Below Minimum proficiency
-  replace value_metadata = test + " " + str_year + " for grade " + str_grade + " using MPL " + min_proficiency_threshold + " for " + subject if indicator == "ld"
+  replace value_metadata = "LD = " + test + " " + str_year + " for grade " + str_grade + " using MPL " + min_proficiency_threshold + " for " + subject + "; " + subgroup_str if indicator == "ld"
 
 
   * - LD Severity, LP Gap and Severity
-  replace value_metadata = "LDGAP: " + test + " " + str_year + " for grade " + str_grade + " using MPL " + min_proficiency_threshold + " for " + subject if indicator == "ldgap" 
-  replace value_metadata = "LDSEV: " + test + " " + str_year + " for grade " + str_grade + " using MPL " + min_proficiency_threshold + " for " + subject if indicator == "ldsev" 
+  replace value_metadata = "LDGAP: " + test + " " + str_year + " for grade " + str_grade + " using MPL " + min_proficiency_threshold + " for " + subject + "; " + subgroup_str if indicator == "ldgap" 
+  replace value_metadata = "LDSEV: " + test + " " + str_year + " for grade " + str_grade + " using MPL " + min_proficiency_threshold + " for " + subject + "; " + subgroup_str if indicator == "ldsev" 
   
-  replace value_metadata = "SD: " + definition_enrollment + "; LD: " + test + " " + str_year + " for grade " + str_grade + " using MPL " + min_proficiency_threshold + " for " + subject if indicator == "lpgap"
-  replace value_metadata = "SD: " + definition_enrollment + "; LD: " + test + " " + str_year + " for grade " + str_grade + " using MPL " + min_proficiency_threshold + " for " + subject if indicator == "lpsev"
+  replace value_metadata = "LPGAP = SD: " + definition_enrollment + "; LD: " + test + " " + str_year + " for grade " + str_grade + " using MPL " + min_proficiency_threshold + " for " + subject + "; " + subgroup_str if indicator == "lpgap"
+  replace value_metadata = "LPSEV = SD: " + definition_enrollment + "; LD: " + test + " " + str_year + " for grade " + str_grade + " using MPL " + min_proficiency_threshold + " for " + subject + "; " + subgroup_str if indicator == "lpsev"
 
   * - Population
    local possible_ages "10 0516 9plus primary 1014"
    foreach pop in `possible_ages' {
-      replace value_metadata = "Population Age `pop' for Reference Year `anchoryear'"  if value_metadata == "" & indicator == "population_`pop'"
+      replace value_metadata = "Population Age `pop' for Reference Year `anchoryear'" + "; " + subgroup_str  if value_metadata == "" & indicator == "population_`pop'"
     }
 	
-	
-	
-	
-
-
   * Final touches
   rename year_assessment year
   keep  countrycode countryname regionname year indicatorcode value value_metadata
@@ -382,14 +384,17 @@ restore
   use  "${clone}/03_export_tables/033_outputs/WDI_TEMP_country_level.dta", clear
   * append aggregates
   append using "${clone}/03_export_tables/033_outputs/WDI_TEMP_aggregates.dta"
- 
+
+  * For country level updates, we remove aggregates. To keep, comment out drop if line   
+  global aggregates cty_or_agg
+  drop if $aggregates == "agg"
+
   * Final touches
   order countrycode cty_or_agg year indicator value value_metadata
   sort  countrycode year indicator
+  
   * Check that it is uniquely identified
   isid  countrycode year indicator
-
-  
   save "${clone}/03_export_tables/033_outputs/WDI_indicators_`chosen_preference'.dta", replace
   export delimited "${clone}/03_export_tables/033_outputs/WDI_indicators_`chosen_preference'.csv", replace
 
@@ -397,13 +402,13 @@ restore
   noi disp as txt _newline "{phang}QA: observation breakdown by first/single year vs other years {p_end}"
   bys countrycode indicator:  gen tag_first_obs = (_n == 1)
   noi tab cty_or_agg tag_first_obs if indicator == "SE.LPV.PRIM"
-exit
 
   /********************************************************
-    Create an Excel file that will not be used in any way
-    by the script, nor tracked in the repo, but is meant
+    Create an Excel file that is meant
     to be used as a convinent way to share all the data
-    produced to someone that prefers Excel versus csv
+    produced to someone that prefers Excel versus csv and is 
+	used in task 0325 to produce the WDI data based on the 
+	DCS format
   ********************************************************/
   * List of csv files to be added to the excel file
   local csvfiles "lpv_metadata WDI_indicators"
@@ -428,5 +433,3 @@ exit
 
   noi disp as res _newline "{phang}Exported all Learning Poverty indicators for WDI{p_end}"
 
-
-exit

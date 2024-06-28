@@ -26,21 +26,21 @@ traitvars: enrollment_source enrollment_definition year_enrollment
 . codebook, compact
 
 Variable       Obs Unique      Mean       Min   Max  Label
------------------------------------------------------------------------------------------------------------------------------------------
-countrycode   6944    217         .         .     .  WB country code (3 letters)
-year          6944     32    2005.5      1990  2021  Year
-en~dated_all  6432   2964  87.86989  19.18834   100  Validated % of children enrolled in school (using closest year, both genders)
-enr~dated_fe  5379   2565  86.16633  15.47124   100  Validated % of children enrolled in school (using closest year, female only)
-enr~dated_ma  5384   2567  87.82458   22.7423   100  Validated % of children enrolled in school (using closest year, male only)
-e~dated_flag  6944      2   .234591         0     1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
-en~lated_all  6432   3967  87.90066  19.18834   100  Validated % of children enrolled in school (using interpolation, both genders)
-enr~lated_fe  4773   2766  87.08727  15.47124   100  Validated % of children enrolled in school (using interpolation, female only)
-enr~lated_ma  4778   2769  88.53922   22.7423   100  Validated % of children enrolled in school (using interpolation, male only)
-e~lated_flag  6944      2  .2370392         0     1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
-enrollmen~ce  6944      4         .         .     .  The source used for this enrollment value
-enrollment~n  6944      6         .         .     .  The definition used for this enrollment value
-year_enrol~t  6432     30  2006.249      1990  2019  The year that the enrollment value is from
------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
+countrycode   7161    217         .         .     .  WB country code (3 letters)
+year          7161     33      2006      1990  2022  Year
+en~dated_all  6699   2923  88.19532  19.18834   100  Validated % of children enrolled in school (using closest year, both genders)
+enr~dated_fe  5705   2535  86.34887         0   100  Validated % of children enrolled in school (using closest year, female only)
+enr~dated_ma  5705   2537  88.05561   22.7423   100  Validated % of children enrolled in school (using closest year, male only)
+e~dated_flag  7161      2  .2266443         0     1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
+en~lated_all  6699   3881  88.22627  19.18834   100  Validated % of children enrolled in school (using interpolation, both genders)
+enr~lated_fe  5106   2721   87.1734         0   100  Validated % of children enrolled in school (using interpolation, female only)
+enr~lated_ma  5106   2723  88.71156   22.7423   100  Validated % of children enrolled in school (using interpolation, male only)
+e~lated_flag  7161      2   .226784         0     1  Flag for enrollment by gender filled up from aggregate (>=98.5%)
+enrollmen~ce  7161      4         .         .     .  The source used for this enrollment value
+enrollment~n  7161      6         .         .     .  The definition used for this enrollment value
+year_enrol~t  6699     32  2007.069      1990  2022  The year that the enrollment value is from
+---------------------------------------------------------------------------------------------------------------------------------------
 
 
 ~~~~

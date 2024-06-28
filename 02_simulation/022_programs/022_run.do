@@ -19,7 +19,7 @@ if _rc != 0 {
 *-------------------------------------------------------------------------------
 * Execution parameters
 global master_seed  		17893   	// Ensures reproducibility
-global chosen_preference 	1205  		// Chosen preference created in 01 rawlatest
+global chosen_preference 	1303  		// Chosen preference created in 01 rawlatest
 global enrollment_def 		"validated"
 global anchoryr 			2019
 global enrollmentyr			"adjust"
@@ -35,6 +35,9 @@ do "${clone}/02_simulation/022_programs/0221_aggregates_spells.do"
 
 * Run simulations to produce final datasets
 do "${clone}/02_simulation/022_programs/0222_simulations.do"
+
+* 2023 Task: Check LP numbers might change with GEM
+do "${clone}/02_simulation/022_programs/0223_gems_oos_checks.do"
 
 /* To generate spells that were saved as markdown in the 021_rawdata/old_version
 do "${clone}/02_simulation/022_programs/022x_custom_spells.do"
